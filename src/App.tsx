@@ -14,7 +14,9 @@ import {
 function App() {
   return (
     <div className="App">
+      {/* Header */}
       <StyledHeader />
+      {/* Router */}
       <Router>
         <Switch>
           <Route exact path="/" >
