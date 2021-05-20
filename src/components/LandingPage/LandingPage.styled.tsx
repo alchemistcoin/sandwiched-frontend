@@ -12,20 +12,18 @@ const StyledLandingPage = styled.div`
   align-items: center;
 `
 export const StyledMainTextBox = styled.div`
+  color: rgb(var(--color-text));
   margin-top: 10px;
   padding: 0px 40px;
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
   //justify-content: space-around;
-  color: #190134;
   max-width: 562px;
   height: 300px;
   //border: 2px solid rgb(var(--color-primary));
   text-align: center;
-  font-family: Poppins;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
   line-height: 38px;
   /* or 192% */
   p:nth-child(2) {

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import LandingPage from "./components/LandingPage";
 import StyledHeader from "./components/Header/Header";
+import backgroundSvg from "./assets/background.svg"
 
 import {
   BrowserRouter as Router,
@@ -13,7 +14,7 @@ import {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundImage: `url(${backgroundSvg})`, backgroundSize: "cover", height: "100%" }}>
       {/* Router */}
       <Router>
         {/* Header */}

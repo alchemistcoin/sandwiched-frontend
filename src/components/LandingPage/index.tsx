@@ -6,7 +6,7 @@ import StyledLandingPage, {StyledMainTextBox, StyledConnectWalletButton} from '.
 import LogoSvg from '../../assets/logo.svg';
 
 const LandingPage = () => (
-  <Container>
+  // <Container>
     <StyledLandingPage>
       <img src={LogoSvg} />
       <StyledMainTextBox>
@@ -17,6 +17,6 @@ const LandingPage = () => (
         Connect Wallet
       </StyledConnectWalletButton>
     </StyledLandingPage>
-  </Container>
+  // </Container>
 )
 export default LandingPage;

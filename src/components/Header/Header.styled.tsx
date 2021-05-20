@@ -8,6 +8,9 @@ const StyledHeader = styled.header`
   padding-right: 40px;
   height: 50px;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export default StyledHeader
