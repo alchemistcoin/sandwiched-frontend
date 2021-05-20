@@ -14,10 +14,10 @@ import {
 function App() {
   return (
     <div className="App">
-      {/* Header */}
-      <StyledHeader />
       {/* Router */}
       <Router>
+        {/* Header */}
+        <StyledHeader />
         <Switch>
           <Route exact path="/" >
             <LandingPage />
