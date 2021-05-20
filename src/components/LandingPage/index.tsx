@@ -17,10 +17,6 @@ const LandingPage = () => (
         Connect Wallet
       </StyledConnectWalletButton>
     </StyledLandingPage>
-
-
-
-
   </Container>
 )
 export default LandingPage;

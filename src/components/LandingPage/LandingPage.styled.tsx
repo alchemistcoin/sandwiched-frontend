@@ -5,19 +5,22 @@ import Button from 'react-bootstrap/Button';
 
 
 const StyledLandingPage = styled.div`
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `
 export const StyledMainTextBox = styled.div`
+  margin-top: 10px;
+  padding: 0px 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  //justify-content: space-around;
   color: #190134;
-  max-width: 592px;
-  height: 199px;
-  border: 2px var(--color-primary);
+  max-width: 562px;
+  height: 300px;
+  //border: 2px solid rgb(var(--color-primary));
   text-align: center;
   font-family: Poppins;
   font-style: normal;
@@ -25,6 +28,9 @@ export const StyledMainTextBox = styled.div`
   font-size: 20px;
   line-height: 38px;
   /* or 192% */
+  p:nth-child(2) {
+    margin-top: 30px;
+  }
 `;
 
 export const StyledConnectWalletButton = styled.button`
