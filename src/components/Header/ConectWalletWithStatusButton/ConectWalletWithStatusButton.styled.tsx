@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 
 const StyledConnectWalletWithStatusButton = styled.button`
+  transition-duration: 150ms;
   &.disconnected {
     border: 1px solid rgb(var(--color-primary));
     background-color: Transparent;

@@ -58,6 +58,8 @@ export const StyledConnectWalletButton = styled.button`
   &:active {
     filter: brightness(0.8);
   }
+
+  transition-duration: 150ms;
 `
 
 export default StyledLandingPage
