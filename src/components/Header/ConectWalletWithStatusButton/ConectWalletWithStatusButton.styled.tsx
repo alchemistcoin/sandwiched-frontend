@@ -2,9 +2,15 @@ import React from 'react';
 import styled from "styled-components";
 
 const StyledConnectWalletWithStatusButton = styled.button`
-  border: 1px solid rgb(var(--color-primary));
+  &.disconnected {
+    border: 1px solid rgb(var(--color-primary));
+    background-color: Transparent;
+  }
+  &.connected {
+    border: none;
+    background-color: rgb(var(--color-primary));
+  }
   color: rgb(var(--color-text));
-  background-color: Transparent;
   border-radius: 8px;
   width: 120px;
   height: 32px;
@@ -15,6 +21,12 @@ const StyledConnectWalletWithStatusButton = styled.button`
   /* identical to box height, or 140% */
 
   letter-spacing: 0.2px;
+  
+  img {
+    float: right;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
   
 `;
 

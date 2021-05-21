@@ -7,10 +7,10 @@ const StyledHeader = styled.header`
   padding-left: 40px;
   padding-right: 40px;
   height: 50px;
-  text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items:center;
 `;
 
 export default StyledHeader
