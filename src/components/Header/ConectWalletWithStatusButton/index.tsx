@@ -6,21 +6,22 @@ import statusConnected from "../../../assets/status-connected.svg"
 
 interface ConnectWalletWithStatusButtonProps {
   connected: boolean;
-  setConnected: Function;
+  onConnect: Function;
   ethereumAddress: string;
 }
 
 const ConnectWalletWithStatusButton = ({
    connected,
-   setConnected,
+   onConnect,
    ethereumAddress,
  }: ConnectWalletWithStatusButtonProps) => {
+
   return (
     <>
       {
         <StyledConnectWalletWithStatusButton
           // TODO 1: Flesh out this onclick function and make it work with a real wallet connection (unless we opt for a faster manually entering wallet address solution)
-          onClick={()=> {setConnected(!connected)}}
+          onClick={()=> onConnect()}
           className={(connected ? "connected" : "disconnected")}
         >
           {connected

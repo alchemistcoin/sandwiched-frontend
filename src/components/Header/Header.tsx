@@ -7,7 +7,22 @@ import {
 
 import logoText from "../../assets/logo-text.svg"
 
-const Header = () => {
+
+interface HeaderProps {
+  onConnect: Function;
+  walletAddress: string;
+  connected: boolean;
+  resetApp: Function;
+}
+
+
+
+const Header = ({
+  onConnect,
+  walletAddress,
+  connected,
+  resetApp,
+} : HeaderProps) => {
   const [conected, setConnected] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
 
@@ -19,15 +34,16 @@ const Header = () => {
       setShowLogo(false)
     }
   });
-
-  console.log(showLogo)
+  
   return (
     <StyledHeader>
       <div>
         {/* Only Show Small Logo in corner if we're not on the landing page */}
         {showLogo &&
         <Link
-          onClick={ ()=> setShowLogo(false)}
+          onClick={()=> {
+            setShowLogo(false)
+          }}
           to={"/"}>
           <img src={logoText} style={{paddingTop: "0.5rem"}}></img>
         </Link>
@@ -35,9 +51,10 @@ const Header = () => {
         }
       </div>
       <ConnectWalletWithStatusButton
-        connected={conected}
-        setConnected={setConnected}
-        ethereumAddress={"PLACEHOLDER123456789"} //TODO 1: Replace placeholder ethereum address with users wallet address
+        connected={connected}
+        onConnect={onConnect}
+        ethereumAddress={walletAddress} //TODO 1: Replace placeholder ethereum address with users wallet address
+
       />
     </StyledHeader>
   )
