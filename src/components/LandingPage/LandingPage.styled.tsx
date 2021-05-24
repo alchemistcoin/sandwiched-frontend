@@ -63,4 +63,3 @@ export const StyledConnectWalletButton = styled.button`
 `
 
 export default StyledLandingPage
-/* Did you know, you might have some unsuspected transactions, which might be draining away your wallet? We help you scan and find those sandwiches in your transactions. */
