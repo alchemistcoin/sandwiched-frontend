@@ -4,14 +4,12 @@ import LandingPage from "./components/LandingPage";
 import StyledHeader from "./components/Header/Header";
 import backgroundSvg from "./assets/background.svg"
 import Web3 from "web3";
-import { convertUtf8ToHex } from "@walletconnect/utils";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
   useParams,
-  useHistory
 } from "react-router-dom";
 
 
@@ -116,6 +114,8 @@ class App extends React.Component<any, any> {
       chainId,
       networkId
     });
+
+    return {address, connected: true}
     // await this.getAccountAssets();
   };
 
@@ -126,6 +126,7 @@ class App extends React.Component<any, any> {
     provider.on("close", () => this.resetApp());
     provider.on("accountsChanged", async (accounts: string[]) => {
       await this.setState({address: accounts[0]});
+      window.location.href="/"
       // await this.getAccountAssets();
     });
     provider.on("chainChanged", async (chainId: number) => {
@@ -210,13 +211,7 @@ class App extends React.Component<any, any> {
         <Router>
           {/* Header */}
           <StyledHeader
-            onConnect={()=>{
-              if (this.state.connected) {
-                this.resetApp()
-              } else {
-                this.onConnect()
-              }
-            }}
+            onConnect={this.onConnect}
             connected={connected}
             walletAddress={this.state.address}
             resetApp={this.resetApp}

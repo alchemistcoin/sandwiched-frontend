@@ -43,7 +43,14 @@ const LandingPage = ({
         <p>We help you scan and find those sandwiches in your transactions.</p>
       </StyledMainTextBox>
       <StyledConnectWalletButton
-      onClick={()=>onConnect()}>
+      onClick={async ()=> {
+        const {address, connected} = await onConnect()
+        if (connected) {
+          history.push(`/${address}`)
+        }
+      }
+
+      }>
         Connect Wallet
       </StyledConnectWalletButton>
     </StyledLandingPage>

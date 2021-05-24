@@ -34,17 +34,20 @@ const Header = ({
       setShowLogo(false)
     }
   });
+
   
   return (
     <StyledHeader>
       <div>
         {/* Only Show Small Logo in corner if we're not on the landing page */}
         {showLogo &&
-        <Link
+        <Link // Link doesn't want to redirect to home and also reset the app state
           onClick={()=> {
             setShowLogo(false)
+            resetApp()
           }}
-          to={"/"}>
+          to={"/"}
+        >
           <img src={logoText} style={{paddingTop: "0.5rem"}}></img>
         </Link>
 
@@ -54,7 +57,7 @@ const Header = ({
         connected={connected}
         onConnect={onConnect}
         ethereumAddress={walletAddress} //TODO 1: Replace placeholder ethereum address with users wallet address
-
+        resetApp={resetApp}
       />
     </StyledHeader>
   )
