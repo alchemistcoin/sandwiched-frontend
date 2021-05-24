@@ -20,6 +20,7 @@ import {
   getChainData
 } from "./helpers/utilities";
 import { IAssetData } from "./helpers/types";
+import SandwichPage from "./components/SandwichPage";
 
 
 // FROM EXAMPLE
@@ -225,7 +226,7 @@ class App extends React.Component<any, any> {
               />
             </Route>
             <Route path="/:walletAddress">
-              <ResultsPage/>
+              <SandwichPage/>
             </Route>
           </Switch>
         </Router>
