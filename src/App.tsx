@@ -150,7 +150,6 @@ class App extends React.Component<any, any> {
           infuraId: process.env.REACT_APP_INFURA_ID
         }
       },
-      // TODO: Could add support for more Wallets
       // torus: {
       //   package: Torus
       // },

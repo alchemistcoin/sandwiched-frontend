@@ -11,6 +11,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@walletconnect/web3-provider": "^1.4.1",
+    "dotenv": "^10.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-dom": "^17.0.2",
@@ -23,7 +24,7 @@
     "web3modal": "^1.9.3"
   },
   "scripts": {
-    "start": "export REACT_APP_INFURA_ID=33ad987efb064c2db514c39bc9a42365 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

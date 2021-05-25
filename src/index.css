@@ -12,7 +12,7 @@ body {
   height: 100%;
   --color-primary: 255, 191, 0;
   --color-text: 25, 1, 52;
-  /* TODO 3: color themeing, this looks like it has some reasonbly simple solutions start https://dev.to/felixtellmann/how-to-add-color-themes-in-reactjs-pn1*/
+  /* TODO: color themeing, this looks like it has some simple solutions to start with https://dev.to/felixtellmann/how-to-add-color-themes-in-reactjs-pn1*/
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: normal;

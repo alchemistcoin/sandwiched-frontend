@@ -23,8 +23,6 @@ const Header = ({
 
   return (
     <StyledHeader>
-      {console.log(`window.location.pathname: ${window.location.pathname}`)}
-      {console.log(`showLogo: ${showLogo}`)}
       <div>
         {/* Only Show Small Logo in corner if we're not on the landing page */}
         <img
