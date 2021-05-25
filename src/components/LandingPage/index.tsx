@@ -19,7 +19,7 @@ const LandingPage = ({
   /** Router Methods **/
   let history = useHistory()
 
-  // Send user to Sandwhich look up if wallet is connected
+  // Send user to sandwich look up if wallet is connected
   useEffect(() => {
     if (walletAddress) {
       history.push(`/${walletAddress}`)
