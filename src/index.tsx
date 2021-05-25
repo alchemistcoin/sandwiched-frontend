@@ -5,9 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 
-// @ts-ignore
 declare global {
-  // tslint:disable-next-line
   interface Window {
     web3: any;
     ethereum: any;

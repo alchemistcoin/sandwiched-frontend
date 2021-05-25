@@ -52,9 +52,9 @@ const ConnectWalletWithStatusButton = ({
               "Connect Wallet"
           }
           {connected ?
-            <img src={statusConnected}/>
+            <img src={statusConnected} alt="connected"/>
             :
-            <img src={connectIcon}/>
+            <img src={connectIcon} alt="disconnected"/>
           }
         </StyledConnectWalletWithStatusButton>
       }
