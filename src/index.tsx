@@ -3,6 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+require('dotenv').config()
+
+console.log(process.env)
+
+
+declare global {
+  interface Window {
+    web3: any;
+    ethereum: any;
+    Web3Modal: any;
+    Box: any;
+    box: any;
+    space: any;
+    [name: string]: any;
+  }
+}
 
 ReactDOM.render(
   <React.StrictMode>
