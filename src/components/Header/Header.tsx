@@ -18,7 +18,7 @@ const Header = ({ onConnect, walletAddress, connected, resetApp, showLogo }: Hea
         {/* Only Show Small Logo in corner if we're not on the landing page */}
         <img
           src={logoText}
-          style={{ paddingTop: '0.5rem', visibility: showLogo ? 'visible' : 'hidden' }}
+          style={{ paddingTop: '0.5rem', visibility: showLogo ? 'visible' : 'hidden', cursor: 'pointer' }}
           alt="sandwich.wtf"
           onClick={() => {
             resetApp()
