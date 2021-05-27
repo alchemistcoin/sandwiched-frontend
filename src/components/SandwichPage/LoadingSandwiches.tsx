@@ -13,35 +13,18 @@ const StyledLoadingSandwichesDisplay = styled.div`
   justify-content: center;
   align-items: center;
   
-  // This works, but was easier to modify the .svg from the landing page
-  //.banner {
-  //  position: relative;
-  //  right: 85px;
-  //}
-  //img {
-  //  position: absolute;
-  //}
-  //img.logo {
-  //  left: 20px;
-  //  top: 20px;
-  //}
-  //img.radiance {
-  //}
-  //img.hamburgers {
-  //  top: 64px;
-  //  left: -445px;
-  //}
+  img.hamburgers {
+    position: relative;
+    top: -193px;
+    right: 2px;
+  }
 `
-
 
 const LoadingSandwichesDisplay = ()=> (
   <StyledLoadingSandwichesDisplay>
     <img src={logoStripped} />
-    {/*<div className="banner">*/}
-    {/*  <img className="radiance" src={hamburgerRadiance} style={{zIndex: 0}}/>*/}
-    {/*  <img className="hamburgers" src={hamburgers} style={{zIndex: 1}}/>*/}
-    {/*  <img className="logo" src={logoOnly} style={{zIndex: 2}}/>*/}
-    {/*</div>*/}
+    <img className="hamburgers" src={hamburgers}/>
+
   </StyledLoadingSandwichesDisplay>
 
 )
