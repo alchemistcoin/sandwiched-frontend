@@ -36,7 +36,7 @@ const LoadingSandwichesDisplay = ()=> (
     <img className="hamburgers" src={hamburgers} alt=""/>
     <StyledMainTextBox>
       <h1>Hold up!</h1>
-      <p>We are scanning your wallet transaction for potential sandwiches</p>
+      <p>We are scanning your wallet transactions for potential sandwiches</p>
     </StyledMainTextBox>
   </StyledLoadingSandwichesDisplay>
 )
