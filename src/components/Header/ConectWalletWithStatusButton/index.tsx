@@ -33,7 +33,6 @@ const ConnectWalletWithStatusButton = ({
     <>
       {
         <StyledConnectWalletWithStatusButton
-          // TODO 1: Flesh out this onclick function and make it work with a real wallet connection (unless we opt for a faster manually entering wallet address solution)
           onClick={ async ()=> {
             const {address} = await onConnect()
             if (connected) {
@@ -52,9 +51,9 @@ const ConnectWalletWithStatusButton = ({
               "Connect Wallet"
           }
           {connected ?
-            <img src={statusConnected}/>
+            <img src={statusConnected} alt="connected"/>
             :
-            <img src={connectIcon}/>
+            <img src={connectIcon} alt="disconnected"/>
           }
         </StyledConnectWalletWithStatusButton>
       }

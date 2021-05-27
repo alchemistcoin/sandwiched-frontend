@@ -1,14 +1,7 @@
 import React, {useEffect} from 'react'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import StyledLandingPage, {StyledMainTextBox, StyledConnectWalletButton} from './LandingPage.styled'
 import LogoSvg from '../../assets/logo.svg';
-import Web3 from "web3"
-import Web3Modal from "web3modal"
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import {useHistory} from "react-router-dom";
-
 
 
 interface LandingPageProps {
@@ -26,7 +19,7 @@ const LandingPage = ({
   /** Router Methods **/
   let history = useHistory()
 
-  // Send user to Sandwhich look up if wallet is connected
+  // Send user to sandwich look up if wallet is connected
   useEffect(() => {
     if (walletAddress) {
       history.push(`/${walletAddress}`)
@@ -37,7 +30,7 @@ const LandingPage = ({
   return (
     // <Container>
     <StyledLandingPage>
-      <img src={LogoSvg} />
+      <img src={LogoSvg} alt="sandwich.wtf"/>
       <StyledMainTextBox>
         <p>Did you know, you might have some unsuspected transactions, which might be draining away your wallet?</p>
         <p>We help you scan and find those sandwiches in your transactions.</p>

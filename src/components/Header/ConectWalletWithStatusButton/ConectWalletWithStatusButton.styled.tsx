@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from "styled-components";
+
 
 const StyledConnectWalletWithStatusButton = styled.button`
   transition-duration: 150ms;

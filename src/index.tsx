@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+require('dotenv').config()
+
+console.log(process.env)
 
 
-// @ts-ignore
 declare global {
-  // tslint:disable-next-line
   interface Window {
     web3: any;
     ethereum: any;

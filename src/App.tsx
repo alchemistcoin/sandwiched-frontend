@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import LandingPage from "./components/LandingPage";
 import StyledHeader from "./components/Header/Header";
@@ -8,13 +8,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   useParams,
 } from "react-router-dom";
 
 
 import Web3Modal from "web3modal";
-// @ts-ignore
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import {
   getChainData
@@ -23,7 +21,7 @@ import { IAssetData } from "./helpers/types";
 import SandwichPage from "./components/SandwichPage";
 
 
-// FROM EXAMPLE
+// FROM EXAMPLE: https://github.com/Web3Modal/web3modal/blob/master/example/src/App.tsx
 
 interface IAppState {
   fetching: boolean;
@@ -70,7 +68,6 @@ function initWeb3(provider: any) {
 }
 
 class App extends React.Component<any, any> {
-  // @ts-ignore
   public web3Modal: Web3Modal;
   public state: IAppState;
 
@@ -117,7 +114,6 @@ class App extends React.Component<any, any> {
     });
 
     return {address, connected: true}
-    // await this.getAccountAssets();
   };
 
   public subscribeProvider = async (provider: any) => {
@@ -155,7 +151,6 @@ class App extends React.Component<any, any> {
           infuraId: process.env.REACT_APP_INFURA_ID
         }
       },
-      // TODO: Could add support for more Wallets
       // torus: {
       //   package: Torus
       // },
@@ -193,14 +188,7 @@ class App extends React.Component<any, any> {
 
   public render = () => {
     const {
-      assets,
-      address,
       connected,
-      chainId,
-      fetching,
-      showModal,
-      pendingRequest,
-      result
     } = this.state;
     return (
       <div className="App" style={{
@@ -210,15 +198,16 @@ class App extends React.Component<any, any> {
       }}>
         {/* Router */}
         <Router>
-          {/* Header */}
-          <StyledHeader
-            onConnect={this.onConnect}
-            connected={connected}
-            walletAddress={this.state.address}
-            resetApp={this.resetApp}
-          />
           <Switch>
             <Route exact path="/">
+              {/* Header */}
+              <StyledHeader
+                showLogo={false}
+                onConnect={this.onConnect}
+                connected={connected}
+                walletAddress={this.state.address}
+                resetApp={this.resetApp}
+              />
               <LandingPage
                 onConnect={this.onConnect}
                 connected={connected}
@@ -226,6 +215,14 @@ class App extends React.Component<any, any> {
               />
             </Route>
             <Route path="/:walletAddress">
+              {/* Header */}
+              <StyledHeader
+                showLogo={true}
+                onConnect={this.onConnect}
+                connected={connected}
+                walletAddress={this.state.address}
+                resetApp={this.resetApp}
+              />
               <SandwichPage/>
             </Route>
           </Switch>
