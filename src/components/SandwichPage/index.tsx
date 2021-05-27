@@ -1,3 +1,3 @@
-import SandwichPage from "./SandwichPage";
+import SandwichPage from './SandwichPage'
 
 export default SandwichPage

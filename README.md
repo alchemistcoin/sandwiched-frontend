@@ -45,11 +45,10 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
-
-
 ## Project TODOs
+
 TODO's are losely ranked:
+
 1. critical
 2. probably not critical, but probably highly desired
 3. not critical, but desired

@@ -1,8 +1,7 @@
 import React from 'react'
-import styled from "styled-components";
-import hamburgers from "../../assets/hamburgers.svg"
-import logoStripped from "../../assets/logo-stripped.svg"
-
+import styled from 'styled-components'
+import hamburgers from '../../assets/hamburgers.svg'
+import logoStripped from '../../assets/logo-stripped.svg'
 
 const StyledLoadingSandwichesDisplay = styled.div`
   margin-top: 19vh;
@@ -10,7 +9,7 @@ const StyledLoadingSandwichesDisplay = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+
   img.hamburgers {
     position: relative;
     top: -193px;
@@ -28,12 +27,12 @@ export const StyledMainTextBox = styled.div`
   font-style: normal;
   font-weight: normal;
   line-height: 38px;
-`;
+`
 
-const LoadingSandwichesDisplay = ()=> (
+const LoadingSandwichesDisplay = () => (
   <StyledLoadingSandwichesDisplay>
-    <img src={logoStripped} alt="sandwich.wtf"/>
-    <img className="hamburgers" src={hamburgers} alt=""/>
+    <img src={logoStripped} alt="sandwich.wtf" />
+    <img className="hamburgers" src={hamburgers} alt="" />
     <StyledMainTextBox>
       <h1>Hold up!</h1>
       <p>We are scanning your wallet transactions for potential sandwiches</p>
@@ -41,4 +40,4 @@ const LoadingSandwichesDisplay = ()=> (
   </StyledLoadingSandwichesDisplay>
 )
 
-export default LoadingSandwichesDisplay;
+export default LoadingSandwichesDisplay
