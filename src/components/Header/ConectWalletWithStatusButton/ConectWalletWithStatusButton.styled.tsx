@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 const StyledConnectWalletWithStatusButton = styled.button`
+  cursor: pointer;
   transition-duration: 150ms;
   &.disconnected {
     border: 1px solid rgb(var(--color-primary));

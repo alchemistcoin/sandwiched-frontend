@@ -28,6 +28,7 @@ export const StyledMainTextBox = styled.div`
 `
 
 export const StyledConnectWalletButton = styled.button`
+  cursor: pointer;
   border: none;
   border-radius: 69px;
   background-color: rgb(var(--color-primary));

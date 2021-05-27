@@ -5,6 +5,7 @@ import StyledHeader from './components/Header/Header'
 import backgroundSvg from './assets/background.svg'
 import Web3 from 'web3'
 import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom'
+import SandwichPage from './components/SandwichPage'
 
 import Web3Modal from 'web3modal'
 import WalletConnectProvider from '@walletconnect/web3-provider'
@@ -208,7 +209,7 @@ class App extends React.Component<any, any> {
                 walletAddress={this.state.address}
                 resetApp={this.resetApp}
               />
-              <ResultsPage />
+              <SandwichPage />
             </Route>
           </Switch>
         </Router>
@@ -217,24 +218,6 @@ class App extends React.Component<any, any> {
   }
 }
 // END FROM EXAMPLE
-
-// return (
-//   <div className="App" style={{ backgroundImage: `url(${backgroundSvg})`, backgroundSize: "cover", height: "100%" }}>
-//     {/* Router */}
-//     <Router>
-//       {/* Header */}
-//       <StyledHeader />
-//       <Switch>
-//         <Route exact path="/" >
-//           <LandingPage />
-//         </Route>
-//         <Route path="/:walletAddress">
-//           <ResultsPage />
-//         </Route>
-//       </Switch>
-//     </Router>
-//   </div>
-// );
 
 // TODO 1: Replace with real results page once implemented
 function ResultsPage() {
