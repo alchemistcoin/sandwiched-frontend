@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import styled from 'styled-components'
 
 const StyledLandingPage = styled.div`
   margin-top: 4rem;
@@ -26,7 +25,7 @@ export const StyledMainTextBox = styled.div`
   p:nth-child(2) {
     margin-top: 30px;
   }
-`;
+`
 
 export const StyledConnectWalletButton = styled.button`
   border: none;

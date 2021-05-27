@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import styled from 'styled-components'
 
 const StyledConnectWalletWithStatusButton = styled.button`
   transition-duration: 150ms;
@@ -22,13 +21,12 @@ const StyledConnectWalletWithStatusButton = styled.button`
   /* identical to box height, or 140% */
 
   letter-spacing: 0.2px;
-  
+
   img {
     float: right;
     vertical-align: middle;
     margin-right: 4px;
   }
-  
-`;
+`
 
 export default StyledConnectWalletWithStatusButton

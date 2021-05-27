@@ -1,24 +1,22 @@
-import React, {useEffect} from 'react'
-import StyledConnectWalletWithStatusButton from "./ConectWalletWithStatusButton.styled"
-import connectIcon from "../../../assets/connect-icon.svg"
-import statusConnected from "../../../assets/status-connected.svg"
-import {useHistory} from "react-router-dom"
-
+import React, { useEffect } from 'react'
+import StyledConnectWalletWithStatusButton from './ConectWalletWithStatusButton.styled'
+import connectIcon from '../../../assets/connect-icon.svg'
+import statusConnected from '../../../assets/status-connected.svg'
+import { useHistory } from 'react-router-dom'
 
 interface ConnectWalletWithStatusButtonProps {
-  connected: boolean;
-  onConnect: Function;
-  resetApp: Function;
-  ethereumAddress: string;
+  connected: boolean
+  onConnect: Function
+  resetApp: Function
+  ethereumAddress: string
 }
 
 const ConnectWalletWithStatusButton = ({
-   connected,
-   onConnect,
-   ethereumAddress,
-   resetApp,
- }: ConnectWalletWithStatusButtonProps) => {
-
+  connected,
+  onConnect,
+  ethereumAddress,
+  resetApp,
+}: ConnectWalletWithStatusButtonProps) => {
   /** Router Methods **/
   let history = useHistory()
 
@@ -27,14 +25,14 @@ const ConnectWalletWithStatusButton = ({
     if (!connected) {
       history.push(`/`)
     }
-  });
+  })
 
   return (
     <>
       {
         <StyledConnectWalletWithStatusButton
-          onClick={ async ()=> {
-            const {address} = await onConnect()
+          onClick={async () => {
+            const { address } = await onConnect()
             if (connected) {
               resetApp()
               history.push('/')
@@ -42,24 +40,18 @@ const ConnectWalletWithStatusButton = ({
               history.push(`/${address}`)
             }
           }}
-          className={(connected ? "connected" : "disconnected")}
+          className={connected ? 'connected' : 'disconnected'}
         >
           {connected
-            ?
-              ethereumAddress.substr(1,4) + "..." + ethereumAddress.substr(ethereumAddress.length - 3, ethereumAddress.length)
-            :
-              "Connect Wallet"
-          }
-          {connected ?
-            <img src={statusConnected} alt="connected"/>
-            :
-            <img src={connectIcon} alt="disconnected"/>
-          }
+            ? ethereumAddress.substr(1, 4) +
+              '...' +
+              ethereumAddress.substr(ethereumAddress.length - 3, ethereumAddress.length)
+            : 'Connect Wallet'}
+          {connected ? <img src={statusConnected} alt="connected" /> : <img src={connectIcon} alt="disconnected" />}
         </StyledConnectWalletWithStatusButton>
       }
     </>
   )
-
 }
 
-export default ConnectWalletWithStatusButton;
+export default ConnectWalletWithStatusButton
