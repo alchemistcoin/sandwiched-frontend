@@ -23,6 +23,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - run: npm run prettier
+      - run: yarn run prettier
 
-      - run: npm run lint
+      - run: yarn run lint
