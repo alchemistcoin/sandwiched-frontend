@@ -5,7 +5,7 @@ import logoStripped from "../../assets/logo-stripped.svg"
 
 
 const StyledLoadingSandwichesDisplay = styled.div`
-  margin-top: 20vh;
+  margin-top: 19vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +19,7 @@ const StyledLoadingSandwichesDisplay = styled.div`
 `
 
 export const StyledMainTextBox = styled.div`
-  margin-top: -80px;
+  margin-top: -94px;
   color: rgb(var(--color-text));
   padding: 0px 40px;
   max-width: 413px;
