@@ -14,14 +14,20 @@ const SandwichPage = ({}) => {
     // Create an scoped async function in the hook
     const utf8Decoder = new TextDecoder('utf-8')
     async function fetchStream(reader: any) {
+      let messageCount = 0
       for (;;) {
         let { value: chunk, done: readerDone } = await reader.read()
         if (readerDone) {
           return
         }
+        messageCount += 1
+        if (messageCount <= 2) {
+          // can ignore the first 2 messages, or maybe later use the amount found reported to verify that all of the messages did send, and if not then retry
+          continue
+        }
         const message = utf8Decoder.decode(chunk)
         const parsedMessage = JSON.parse(message)
-        // console.log(parsedMessage)
+        // @ts-ignore
         setData((oldArray) => [...oldArray, parsedMessage])
       }
     }
@@ -38,6 +44,7 @@ const SandwichPage = ({}) => {
     // }, 3000)
   }, [])
 
+  console.log('data')
   console.log(data)
 
   return <div>{!_isEmpty(data[1]) ? <ResultsView /> : <LoadingSandwiches />}</div>

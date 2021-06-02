@@ -60,12 +60,15 @@ const ResultsView = () => (
     <div style={{ maxWidth: '100%' }}>
       <MaterialTable
         columns={[
-          { title: 'Adı', field: 'name' },
-          { title: 'Soyadı', field: 'surname' },
-          { title: 'Doğum Yılı', field: 'birthYear', type: 'numeric' },
-          { title: 'Doğum Yeri', field: 'birthCity', lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' } },
+          { title: 'Date & Time', field: 'date' },
+          { title: 'Sandwich open', field: 'open' },
+          { title: 'User transaction', field: 'usertx' },
+          { title: 'Sandwich close', field: 'close' },
+          { title: 'Profit earned', field: 'profit' },
+          { title: 'loss incurred', field: 'loss' },
+          // { title: 'Doğum Yeri', field: 'birthCity', lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' } },
         ]}
-        data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
+        data={[{ date: 'Mehmet', open: 'Baran', usertx: 1987, close: 63, profit: 54, loss: 80 }]}
         title="Demo Title"
       />
     </div>
