@@ -7,6 +7,7 @@ import { ISandwichTableData } from '../../helpers/types'
 
 const SandwichPage = ({}) => {
   const [data, setData] = useState<ISandwichTableData[]>([])
+  const [fetching, setFetching] = useState(false)
   // @ts-ignore
   let { walletAddress } = useParams()
 
@@ -15,10 +16,12 @@ const SandwichPage = ({}) => {
     // Create an scoped async function in the hook
     const utf8Decoder = new TextDecoder('utf-8')
     async function fetchStream(reader: any) {
+      setFetching(true)
       let messageCount = 0
       for (;;) {
         let { value: chunk, done: readerDone } = await reader.read()
         if (readerDone) {
+          setFetching(false)
           return
         }
         messageCount += 1
@@ -74,18 +77,11 @@ const SandwichPage = ({}) => {
     }
     // Execute the created function directly
     runFetchStream()
-
-    // setTimeout(() => {
-    //   setData((oldArray) => [...oldArray, { something: 'ok' }])
-    // }, 3000)
   }, [])
 
   // @ts-ignore
   return (
-    <div style={{ height: '100vh' }}>
-      <LoadingSandwiches />
-      <ResultsView data={data} />
-    </div>
+    <div style={{ height: '100vh' }}>{_isEmpty(data[0]) ? <LoadingSandwiches /> : <ResultsView data={data} />}</div>
   )
 }
 
