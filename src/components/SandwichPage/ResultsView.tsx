@@ -9,6 +9,17 @@ import {
 } from './ResultsView.styled'
 import MaterialTable from 'material-table'
 import statusIcon from '../../assets/status-icon.svg'
+import { ISandwichTableData } from '../../helpers/types'
+
+type SummarySandwichTableRowProps = {
+  message: string
+  worst?: boolean
+  best?: boolean
+}
+
+type DetailedTableProps = {
+  data: ISandwichTableData[]
+}
 
 const PageHeader = () => (
   <StyledPageHeader>
@@ -18,11 +29,6 @@ const PageHeader = () => (
   </StyledPageHeader>
 )
 
-type SummarySandwichTableRowProps = {
-  message: string
-  worst?: boolean
-  best?: boolean
-}
 const SummarySandwichListItem = ({ message, worst = false, best = false }: SummarySandwichTableRowProps) => (
   <StyledSummarySandwichListItem>
     <span className="message">{message}</span>
@@ -50,28 +56,31 @@ const BadSummarySandwichTable = () => (
   </div>
 )
 
-const ResultsView = () => (
+const ResultsView = ({ data = [] }: DetailedTableProps) => (
   <StyledResultsView>
+    {console.log(data)}
     <PageHeader />
     <StyledSummarySandwichTableWrapper>
       <BadSummarySandwichTable />
       <GoodSummarySandwichTable />
     </StyledSummarySandwichTableWrapper>
-    <div style={{ maxWidth: '100%' }}>
-      <MaterialTable
-        columns={[
-          { title: 'Date & Time', field: 'date' },
-          { title: 'Sandwich open', field: 'open' },
-          { title: 'User transaction', field: 'usertx' },
-          { title: 'Sandwich close', field: 'close' },
-          { title: 'Profit earned', field: 'profit' },
-          { title: 'loss incurred', field: 'loss' },
-          // { title: 'Doğum Yeri', field: 'birthCity', lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' } },
-        ]}
-        data={[{ date: 'Mehmet', open: 'Baran', usertx: 1987, close: 63, profit: 54, loss: 80 }]}
-        title="Demo Title"
-      />
-    </div>
+    <MaterialTable
+      columns={[
+        { title: 'Date & Time', field: 'date' },
+        { title: 'Sandwich open', field: 'open' },
+        { title: 'User transaction', field: 'target' },
+        { title: 'Sandwich close', field: 'close' },
+        { title: 'Profit earned', field: 'profit' },
+      ]}
+      // data={[{ date: 'Mehmet', open: 'Baran', target: 1987, close: 63, profit: 54 }]}
+      data={data}
+      title="All sandwiches"
+      options={{
+        headerStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    />
   </StyledResultsView>
 )
 

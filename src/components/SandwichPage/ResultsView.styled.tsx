@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import backgroundSvg from '../../assets/background.svg'
 
 export const StyledResultsView = styled.div`
   margin-top: 10vh;
@@ -6,6 +7,9 @@ export const StyledResultsView = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  // background-image: url(${backgroundSvg});
+  // background-size: cover;
+}
 `
 export const StyledSummarySandwichTableWrapper = styled.div`
   display: flex;

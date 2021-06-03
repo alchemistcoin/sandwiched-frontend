@@ -21,11 +21,13 @@ const ConnectWalletWithStatusButton = ({
   let history = useHistory()
 
   // Send user back to homepage if they disconnect
-  useEffect(() => {
-    if (!connected) {
-      history.push(`/`)
-    }
-  })
+  // ! This is acutally not desireable because then you cannot use any arbitrary wallet ID, but instead would have to be connected yourself,
+  // instead we should just redirect the user if they connect, but not worry about disconnections
+  // useEffect(() => {
+  //   if (!connected) {
+  //     history.push(`/`)
+  //   }
+  // })
 
   return (
     <>

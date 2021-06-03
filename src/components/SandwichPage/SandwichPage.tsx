@@ -3,9 +3,10 @@ import LoadingSandwiches from './LoadingSandwiches'
 import ResultsView from './ResultsView'
 import _isEmpty from 'lodash/isEmpty'
 import { useParams } from 'react-router-dom'
+import { ISandwichTableData } from '../../helpers/types'
 
 const SandwichPage = ({}) => {
-  const [data, setData] = useState([{}])
+  const [data, setData] = useState<ISandwichTableData[]>([])
   // @ts-ignore
   let { walletAddress } = useParams()
 
@@ -21,14 +22,49 @@ const SandwichPage = ({}) => {
           return
         }
         messageCount += 1
-        if (messageCount <= 2) {
-          // can ignore the first 2 messages, or maybe later use the amount found reported to verify that all of the messages did send, and if not then retry
-          continue
-        }
+        // if (messageCount <= 2) {
+        //   // can ignore the first 2 messages, or maybe later use the amount found reported to verify that all of the messages did send, and if not then retry
+        //   continue
+        // }
         const message = utf8Decoder.decode(chunk)
         const parsedMessage = JSON.parse(message)
-        // @ts-ignore
-        setData((oldArray) => [...oldArray, parsedMessage])
+        if (parsedMessage.message.toLowerCase() != 'sandwich found') {
+          continue
+        }
+        const mappedMessage: ISandwichTableData = {
+          message: parsedMessage.message,
+          date:
+            new Date(parsedMessage.target.ts).toLocaleDateString() +
+            '. ' +
+            new Date(parsedMessage.target.ts).toLocaleTimeString(),
+          open:
+            Number(parsedMessage.open.amountIn).toFixed(2) +
+            ' ' +
+            parsedMessage.open.currencyIn +
+            ' for ' +
+            Number(parsedMessage.open.amountOut).toFixed(2) +
+            ' ' +
+            parsedMessage.open.currencyOut,
+          target:
+            Number(parsedMessage.target.amountIn).toFixed(2) +
+            ' ' +
+            parsedMessage.target.currencyIn +
+            ' for ' +
+            Number(parsedMessage.target.amountOut).toFixed(2) +
+            ' ' +
+            parsedMessage.target.currencyOut,
+          close:
+            Number(parsedMessage.close.amountIn).toFixed(2) +
+            ' ' +
+            parsedMessage.close.currencyIn +
+            ' for ' +
+            Number(parsedMessage.close.amountOut).toFixed(2) +
+            ' ' +
+            parsedMessage.close.currencyOut,
+          profit: Number(parsedMessage.profit.amount).toFixed(2) + ' ' + parsedMessage.profit.currency,
+        }
+        console.log(mappedMessage)
+        setData((oldArray) => [...oldArray, mappedMessage])
       }
     }
     async function runFetchStream() {
@@ -44,10 +80,13 @@ const SandwichPage = ({}) => {
     // }, 3000)
   }, [])
 
-  console.log('data')
-  console.log(data)
-
-  return <div>{!_isEmpty(data[1]) ? <ResultsView /> : <LoadingSandwiches />}</div>
+  // @ts-ignore
+  return (
+    <div style={{ height: '100vh' }}>
+      <LoadingSandwiches />
+      <ResultsView data={data} />
+    </div>
+  )
 }
 
 export default SandwichPage

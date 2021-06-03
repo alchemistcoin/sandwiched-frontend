@@ -16,3 +16,20 @@ export interface IAssetData {
   contractAddress: string
   balance?: string
 }
+
+export interface ITransaction {
+  amountIn: string
+  amountOut: string
+  currencyIn: string
+  currencyOut: string
+  ts: string
+  tx: string
+}
+export interface ISandwichTableData {
+  message: string
+  open?: string
+  close?: string
+  target?: string
+  date?: string
+  profit?: string
+}
