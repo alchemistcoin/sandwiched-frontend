@@ -6,10 +6,13 @@ import {
   StyledSummarySandwichListItem,
   StyledPageHeader,
   StyledSummarySandwichTableWrapper,
+  StyledDetailedTableContainer,
 } from './ResultsView.styled'
 import MaterialTable from 'material-table'
 import statusIcon from '../../assets/status-icon.svg'
 import { ISandwichTableData } from '../../helpers/types'
+import WorstSandwich from '../../assets/worst-sandwich.svg'
+import GreatSandwich from '../../assets/great-sandwich.svg'
 
 type SummarySandwichTableRowProps = {
   message: string
@@ -36,23 +39,37 @@ const SummarySandwichListItem = ({ message, worst = false, best = false }: Summa
   </StyledSummarySandwichListItem>
 )
 
-const GoodSummarySandwichTable = () => (
-  <div style={{ display: 'flex', flexDirection: 'column' }}>
-    <h1>Sandwich</h1>
+const GoodSummarySandwichTable = ({ data = [] }: DetailedTableProps) => (
+  <div style={{}}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <img src={GreatSandwich} alt="good sandwich" />
+    </div>
     <StyledSummarySandwichList className="good">
       <ul>
-        <SummarySandwichListItem message={`swap 100 ETH for 10 MIST`} />
-        <SummarySandwichListItem message={`swap 200 ETH for 10 MIST`} />
-        <SummarySandwichListItem message={`swap 300 ETH for 10 MIST`} />
+        {data.map((rec, idx) => {
+          if (rec.profit?.substr(0, 1) === '-') return
+          const message = 'swap ' + rec.target
+          return <SummarySandwichListItem message={message} key={idx} />
+        })}
       </ul>
     </StyledSummarySandwichList>
   </div>
 )
 
-const BadSummarySandwichTable = () => (
-  <div style={{ display: 'flex', flexDirection: 'column' }}>
-    <h1>Sandwich</h1>
-    <StyledSummarySandwichList className="bad"></StyledSummarySandwichList>
+const BadSummarySandwichTable = ({ data = [] }: DetailedTableProps) => (
+  <div>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <img src={WorstSandwich} alt="bad sandwich" />
+    </div>
+    <StyledSummarySandwichList className="bad">
+      <ul>
+        {data.map((rec, idx) => {
+          if (rec.profit?.substr(0, 1) !== '-') return
+          const message = 'swap ' + rec.target
+          return <SummarySandwichListItem message={message} key={idx} />
+        })}
+      </ul>
+    </StyledSummarySandwichList>
   </div>
 )
 
@@ -61,26 +78,63 @@ const ResultsView = ({ data = [] }: DetailedTableProps) => (
     {console.log(data)}
     <PageHeader />
     <StyledSummarySandwichTableWrapper>
-      <BadSummarySandwichTable />
-      <GoodSummarySandwichTable />
+      <BadSummarySandwichTable data={data} />
+      <GoodSummarySandwichTable data={data} />
     </StyledSummarySandwichTableWrapper>
-    <MaterialTable
-      columns={[
-        { title: 'Date & Time', field: 'date' },
-        { title: 'Sandwich open', field: 'open' },
-        { title: 'User transaction', field: 'target' },
-        { title: 'Sandwich close', field: 'close' },
-        { title: 'Profit earned', field: 'profit' },
-      ]}
-      // data={[{ date: 'Mehmet', open: 'Baran', target: 1987, close: 63, profit: 54 }]}
-      data={data}
-      title="All sandwiches"
-      options={{
-        headerStyle: {
-          fontWeight: 'bold',
-        },
-      }}
-    />
+    <StyledDetailedTableContainer>
+      <MaterialTable
+        style={{
+          paddingTop: 50,
+          width: '100%',
+          borderTopLeftRadius: '25px',
+          borderTopRightRadius: '25px',
+        }}
+        columns={[
+          { title: 'Date & Time', field: 'date' },
+          { title: 'Sandwich open', field: 'open' },
+          { title: 'User transaction', field: 'target' },
+          { title: 'Sandwich close', field: 'close' },
+          { title: 'Profit earned', field: 'profit' },
+        ]}
+        data={data}
+        title={<span style={{ fontSize: 14, letterSpacing: 2 }}>ALL SANDWICHES</span>}
+        options={{
+          headerStyle: {
+            fontWeight: 'bold',
+            fontSize: '14px',
+            lineHeight: '24px',
+          },
+          rowStyle: {
+            fontSize: '14px',
+            lineHeight: '24px',
+            backgroundColor: '#EEE',
+          },
+          searchFieldStyle: {
+            // color: 'yellow',
+          },
+          pageSizeOptions: [10, 20, 50, 100],
+        }}
+        // localization={{
+        //   pagination: {
+        //     labelDisplayedRows: '1',
+        //     labelRowsSelect: '2',
+        //     labelRowsPerPage: '3',
+        //     firstAriaLabel: '4',
+        //     firstTooltip: '5',
+        //     previousAriaLabel: '5',
+        //     previousTooltip: '5',
+        //     nextAriaLabel: '5',
+        //     nextTooltip: '5',
+        //     lastAriaLabel: '5',
+        //     lastTooltip: '5',
+        //   },
+        // }}
+        // components={{
+        //   // eslint-disable-next-line react/display-name
+        //   Pagination: (props) => <MTablePagination {...props} />,
+        // }}
+      />
+    </StyledDetailedTableContainer>
   </StyledResultsView>
 )
 

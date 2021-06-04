@@ -9,14 +9,23 @@ export const StyledResultsView = styled.div`
   align-items: center;
   // background-image: url(${backgroundSvg});
   // background-size: cover;
-}
+  h1 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+    text-align: center;
+    letter-spacing: 2px;
+  }
 `
 export const StyledSummarySandwichTableWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `
 export const StyledSummarySandwichList = styled.div`
-  padding: 10px 60px;
+  padding: 2px;
   list-style-type: none;
   margin: 15px;
   height: 357px;
@@ -33,6 +42,11 @@ export const StyledSummarySandwichList = styled.div`
     border: 1px solid red;
   }
   ul {
+    scrollbar-color: dark;
+    margin-left: 60px;
+    padding-right: 60px;
+    overflow: auto;
+    max-height: 300px;
     padding-inline-start: 0px;
   }
 `
@@ -81,5 +95,27 @@ export const StyledPageHeader = styled.div`
     line-height: 39px;
     letter-spacing: 0em;
     text-align: center;
+  }
+`
+
+export const StyledDetailedTableContainer = styled.div`
+  width: 100%;
+  background-color: #ffbf00;
+  //margin-top: 60px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  //padding-bottom: 32px;
+  .MuiTableCell-footer {
+    background-color: rgb(var(--color-primary));
+  }
+  .MTablePaginationInner-root-14 {
+    font-size: 8px;
+  }
+  .MuiTableSortLabel-icon {
+    color: rgb(var(--color-primary));
+  }
+  .MuiTableSortLabel-iconDirectionDesc,
+  .MuiTableSortLabel-iconDirectionAsc {
+    color: rgb(var(--color-primary));
   }
 `
