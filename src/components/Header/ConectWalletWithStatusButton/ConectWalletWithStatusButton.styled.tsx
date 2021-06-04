@@ -23,6 +23,10 @@ const StyledConnectWalletWithStatusButton = styled.button`
 
   letter-spacing: 0.2px;
 
+  &:hover {
+    filter: brightness(0.9);
+  }
+
   img {
     float: right;
     vertical-align: middle;

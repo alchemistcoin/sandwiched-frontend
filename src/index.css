@@ -5,10 +5,13 @@ body {
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
+  height: auto;
+}
+html {
+  height: auto;
 }
 #root {
-  height: 100%;
+  height: 100vh;
   --color-primary: 255, 191, 0;
   --color-text: 25, 1, 52;
   /* TODO: color themeing, this looks like it has some simple solutions to start with https://dev.to/felixtellmann/how-to-add-color-themes-in-reactjs-pn1*/
