@@ -80,9 +80,7 @@ const SandwichPage = ({}) => {
   }, [])
 
   // @ts-ignore
-  return (
-    <div style={{ height: '100vh' }}>{_isEmpty(data[0]) ? <LoadingSandwiches /> : <ResultsView data={data} />}</div>
-  )
+  return <div>{_isEmpty(data[0]) ? <LoadingSandwiches /> : <ResultsView data={data} />}</div>
 }
 
 export default SandwichPage

@@ -75,7 +75,7 @@ const BadSummarySandwichTable = ({ data = [] }: DetailedTableProps) => (
 
 const ResultsView = ({ data = [] }: DetailedTableProps) => (
   <StyledResultsView>
-    {console.log(data)}
+    {/*{console.log(data)}*/}
     <PageHeader />
     <StyledSummarySandwichTableWrapper>
       <BadSummarySandwichTable data={data} />

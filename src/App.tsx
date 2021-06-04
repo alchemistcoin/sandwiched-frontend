@@ -183,7 +183,7 @@ class App extends React.Component<any, any> {
         style={{
           backgroundImage: `url(${backgroundSvg})`,
           backgroundSize: 'cover',
-          height: '100%',
+          height: '100vh',
         }}
       >
         {/* Router */}
