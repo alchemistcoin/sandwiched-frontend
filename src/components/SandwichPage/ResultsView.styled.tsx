@@ -3,6 +3,7 @@ import backgroundSvg from '../../assets/background.svg'
 
 export const StyledResultsView = styled.div`
   margin-top: 10vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,6 +100,7 @@ export const StyledPageHeader = styled.div`
 `
 
 export const StyledDetailedTableContainer = styled.div`
+  margin-top: 60px;
   width: 100%;
   background-color: #ffbf00;
   //margin-top: 60px;
