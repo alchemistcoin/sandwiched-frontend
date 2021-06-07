@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import backgroundSvg from '../../assets/background.svg'
 
 export const StyledResultsView = styled.div`
-  margin-top: 26vh;
-  height: 100vh;
+  margin-top: 10vh;
+  //height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,8 +22,11 @@ export const StyledResultsView = styled.div`
   }
 `
 export const StyledSummarySandwichTableWrapper = styled.div`
+  min-width: 1024px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 `
 export const StyledSummarySandwichList = styled.div`
   padding: 2px;
@@ -120,4 +123,18 @@ export const StyledDetailedTableContainer = styled.div`
   .MuiTableSortLabel-iconDirectionAsc {
     color: rgb(var(--color-primary));
   }
+`
+
+export const StyledAttributesItem = styled.span`
+  width: 50px;
+  height: 30px;
+  border-radius: 8px;
+  padding: 6px;
+  border: 1px solid rgb(var(--color-primary));
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: left;
+  color: rgb(var(--color-primary));
 `

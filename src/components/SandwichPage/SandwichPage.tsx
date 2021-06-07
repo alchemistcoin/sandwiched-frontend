@@ -3,11 +3,14 @@ import LoadingSandwiches from './LoadingSandwiches'
 import ResultsView from './ResultsView'
 import _isEmpty from 'lodash/isEmpty'
 import { useParams } from 'react-router-dom'
-import { ISandwichTableData } from '../../helpers/types'
+import { ISandwichDetailedTableData } from '../../helpers/types'
+import { sleep } from '../../helpers/utilities'
+import { AnyShape } from '../../helpers/types'
 
 const SandwichPage = ({}) => {
-  const [data, setData] = useState<ISandwichTableData[]>([])
+  const [data, setData] = useState<AnyShape[]>([])
   const [fetching, setFetching] = useState(false)
+  const [fetchingComplete, setFetchingComplete] = useState(false)
   // @ts-ignore
   let { walletAddress } = useParams()
 
@@ -21,66 +24,44 @@ const SandwichPage = ({}) => {
       for (;;) {
         let { value: chunk, done: readerDone } = await reader.read()
         if (readerDone) {
+          setFetchingComplete(true)
           setFetching(false)
           return
         }
         messageCount += 1
-        // if (messageCount <= 2) {
-        //   // can ignore the first 2 messages, or maybe later use the amount found reported to verify that all of the messages did send, and if not then retry
-        //   continue
-        // }
         const message = utf8Decoder.decode(chunk)
-        const parsedMessage = JSON.parse(message)
-        if (parsedMessage.message.toLowerCase() != 'sandwich found') {
-          continue
-        }
-        const mappedMessage: ISandwichTableData = {
-          message: parsedMessage.message,
-          date:
-            new Date(parsedMessage.target.ts).toLocaleDateString() +
-            '. ' +
-            new Date(parsedMessage.target.ts).toLocaleTimeString(),
-          open:
-            Number(parsedMessage.open.amountIn).toFixed(2) +
-            ' ' +
-            parsedMessage.open.currencyIn +
-            ' for ' +
-            Number(parsedMessage.open.amountOut).toFixed(2) +
-            ' ' +
-            parsedMessage.open.currencyOut,
-          target:
-            Number(parsedMessage.target.amountIn).toFixed(2) +
-            ' ' +
-            parsedMessage.target.currencyIn +
-            ' for ' +
-            Number(parsedMessage.target.amountOut).toFixed(2) +
-            ' ' +
-            parsedMessage.target.currencyOut,
-          close:
-            Number(parsedMessage.close.amountIn).toFixed(2) +
-            ' ' +
-            parsedMessage.close.currencyIn +
-            ' for ' +
-            Number(parsedMessage.close.amountOut).toFixed(2) +
-            ' ' +
-            parsedMessage.close.currencyOut,
-          profit: Number(parsedMessage.profit.amount).toFixed(2) + ' ' + parsedMessage.profit.currency,
-        }
-        console.log(mappedMessage)
-        setData((oldArray) => [...oldArray, mappedMessage])
+        let splitMessages = message.split('\n')
+        splitMessages.splice(splitMessages.length - 1, 1)
+        // console.log('split', splitMessages)
+        const parsedMessages = splitMessages.map((msg) => JSON.parse(msg))
+        setData((oldArray) => {
+          const newArray = oldArray.concat(parsedMessages)
+          return [...newArray]
+        })
       }
     }
     async function runFetchStream() {
       // @ts-ignore
       let reader = (await fetch(`https://api.sandwiched.wtf/sandwiches/${walletAddress}`)).body.getReader() // shouldn't hardcode this endpoint
+      let successfulFetch = false
+      // while (!successfulFetch) {
+      //   try {
       fetchStream(reader)
+      //     successfulFetch = true
+      //   } catch (err) {
+      //     sleep(3000)
+      //   }
+      // }
     }
     // Execute the created function directly
     runFetchStream()
   }, [])
 
-  // @ts-ignore
-  return <div>{_isEmpty(data[0]) ? <LoadingSandwiches /> : <ResultsView data={data} />}</div>
+  return (
+    <div>
+      {_isEmpty(data[0]) ? <LoadingSandwiches /> : <ResultsView data={data} fetchingComplete={fetchingComplete} />}
+    </div>
+  )
 }
 
 export default SandwichPage

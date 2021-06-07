@@ -1,27 +1,27 @@
+{
+  /* eslint-disable react/display-name */
+}
 import React from 'react'
 import sandwichPotion from '../../assets/sandwich-potion.svg'
 import {
   StyledResultsView,
-  StyledSummarySandwichList,
-  StyledSummarySandwichListItem,
   StyledPageHeader,
   StyledSummarySandwichTableWrapper,
   StyledDetailedTableContainer,
+  StyledAttributesItem,
 } from './ResultsView.styled'
+import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
 import statusIcon from '../../assets/status-icon.svg'
-import { ISandwichTableData } from '../../helpers/types'
-import WorstSandwich from '../../assets/worst-sandwich.svg'
-import GreatSandwich from '../../assets/great-sandwich.svg'
-
-type SummarySandwichTableRowProps = {
-  message: string
-  worst?: boolean
-  best?: boolean
-}
+import SummaryTotalProfitSandwiches from '../../assets/summary-total-profit-sandwiches.svg'
+import SummaryTotalSandwiches from '../../assets/summary-total-sandwiches.svg'
+import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
+import { filterSandwichesToDetailsTable, mapSandwichesToDetailsTable } from '../../helpers/data'
+import { AnyShape } from '../../helpers/types'
 
 type DetailedTableProps = {
-  data: ISandwichTableData[]
+  data: AnyShape[]
+  fetchingComplete: boolean
 }
 
 const PageHeader = () => (
@@ -32,110 +32,101 @@ const PageHeader = () => (
   </StyledPageHeader>
 )
 
-const SummarySandwichListItem = ({ message, worst = false, best = false }: SummarySandwichTableRowProps) => (
-  <StyledSummarySandwichListItem>
-    <span className="message">{message}</span>
-    <img className="icon" src={statusIcon} />
-  </StyledSummarySandwichListItem>
-)
+const AttributeItem = ({ mev }: { mev?: boolean }) => <>{mev && <StyledAttributesItem>MEV</StyledAttributesItem>}</>
+const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
+  // console.log('data', data)
+  // Prep Data for Summary Tables
+  const bestSandwich = data.reduce((prev, curr) => {
+    // TODO: find a better way to grab a records profit data (maybe combine, maybe take the max, or maybe one of them is always preferred?)
+    const prevProfit = prev.profit?.amount || prev.profit2?.amount || 0
+    const currProfit = curr.profit?.amount || curr.profit2?.amount || 0
+    return Number(prevProfit) >= Number(currProfit) ? prev : curr
+  })
+  const totalSandwiches = data.filter((rec) => {
+    if (rec.message.toLowerCase() === 'sandwich found') {
+      return true
+    }
+  }).length
+  let totalProfitFromSandwiches = 0
+  data.forEach((rec) => {
+    if (rec.profit?.currency.toLowerCase() === 'weth') {
+      totalProfitFromSandwiches += Number(rec.profit?.amount)
+    }
+    if (rec.profit2?.currency.toLowerCase() === 'weth') {
+      totalProfitFromSandwiches += Number(rec.profit2?.amount)
+    }
+  })
+  // Prep Data for Detailed Table
+  const detailedTableData = data.filter(filterSandwichesToDetailsTable).map(mapSandwichesToDetailsTable)
+  // console.log('detailedTableData', detailedTableData)
 
-const GoodSummarySandwichTable = ({ data = [] }: DetailedTableProps) => (
-  <div style={{}}>
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <img src={GreatSandwich} alt="good sandwich" />
-    </div>
-    <StyledSummarySandwichList className="good">
-      <ul>
-        {data.map((rec, idx) => {
-          if (rec.profit?.substr(0, 1) === '-') return
-          const message = 'swap ' + rec.target
-          return <SummarySandwichListItem message={message} key={idx} />
-        })}
-      </ul>
-    </StyledSummarySandwichList>
-  </div>
-)
-
-const BadSummarySandwichTable = ({ data = [] }: DetailedTableProps) => (
-  <div>
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <img src={WorstSandwich} alt="bad sandwich" />
-    </div>
-    <StyledSummarySandwichList className="bad">
-      <ul>
-        {data.map((rec, idx) => {
-          if (rec.profit?.substr(0, 1) !== '-') return
-          const message = 'swap ' + rec.target
-          return <SummarySandwichListItem message={message} key={idx} />
-        })}
-      </ul>
-    </StyledSummarySandwichList>
-  </div>
-)
-
-const ResultsView = ({ data = [] }: DetailedTableProps) => (
-  <StyledResultsView>
-    {/*{console.log(data)}*/}
-    <PageHeader />
-    <StyledSummarySandwichTableWrapper>
-      <BadSummarySandwichTable data={data} />
-      <GoodSummarySandwichTable data={data} />
-    </StyledSummarySandwichTableWrapper>
-    <StyledDetailedTableContainer>
-      <MaterialTable
-        style={{
-          paddingTop: 50,
-          width: '100%',
-          borderTopLeftRadius: '25px',
-          borderTopRightRadius: '25px',
-        }}
-        columns={[
-          { title: 'Date & Time', field: 'date' },
-          { title: 'Sandwich open', field: 'open' },
-          { title: 'User transaction', field: 'target' },
-          { title: 'Sandwich close', field: 'close' },
-          { title: 'Profit earned', field: 'profit' },
-        ]}
-        data={data}
-        title={<span style={{ fontSize: 14, letterSpacing: 2 }}>ALL SANDWICHES</span>}
-        options={{
-          headerStyle: {
-            fontWeight: 'bold',
-            fontSize: '14px',
-            lineHeight: '24px',
-          },
-          rowStyle: {
-            fontSize: '14px',
-            lineHeight: '24px',
-            backgroundColor: '#EEE',
-          },
-          searchFieldStyle: {
-            // color: 'yellow',
-          },
-          pageSizeOptions: [10, 20, 50, 100],
-        }}
-        // localization={{
-        //   pagination: {
-        //     labelDisplayedRows: '1',
-        //     labelRowsSelect: '2',
-        //     labelRowsPerPage: '3',
-        //     firstAriaLabel: '4',
-        //     firstTooltip: '5',
-        //     previousAriaLabel: '5',
-        //     previousTooltip: '5',
-        //     nextAriaLabel: '5',
-        //     nextTooltip: '5',
-        //     lastAriaLabel: '5',
-        //     lastTooltip: '5',
-        //   },
-        // }}
-        // components={{
-        //   // eslint-disable-next-line react/display-name
-        //   Pagination: (props) => <MTablePagination {...props} />,
-        // }}
-      />
-    </StyledDetailedTableContainer>
-  </StyledResultsView>
-)
+  return (
+    <StyledResultsView>
+      <PageHeader />
+      <StyledSummarySandwichTableWrapper>
+        <SummaryCard
+          image={SummaryBestSandwich}
+          backgroundColor={'#fdf0ca'}
+          title={'juiciest'}
+          value={Number(bestSandwich?.profit?.amount).toFixed() + ` ${bestSandwich?.profit?.currency}` || '?'}
+          valueColor={'#22da4a'}
+        />
+        <SummaryCard
+          image={SummaryTotalSandwiches}
+          backgroundColor={'#dff8fd'}
+          title={'total # sandwiches'}
+          value={String(totalSandwiches)}
+        />
+        <SummaryCard
+          image={SummaryTotalProfitSandwiches}
+          backgroundColor={'#F9EEE5'}
+          title={'total profit made'}
+          value={totalProfitFromSandwiches.toFixed() + ' WETH' || '?'}
+          valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
+        />
+      </StyledSummarySandwichTableWrapper>
+      <StyledDetailedTableContainer>
+        <MaterialTable
+          style={{
+            paddingTop: 50,
+            width: '100%',
+            borderTopLeftRadius: '25px',
+            borderTopRightRadius: '25px',
+          }}
+          columns={[
+            { title: 'Date & Time', field: 'date' },
+            { title: 'Sandwich open', field: 'open' },
+            { title: 'User transaction', field: 'target' },
+            { title: 'Sandwich close', field: 'close' },
+            { title: 'Profit earned', field: 'profit' },
+            {
+              title: 'Attributes',
+              field: 'attributes',
+              render: (rowData) => <AttributeItem {...rowData.attributes}/>, // prettier-ignore
+            },
+          ]}
+          data={detailedTableData}
+          title={<span style={{ fontSize: 14, letterSpacing: 2 }}>ALL SANDWICHES</span>}
+          options={{
+            headerStyle: {
+              fontWeight: 'bold',
+              fontSize: '14px',
+              lineHeight: '24px',
+            },
+            rowStyle: {
+              fontSize: '14px',
+              lineHeight: '24px',
+              backgroundColor: '#EEE',
+            },
+            searchFieldStyle: {
+              // color: 'yellow',
+            },
+            pageSizeOptions: [10, 20, 50, 100],
+          }}
+        />
+      </StyledDetailedTableContainer>
+    </StyledResultsView>
+  )
+}
 
 export default ResultsView
