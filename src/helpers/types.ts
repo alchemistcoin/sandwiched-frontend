@@ -33,6 +33,7 @@ export interface ISandwichDetailedTableData {
   date?: string
   profit?: string
   count?: string
+  attributes?: any
 }
 
 export interface AnyShape {

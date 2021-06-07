@@ -124,3 +124,17 @@ export const StyledDetailedTableContainer = styled.div`
     color: rgb(var(--color-primary));
   }
 `
+
+export const StyledAttributesItem = styled.span`
+  width: 50px;
+  height: 30px;
+  border-radius: 8px;
+  padding: 6px;
+  border: 1px solid rgb(var(--color-primary));
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: left;
+  color: rgb(var(--color-primary));
+`

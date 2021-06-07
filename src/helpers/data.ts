@@ -1,8 +1,6 @@
 import { ISandwichDetailedTableData } from './types'
 
 export const filterSandwichesToDetailsTable = (parsedMessage: any) => {
-  console.log('filtering...')
-  console.log(parsedMessage)
   if (parsedMessage.message.toLowerCase() == 'sandwich found') {
     return true
   }
@@ -41,6 +39,7 @@ export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetail
       ' ' +
       parsedMessage.close.currencyOut,
     profit: Number(parsedMessage.profit.amount).toFixed(2) + ' ' + parsedMessage.profit.currency,
+    attributes: { mev: parsedMessage.mev },
   }
 
   return mappedMessage
