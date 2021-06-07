@@ -6,10 +6,11 @@ type SummaryCardProps = {
   image?: string
   title?: string
   value?: string
+  valueColor?: string
   backgroundColor?: string
 }
 
-const SummaryCard = ({ image, title, value, backgroundColor }: SummaryCardProps) => {
+const SummaryCard = ({ image, title, value, backgroundColor, valueColor }: SummaryCardProps) => {
   return (
     <StyledSummaryCard>
       <div className="statusIcon">
@@ -20,7 +21,9 @@ const SummaryCard = ({ image, title, value, backgroundColor }: SummaryCardProps)
           <img className="summaryCardIcon" src={image} />
         </div>
         <div className="summaryCardTitle">{title}</div>
-        <div className="summaryCardValue">{value}</div>
+        <div className="summaryCardValue" style={{ color: valueColor }}>
+          {value}
+        </div>
       </div>
     </StyledSummaryCard>
   )

@@ -69,6 +69,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           backgroundColor={'#fdf0ca'}
           title={'juiciest'}
           value={Number(bestSandwich?.profit?.amount).toFixed() + ` ${bestSandwich?.profit?.currency}` || '?'}
+          valueColor={'#22da4a'}
         />
         <SummaryCard
           image={SummaryTotalSandwiches}
@@ -81,6 +82,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           backgroundColor={'#F9EEE5'}
           title={'total profit made'}
           value={totalProfitFromSandwiches.toFixed() + ' WETH' || '?'}
+          valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
         />
       </StyledSummarySandwichTableWrapper>
       <StyledDetailedTableContainer>

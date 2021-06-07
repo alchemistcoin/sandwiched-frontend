@@ -51,7 +51,6 @@ const StyledSummaryCard = styled.div`
     font-size: 24px;
     line-height: 32px;
     text-align: right;
-    color: #22da4a;
   }
 `
 
