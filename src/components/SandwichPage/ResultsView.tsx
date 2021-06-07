@@ -13,10 +13,8 @@ import {
 import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
 import statusIcon from '../../assets/status-icon.svg'
-import { ISandwichDetailedTableData } from '../../helpers/types'
 import SummaryTotalProfitSandwiches from '../../assets/summary-total-profit-sandwiches.svg'
 import SummaryTotalSandwiches from '../../assets/summary-total-sandwiches.svg'
-import GreatSandwich from '../../assets/great-sandwich.svg'
 import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
 import { filterSandwichesToDetailsTable, mapSandwichesToDetailsTable } from '../../helpers/data'
 import { AnyShape } from '../../helpers/types'
@@ -123,25 +121,6 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
             },
             pageSizeOptions: [10, 20, 50, 100],
           }}
-          // localization={{
-          //   pagination: {
-          //     labelDisplayedRows: '1',
-          //     labelRowsSelect: '2',
-          //     labelRowsPerPage: '3',
-          //     firstAriaLabel: '4',
-          //     firstTooltip: '5',
-          //     previousAriaLabel: '5',
-          //     previousTooltip: '5',
-          //     nextAriaLabel: '5',
-          //     nextTooltip: '5',
-          //     lastAriaLabel: '5',
-          //     lastTooltip: '5',
-          //   },
-          // }}
-          // components={{
-          //   // eslint-disable-next-line react/display-name
-          //   Pagination: (props) => <MTablePagination {...props} />,
-          // }}
         />
       </StyledDetailedTableContainer>
     </StyledResultsView>
