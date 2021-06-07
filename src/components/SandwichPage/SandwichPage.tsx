@@ -29,16 +29,11 @@ const SandwichPage = ({}) => {
           return
         }
         messageCount += 1
-        console.log(messageCount)
         const message = utf8Decoder.decode(chunk)
         let splitMessages = message.split('\n')
         splitMessages.splice(splitMessages.length - 1, 1)
         // console.log('split', splitMessages)
         const parsedMessages = splitMessages.map((msg) => JSON.parse(msg))
-
-        // console.log(message)
-        //const parsedMessage = JSON.parse(message)
-        console.log('parsedMessage', typeof parsedMessages, parsedMessages)
         setData((oldArray) => {
           const newArray = oldArray.concat(parsedMessages)
           return [...newArray]

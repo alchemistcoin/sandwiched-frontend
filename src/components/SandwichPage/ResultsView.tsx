@@ -34,7 +34,7 @@ const PageHeader = () => (
 
 const AttributeItem = ({ mev }: { mev?: boolean }) => <>{mev && <StyledAttributesItem>MEV</StyledAttributesItem>}</>
 const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
-  console.log('data', data)
+  // console.log('data', data)
   // Prep Data for Summary Tables
   const bestSandwich = data.reduce((prev, curr) => {
     // TODO: find a better way to grab a records profit data (maybe combine, maybe take the max, or maybe one of them is always preferred?)
