@@ -1,4 +1,6 @@
-{/* eslint-disable */}
+{
+  /* eslint-disable react/display-name */
+}
 import React from 'react'
 import sandwichPotion from '../../assets/sandwich-potion.svg'
 import {
