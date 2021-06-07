@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import backgroundSvg from '../../assets/background.svg'
 
 export const StyledResultsView = styled.div`
-  margin-top: 26vh;
+  margin-top: 18vh;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,8 +22,11 @@ export const StyledResultsView = styled.div`
   }
 `
 export const StyledSummarySandwichTableWrapper = styled.div`
+  min-width: 1024px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 `
 export const StyledSummarySandwichList = styled.div`
   padding: 2px;

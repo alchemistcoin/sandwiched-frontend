@@ -21,3 +21,7 @@ export function getChainData(chainId: number): IChainData {
 
   return chainData
 }
+
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}

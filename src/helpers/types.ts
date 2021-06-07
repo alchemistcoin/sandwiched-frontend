@@ -25,11 +25,16 @@ export interface ITransaction {
   ts: string
   tx: string
 }
-export interface ISandwichTableData {
+export interface ISandwichDetailedTableData {
   message: string
   open?: string
   close?: string
   target?: string
   date?: string
   profit?: string
+  count?: string
+}
+
+export interface AnyShape {
+  [fieldName: string]: any
 }
