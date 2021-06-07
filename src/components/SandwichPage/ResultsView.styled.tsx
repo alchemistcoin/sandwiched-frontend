@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import backgroundSvg from '../../assets/background.svg'
 
 export const StyledResultsView = styled.div`
-  margin-top: 18vh;
-  height: 100vh;
+  margin-top: 10vh;
+  //height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
