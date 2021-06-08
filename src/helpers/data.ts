@@ -14,6 +14,7 @@ export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetail
       new Date(parsedMessage.target.ts).toISOString().split('T')[0] +
       '. ' +
       new Date(parsedMessage.target.ts).toLocaleTimeString(),
+    openTx: parsedMessage.open.tx,
     open:
       Number(parsedMessage.open.amountIn).toFixed(2) +
       ' ' +
@@ -22,6 +23,7 @@ export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetail
       Number(parsedMessage.open.amountOut).toFixed(2) +
       ' ' +
       parsedMessage.open.currencyOut,
+    targetTx: parsedMessage.target.tx,
     target:
       Number(parsedMessage.target.amountIn).toFixed(2) +
       ' ' +
@@ -30,6 +32,7 @@ export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetail
       Number(parsedMessage.target.amountOut).toFixed(2) +
       ' ' +
       parsedMessage.target.currencyOut,
+    closeTx: parsedMessage.close.tx,
     close:
       Number(parsedMessage.close.amountIn).toFixed(2) +
       ' ' +

@@ -117,11 +117,11 @@ export const StyledDetailedTableContainer = styled.div`
     font-size: 8px;
   }
   .MuiTableSortLabel-icon {
-    color: rgb(var(--color-primary));
+    //color: rgb(var(--color-primary));
   }
   .MuiTableSortLabel-iconDirectionDesc,
   .MuiTableSortLabel-iconDirectionAsc {
-    color: rgb(var(--color-primary));
+    //color: rgb(var(--color-primary));
   }
 `
 
