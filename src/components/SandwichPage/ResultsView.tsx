@@ -9,6 +9,7 @@ import {
   StyledSummarySandwichTableWrapper,
   StyledDetailedTableContainer,
   StyledAttributesItem,
+  StyledCTAButton,
 } from './ResultsView.styled'
 import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
@@ -76,6 +77,19 @@ const EtherscanLink = ({ txId }: { txId: string }) => (
   </a>
 )
 
+const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: number, bestSandwichValue: string) => {
+  const twitterBase = 'https://twitter.com/intent/tweet'
+  const defaultText = 'Have you been Sandwiched WTF?'
+  if (totalSandwiches === 0) return `${twitterBase}?text=${encodeURIComponent(defaultText)}`
+  const totalMEV = totalProfitFromSandwiches.toFixed() + ' WETH'
+  const numberMEV = totalSandwiches
+  const highestMEV = bestSandwichValue
+  const targetBase = 'https://sandwiched.wtf'
+  const targetUrl = encodeURI(`${targetBase}?totalMEV=${totalMEV}&numberMEV=${numberMEV}&highestMEV=${highestMEV}`)
+  const text = `I've been Sandwiched, WTF! Have you? ${targetUrl}`
+  return `${twitterBase}?text=${encodeURIComponent(text)}`
+}
+
 const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
   console.log('data', data)
   // Prep Data for Summary Tables
@@ -105,9 +119,8 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
 
   const bestSandwichValue =
     bestSandwich && bestSandwich.profit
-      ? `${Number(bestSandwich?.profit?.amount).toFixed()}  ${bestSandwich?.profit?.currency}`
+      ? `${Number(bestSandwich?.profit?.amount).toFixed()} ${bestSandwich?.profit?.currency}`
       : 'None'
-
   return (
     <StyledResultsView>
       {PageHeader(totalSandwiches)}
@@ -133,6 +146,12 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
         />
       </StyledSummarySandwichTableWrapper>
+      <StyledCTAButton
+        href={twitterShareLink(totalSandwiches, totalProfitFromSandwiches, bestSandwichValue)}
+        target="_blank"
+      >
+        Spread the word on Twitter!
+      </StyledCTAButton>
       <StyledDetailedTableContainer>
         <MaterialTable
           style={{
