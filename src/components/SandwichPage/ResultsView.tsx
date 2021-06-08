@@ -25,13 +25,32 @@ type DetailedTableProps = {
   fetchingComplete: boolean
 }
 
-const PageHeader = () => (
-  <StyledPageHeader>
-    <img src={sandwichPotion} />
-    <h1>Not too bad!</h1>
-    <p>these are the sandwiches we found</p>
-  </StyledPageHeader>
-)
+const headers = {
+  none: {
+    title: 'Not too bad!',
+    para: 'these are the sandwiches we found',
+  },
+}
+
+const PageHeader = (x: number) => {
+  let title: string
+  let body: string
+  if (x == 0) {
+    title = 'No sandwiches found.'
+    body = 'Well played - use mistX.io to stay unsandwiched!'
+  } else {
+    title = 'Uh-oh!'
+    body = "You've been sandwiched,wtf were you thinking! Next time use mistX.io"
+  }
+
+  return (
+    <StyledPageHeader>
+      <img src={sandwichPotion} />
+      <h1>{title}</h1>
+      <p>{body}</p>
+    </StyledPageHeader>
+  )
+}
 /** Details Table Components */
 const AttributeItem = ({ mev }: { mev?: boolean }) => <>{mev && <StyledAttributesItem>MEV</StyledAttributesItem>}</>
 const EtherscanLink = ({ txId }: { txId: string }) => (
@@ -69,13 +88,19 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
 
   return (
     <StyledResultsView>
-      <PageHeader />
+      {PageHeader(totalSandwiches)}
       <StyledSummarySandwichTableWrapper>
         <SummaryCard
           image={SummaryBestSandwich}
           backgroundColor={'#fdf0ca'}
           title={'juiciest'}
-          value={Number(bestSandwich?.profit?.amount).toFixed() + ` ${bestSandwich?.profit?.currency}` || '?'}
+          value={
+            totalSandwiches
+              ? data.length.toFixed() +
+                Number(bestSandwich?.profit?.amount).toFixed() +
+                ` ${bestSandwich?.profit?.currency}`
+              : 'none'
+          }
           valueColor={'#22da4a'}
         />
         <SummaryCard
