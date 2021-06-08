@@ -51,7 +51,7 @@ const PageHeader = (x: number) => {
     title = 'Uh-oh!'
     body = (
       <>
-        You`&apos;ve been sandwiched,wtf were you thinking! Next time use{' '}
+        You&apos;ve been sandwiched, wtf were you thinking! Next time use{' '}
         <a href="http://mistx.io" target="_blank" rel="noreferrer">
           mistX.io
         </a>
