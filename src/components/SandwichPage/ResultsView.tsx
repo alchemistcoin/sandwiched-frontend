@@ -80,14 +80,14 @@ const EtherscanLink = ({ txId }: { txId: string }) => (
 const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: number, bestSandwichValue: string) => {
   const twitterBase = 'https://twitter.com/intent/tweet'
   const defaultText = 'Have you been Sandwiched WTF?'
-  if (totalSandwiches === 0) return `${twitterBase}?text=${encodeURIComponent(defaultText)}`
+  const targetBase = window.location.origin
+  if (totalSandwiches === 0) return `${twitterBase}?text=${encodeURIComponent(defaultText)}&url=${targetBase}`
   const totalMEV = totalProfitFromSandwiches.toFixed() + ' WETH'
   const numberMEV = totalSandwiches
   const highestMEV = bestSandwichValue
-  const targetBase = window.location.origin
   const targetUrl = encodeURI(`${targetBase}?totalMEV=${totalMEV}&numberMEV=${numberMEV}&highestMEV=${highestMEV}`)
-  const text = `I've been Sandwiched, WTF! Have you? ${targetUrl}`
-  return `${twitterBase}?text=${encodeURIComponent(text)}`
+  const text = `I've been Sandwiched, WTF! Have you?`
+  return `${twitterBase}?text=${encodeURIComponent(text)}&url=${targetUrl}`
 }
 
 const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
