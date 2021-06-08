@@ -28,11 +28,11 @@ export interface ITransaction {
 export interface ISandwichDetailedTableData {
   message: string
   open?: string
-  openTx?: string,
+  openTx?: string
   close?: string
-  closeTx?: string,
+  closeTx?: string
   target?: string
-  targetTx?: string,
+  targetTx?: string
   date?: string
   profit?: string
   count?: string

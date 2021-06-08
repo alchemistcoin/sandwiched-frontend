@@ -35,7 +35,7 @@ const PageHeader = () => (
 /** Details Table Components */
 const AttributeItem = ({ mev }: { mev?: boolean }) => <>{mev && <StyledAttributesItem>MEV</StyledAttributesItem>}</>
 const EtherscanLink = ({ txId }: { txId: string }) => (
-  <a style={{ float: 'right' }} href={`https://etherscan.io/tx/${txId}`}>
+  <a style={{ float: 'right' }} href={`https://etherscan.io/tx/${txId}`} rel="noreferrer" target="_blank">
     <img src={ArrowLink} />
   </a>
 )

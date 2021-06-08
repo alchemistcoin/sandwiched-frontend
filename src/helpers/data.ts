@@ -8,12 +8,10 @@ export const filterSandwichesToDetailsTable = (parsedMessage: any) => {
 }
 
 export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetailedTableData => {
+  const date = new Date(parsedMessage.target.ts)
   const mappedMessage: ISandwichDetailedTableData = {
     message: parsedMessage.message,
-    date:
-      new Date(parsedMessage.target.ts).toISOString().split('T')[0] +
-      '. ' +
-      new Date(parsedMessage.target.ts).toLocaleTimeString(),
+    date: date.toISOString().split('T')[0] + ' ' + `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
     openTx: parsedMessage.open.tx,
     open:
       Number(parsedMessage.open.amountIn).toFixed(2) +
