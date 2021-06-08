@@ -128,9 +128,10 @@ export const StyledDetailedTableContainer = styled.div`
     //color: rgb(var(--color-primary));
   }
   .MuiTableRow-root {
-    display: none;
+    // display: none;
   }
   .MuiTableRow-root[index],
+  .MuiTableRow-head,
   .MuiTableRow-footer {
     display: table-row;
   }

@@ -25,49 +25,13 @@ type DetailedTableProps = {
   fetchingComplete: boolean
 }
 
-const headers = {
-  none: {
-    title: 'Not too bad!',
-    para: 'these are the sandwiches we found',
-  },
-}
-
-const PageHeader = (x: number) => {
-  let title: string
-  let body: React.ReactElement
-  if (x == 0) {
-    title = 'No sandwiches found.'
-    // body = 'Well played - use mistX.io to stay unsandwiched!'
-    body = (
-      <>
-        Well played - use{' '}
-        <a href="http://mistx.io" target="_blank" rel="noreferrer">
-          mistX.io
-        </a>{' '}
-        to stay unsandwiched!
-      </>
-    )
-  } else {
-    title = 'Uh-oh!'
-    body = (
-      <>
-        You&apos;ve been sandwiched, wtf were you thinking! Next time use{' '}
-        <a href="http://mistx.io" target="_blank" rel="noreferrer">
-          mistX.io
-        </a>
-      </>
-    )
-  }
-
-  return (
-    <StyledPageHeader>
-      <img src={sandwichPotion} />
-      <h1>{title}</h1>
-      <p>{body}</p>
-    </StyledPageHeader>
-  )
-}
-
+const PageHeader = () => (
+  <StyledPageHeader>
+    <img src={sandwichPotion} />
+    <h1>Not too bad!</h1>
+    <p>these are the sandwiches we found</p>
+  </StyledPageHeader>
+)
 /** Details Table Components */
 const AttributeItem = ({ mev }: { mev?: boolean }) => <>{mev && <StyledAttributesItem>MEV</StyledAttributesItem>}</>
 const EtherscanLink = ({ txId }: { txId: string }) => (
@@ -103,20 +67,17 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
   const detailedTableData = data.filter(filterSandwichesToDetailsTable).map(mapSandwichesToDetailsTable)
   // console.log('detailedTableData', detailedTableData)
 
-  const bestSandwichValue =
-    bestSandwich && bestSandwich.profit
-      ? `${Number(bestSandwich?.profit?.amount).toFixed()}  ${bestSandwich?.profit?.currency}`
-      : 'None'
+  const bestSandwichAmmoutValue = 'hmm'
 
   return (
     <StyledResultsView>
-      {PageHeader(totalSandwiches)}
+      <PageHeader />
       <StyledSummarySandwichTableWrapper>
         <SummaryCard
           image={SummaryBestSandwich}
           backgroundColor={'#fdf0ca'}
           title={'juiciest'}
-          value={bestSandwichValue}
+          value={bestSandwichAmmoutValue}
           valueColor={'#22da4a'}
         />
         <SummaryCard
@@ -209,7 +170,6 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
             searchFieldStyle: {
               // color: 'yellow',
             },
-            pageSize: 10,
             pageSizeOptions: [10, 20, 50, 100],
           }}
         />
