@@ -139,7 +139,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
                 if (rowData.profit && rowData.profit.substr(0, 1) != '-') {
                   return <span style={{ color: '#D96A19' }}>{rowData.profit}</span>
                 } else {
-                  return <span style={{ color: '#22DA4A' }}>{rowData.profit}</span>
+                  return <span style={{ color: '#22DA4A', fontWeight: 'bold' }}>{rowData.profit}</span>
                 }
               },
             },
@@ -156,11 +156,14 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               fontWeight: 'bold',
               fontSize: '14px',
               lineHeight: '24px',
+              borderBottom: '2px solid #E0DFDB',
+              marginBottom: '20px',
+              paddingBottom: '20px',
             },
             rowStyle: {
               fontSize: '14px',
               lineHeight: '24px',
-              backgroundColor: '#EEE',
+              borderBottom: '0px',
             },
             searchFieldStyle: {
               // color: 'yellow',
