@@ -28,7 +28,7 @@ type DetailedTableProps = {
 const PageHeader = () => (
   <StyledPageHeader>
     <img src={sandwichPotion} />
-    <h1>Not too bad!</h1>
+    <h1>No sandwiches found!</h1>
     <p>these are the sandwiches we found</p>
   </StyledPageHeader>
 )
@@ -67,6 +67,11 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
   const detailedTableData = data.filter(filterSandwichesToDetailsTable).map(mapSandwichesToDetailsTable)
   // console.log('detailedTableData', detailedTableData)
 
+  const bestSandwichValue =
+    bestSandwich && bestSandwich.profit
+      ? `${Number(bestSandwich?.profit?.amount).toFixed()}  ${bestSandwich?.profit?.currency}`
+      : 'None'
+
   return (
     <StyledResultsView>
       <PageHeader />
@@ -75,7 +80,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryBestSandwich}
           backgroundColor={'#fdf0ca'}
           title={'juiciest'}
-          value={Number(bestSandwich?.profit?.amount).toFixed() + ` ${bestSandwich?.profit?.currency}` || '?'}
+          value={bestSandwichValue}
           valueColor={'#22da4a'}
         />
         <SummaryCard
