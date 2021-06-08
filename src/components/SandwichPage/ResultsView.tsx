@@ -18,6 +18,7 @@ import SummaryTotalSandwiches from '../../assets/summary-total-sandwiches.svg'
 import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
 import { filterSandwichesToDetailsTable, mapSandwichesToDetailsTable } from '../../helpers/data'
 import { AnyShape } from '../../helpers/types'
+import ArrowLink from '../../assets/arrow-link.svg'
 
 type DetailedTableProps = {
   data: AnyShape[]
@@ -31,10 +32,16 @@ const PageHeader = () => (
     <p>these are the sandwiches we found</p>
   </StyledPageHeader>
 )
-
+/** Details Table Components */
 const AttributeItem = ({ mev }: { mev?: boolean }) => <>{mev && <StyledAttributesItem>MEV</StyledAttributesItem>}</>
+const EtherscanLink = ({ txId }: { txId: string }) => (
+  <a style={{ float: 'right' }} href={`https://etherscan.io/tx/${txId}`} rel="noreferrer" target="_blank">
+    <img src={ArrowLink} />
+  </a>
+)
+
 const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
-  // console.log('data', data)
+  console.log('data', data)
   // Prep Data for Summary Tables
   const bestSandwich = data.reduce((prev, curr) => {
     // TODO: find a better way to grab a records profit data (maybe combine, maybe take the max, or maybe one of them is always preferred?)
@@ -95,10 +102,47 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           }}
           columns={[
             { title: 'Date & Time', field: 'date' },
-            { title: 'Sandwich open', field: 'open' },
-            { title: 'User transaction', field: 'target' },
-            { title: 'Sandwich close', field: 'close' },
-            { title: 'Profit earned', field: 'profit' },
+            {
+              title: 'Sandwich open',
+              field: 'open',
+              render: (rowData) => (
+                <div style={{ minWidth: 220 }}>
+                  <span style={{}}>{rowData.open}</span>
+                  <EtherscanLink txId={rowData?.openTx || ''} />
+                </div>
+              ),
+            },
+            {
+              title: 'User transaction',
+              field: 'target',
+              render: (rowData) => (
+                <div style={{ minWidth: 220 }}>
+                  <span style={{}}>{rowData.target}</span>
+                  <EtherscanLink txId={rowData?.targetTx || ''} />
+                </div>
+              ),
+            },
+            {
+              title: 'Sandwich close',
+              field: 'close',
+              render: (rowData) => (
+                <div style={{ minWidth: 220 }}>
+                  <span style={{}}>{rowData.close}</span>
+                  <EtherscanLink txId={rowData?.closeTx || ''} />
+                </div>
+              ),
+            },
+            {
+              title: 'Profit earned',
+              field: 'profit',
+              render: (rowData) => {
+                if (rowData.profit && rowData.profit.substr(0, 1) != '-') {
+                  return <span style={{ color: '#D96A19' }}>{rowData.profit}</span>
+                } else {
+                  return <span style={{ color: '#22DA4A', fontWeight: 'bold' }}>{rowData.profit}</span>
+                }
+              },
+            },
             {
               title: 'Attributes',
               field: 'attributes',
@@ -112,11 +156,14 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               fontWeight: 'bold',
               fontSize: '14px',
               lineHeight: '24px',
+              borderBottom: '2px solid #E0DFDB',
+              marginBottom: '20px',
+              paddingBottom: '20px',
             },
             rowStyle: {
               fontSize: '14px',
               lineHeight: '24px',
-              backgroundColor: '#EEE',
+              borderBottom: '0px',
             },
             searchFieldStyle: {
               // color: 'yellow',
