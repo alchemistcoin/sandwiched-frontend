@@ -11,7 +11,7 @@ export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetail
   const mappedMessage: ISandwichDetailedTableData = {
     message: parsedMessage.message,
     date:
-      new Date(parsedMessage.target.ts).toLocaleDateString() +
+      new Date(parsedMessage.target.ts).toISOString().split('T')[0] +
       '. ' +
       new Date(parsedMessage.target.ts).toLocaleTimeString(),
     open:
