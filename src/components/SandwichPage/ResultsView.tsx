@@ -41,7 +41,7 @@ const PageHeader = (x: number) => {
     body = (
       <>
         Well played - use{' '}
-        <a href="htttp://mistx.io" target="_blank" rel="noreferrer">
+        <a href="http://mistx.io" target="_blank" rel="noreferrer">
           mistX.io
         </a>{' '}
         to stay unsandwiched!
@@ -51,8 +51,8 @@ const PageHeader = (x: number) => {
     title = 'Uh-oh!'
     body = (
       <>
-        You`&apos;ve been sandwiched,wtf were you thinking! Next time use{' '}
-        <a href="htttp://mistx.io" target="_blank" rel="noreferrer">
+        You&apos;ve been sandwiched, wtf were you thinking! Next time use{' '}
+        <a href="http://mistx.io" target="_blank" rel="noreferrer">
           mistX.io
         </a>
       </>
