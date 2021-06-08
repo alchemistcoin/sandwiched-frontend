@@ -194,6 +194,8 @@ class App extends React.Component<any, any> {
         }}
       >
         <Helmet>
+          <title>{META_TITLE}</title>
+          <meta name="description" content={META_DESCRIPTION} />
           <meta property="og:type" content="website" />
           <meta property="og:url" content={META_URL} />
           <meta property="og:title" content={META_TITLE} />
