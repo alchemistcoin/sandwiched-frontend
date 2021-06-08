@@ -34,7 +34,7 @@ const headers = {
 
 const PageHeader = (x: number) => {
   let title: string
-  let body: any
+  let body: React.ReactElement
   if (x == 0) {
     title = 'No sandwiches found.'
     // body = 'Well played - use mistX.io to stay unsandwiched!'
