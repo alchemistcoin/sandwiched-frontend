@@ -12,6 +12,13 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import { getChainData } from './helpers/utilities'
 import { IAssetData } from './helpers/types'
 
+import { Helmet } from 'react-helmet'
+const META_DESCRIPTION =
+  'Find out how much $$$ has been drained from your wallet by unsuspected sandwich transactions. Sandwiched is bringing transparency to the rampant MEV occuring on the most popular DEXs.'
+const META_IMAGE = 'https://mistx.io/assets/img/mistX.png'
+const META_TITLE = 'Sandwiched.wtf'
+const META_URL = 'https://sandwiched.wtf'
+
 // FROM EXAMPLE: https://github.com/Web3Modal/web3modal/blob/master/example/src/App.tsx
 
 interface IAppState {
@@ -186,6 +193,20 @@ class App extends React.Component<any, any> {
           height: '100vh',
         }}
       >
+        <Helmet>
+          <title>{META_TITLE}</title>
+          <meta name="description" content={META_DESCRIPTION} />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={META_URL} />
+          <meta property="og:title" content={META_TITLE} />
+          <meta property="og:description" content={META_DESCRIPTION} />
+          <meta property="og:image" content={META_IMAGE} />
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content={META_URL} />
+          <meta property="twitter:title" content={META_TITLE} />
+          <meta property="twitter:description" content={META_DESCRIPTION} />
+          <meta property="twitter:image" content={META_IMAGE} />
+        </Helmet>
         {/* Router */}
         <Router>
           <Switch>
