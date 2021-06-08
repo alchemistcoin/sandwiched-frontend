@@ -84,7 +84,7 @@ const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: nu
   const totalMEV = totalProfitFromSandwiches.toFixed() + ' WETH'
   const numberMEV = totalSandwiches
   const highestMEV = bestSandwichValue
-  const targetBase = 'https://sandwiched.wtf'
+  const targetBase = window.location.origin
   const targetUrl = encodeURI(`${targetBase}?totalMEV=${totalMEV}&numberMEV=${numberMEV}&highestMEV=${highestMEV}`)
   const text = `I've been Sandwiched, WTF! Have you? ${targetUrl}`
   return `${twitterBase}?text=${encodeURIComponent(text)}`
