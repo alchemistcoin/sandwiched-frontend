@@ -26,13 +26,42 @@ type DetailedTableProps = {
   fetchingComplete: boolean
 }
 
-const PageHeader = () => (
-  <StyledPageHeader>
-    <img src={sandwichPotion} />
-    <h1>Not too bad!</h1>
-    <p>these are the sandwiches we found</p>
-  </StyledPageHeader>
-)
+const PageHeader = (x: number) => {
+  let title: string
+  let body: React.ReactElement
+  if (x == 0) {
+    title = 'No sandwiches found.'
+    // body = 'Well played - use mistX.io to stay unsandwiched!'
+    body = (
+      <>
+        Well played - use{' '}
+        <a href="http://mistx.io" target="_blank" rel="noreferrer">
+          mistX.io
+        </a>{' '}
+        to stay unsandwiched!
+      </>
+    )
+  } else {
+    title = 'Uh-oh!'
+    body = (
+      <>
+        You&apos;ve been sandwiched, wtf were you thinking! Next time use{' '}
+        <a href="http://mistx.io" target="_blank" rel="noreferrer">
+          mistX.io
+        </a>
+      </>
+    )
+  }
+
+  return (
+    <StyledPageHeader>
+      <img src={sandwichPotion} />
+      <h1>{title}</h1>
+      <p>{body}</p>
+    </StyledPageHeader>
+  )
+}
+
 /** Details Table Components */
 const AttributeItem = ({ mev }: { mev?: boolean }) => <>{mev && <StyledAttributesItem>MEV</StyledAttributesItem>}</>
 const EtherscanLink = ({ txId }: { txId: string }) => (
@@ -89,7 +118,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
 
   return (
     <StyledResultsView>
-      <PageHeader />
+      {PageHeader(totalSandwiches)}
       <StyledSummarySandwichTableWrapper>
         <SummaryCard
           image={SummaryBestSandwich}
