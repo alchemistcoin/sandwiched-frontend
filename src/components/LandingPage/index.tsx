@@ -46,8 +46,6 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
     <StyledLandingPage>
       {metaDesc ? (
         <Helmet>
-          <meta name="twitter:card" content="summary" />
-          <meta name="twitter:site" content="@sandwichedwtf" />
           <meta property="og:title" content="I got Sandwiched, WTF" />
           <meta name="title" content="I got Sandwiched, WTF" />
           <meta property="twitter:title" content="I got Sandwiched, WTF" />

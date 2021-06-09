@@ -203,6 +203,7 @@ class App extends React.Component<any, any> {
           <meta property="og:image" content={META_IMAGE} />
           <meta property="twitter:card" content="summary_large_image" />
           <meta property="twitter:url" content={META_URL} />
+          <meta property="twitter:site" content="@sandwichedwtf" />
           <meta property="twitter:title" content={META_TITLE} />
           <meta property="twitter:description" content={META_DESCRIPTION} />
           <meta property="twitter:image" content={META_IMAGE} />
