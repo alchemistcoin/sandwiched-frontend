@@ -18,7 +18,11 @@ function constructMetaDescription(search: string): string {
 
   if (!numberMEV || !highestMEV || !totalMEV) return ''
 
-  const desc = `I was sandwiched for a loss of ${totalMEV}, ${numberMEV} sandwiches in total with the highest being ${highestMEV}! Find out how much you have been taken for on sandwiched.wtf`
+  const desc =
+    `I was sandwiched for a loss of ${totalMEV}, ${numberMEV} sandwiches in total with the highest being ${highestMEV}! Find out how much you have been taken for on sandwiched.wtf`.replace(
+      /-/g,
+      ' '
+    )
 
   console.log('desc', desc)
   return desc
