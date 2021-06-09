@@ -82,7 +82,6 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
   const detailedTableData = data.filter(filterSandwichesToDetailsTable).map(mapSandwichesToDetailsTable)
   // console.log('detailedTableData', detailedTableData)
 
-
   const bestSandwichValue =
     bestSandwich && bestSandwich.profit
       ? `${Number(bestSandwich?.profit?.amount).toFixed()} ${bestSandwich?.profit?.currency}`
@@ -96,7 +95,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryBestSandwich}
           backgroundColor={'#fdf0ca'}
           title={'juiciest'}
-          value={bestSandwichAmmoutValue}
+          value={bestSandwichValue}
           valueColor={'#22da4a'}
         />
         <SummaryCard
