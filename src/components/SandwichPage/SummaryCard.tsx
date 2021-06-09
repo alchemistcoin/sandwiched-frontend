@@ -14,7 +14,10 @@ const SummaryCard = ({ image, title, value, backgroundColor, valueColor }: Summa
   return (
     <StyledSummaryCard>
       <div className="statusIcon">
-        <img src={statusIcon} />
+        <img
+          style={{ visibility: 'hidden' }} // Remain Hidden until this icon has a function
+          src={statusIcon}
+        />
       </div>
       <div className="centeredContent">
         <div className="iconContainer" style={{ backgroundColor: backgroundColor }}>
