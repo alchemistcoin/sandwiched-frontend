@@ -52,6 +52,7 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
           <meta property="og:description" content={metaDesc} />
           <meta name="description" content={metaDesc} />
           <meta property="twitter:description" content={metaDesc} />
+          <script> window.prerenderReady = true; </script>
         </Helmet>
       ) : (
         <></>
