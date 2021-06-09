@@ -141,6 +141,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
                   <EtherscanLink txId={rowData?.openTx || ''} />
                 </div>
               ),
+              sorting: false,
             },
             {
               title: 'User transaction',
@@ -151,6 +152,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
                   <EtherscanLink txId={rowData?.targetTx || ''} />
                 </div>
               ),
+              sorting: false,
             },
             {
               title: 'Sandwich close',
@@ -161,6 +163,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
                   <EtherscanLink txId={rowData?.closeTx || ''} />
                 </div>
               ),
+              sorting: false,
             },
             {
               title: 'Profit earned',
