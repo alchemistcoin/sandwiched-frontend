@@ -10,10 +10,54 @@ const StyledLoadingSandwichesDisplay = styled.div`
   justify-content: center;
   align-items: center;
 
+  img.loadingLogoStripped {
+    //animation: blinker 1s cubic-bezier(0.68, -0.57, 0.26, 1.65) infinite;
+    @keyframes blinker {
+      100% {
+        opacity: 0.15;
+      }
+    }
+  }
+
   img.hamburgers {
     position: relative;
     top: -193px;
     right: 2px;
+
+    //animation: slideshow 10s linear infinite;
+    //
+    //@keyframes slideshow {
+    //  0% {
+    //    left: 54vw;
+    //  }
+    //  100% {
+    //    left: -54vw;
+    //  }
+    //}
+
+    @keyframes slide-right {
+      0% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(100px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slide-right-pause {
+      50% {
+        left: 0;
+      }
+      75% {
+        left: -100px;
+      }
+      100% {
+        left: 0;
+      }
+    }
   }
 `
 
@@ -31,8 +75,8 @@ export const StyledMainTextBox = styled.div`
 
 const LoadingSandwichesDisplay = () => (
   <StyledLoadingSandwichesDisplay>
-    <img src={logoStripped} alt="sandwich.wtf" />
-    <img className="hamburgers" src={hamburgers} alt="" />
+    <img className="loadingLogoStripped" src={logoStripped} alt="sandwich.wtf" />
+    <img className="hamburgers" src={hamburgers} alt="" style={{ animationPlayState: 'paused' }} />
     <StyledMainTextBox>
       <h1>Hold up!</h1>
       <p>We are scanning your wallet transactions for potential sandwiches</p>
