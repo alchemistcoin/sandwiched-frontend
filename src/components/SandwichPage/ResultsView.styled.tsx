@@ -150,3 +150,37 @@ export const StyledAttributesItem = styled.span`
   text-align: left;
   color: rgb(var(--color-primary));
 `
+
+export const StyledCTAButton = styled.a`
+  cursor: pointer;
+  border: none;
+  border-radius: 69px;
+  background-color: rgb(var(--color-primary));
+  width: 317px;
+  height: 54px;
+  //styleName: Heading 6;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 54px;
+  letter-spacing: 0em;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 1.5rem;
+  color: #fff;
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  &:focus {
+    box-shadow: 0 0 6px 0 rgba(var(--color-primary));
+    transition: box-shadow 50ms;
+  }
+
+  &:active {
+    filter: brightness(0.8);
+  }
+
+  transition-duration: 150ms;
+`

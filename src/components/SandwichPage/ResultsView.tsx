@@ -9,6 +9,7 @@ import {
   StyledSummarySandwichTableWrapper,
   StyledDetailedTableContainer,
   StyledAttributesItem,
+  StyledCTAButton,
 } from './ResultsView.styled'
 import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
@@ -40,6 +41,20 @@ const EtherscanLink = ({ txId }: { txId: string }) => (
   </a>
 )
 
+const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: number, bestSandwichValue: string) => {
+  const twitterBase = 'https://twitter.com/intent/tweet'
+  const defaultText = 'Have you been Sandwiched WTF?'
+  const targetBase = window.location.origin
+  if (totalSandwiches === 0) return `${twitterBase}?text=${encodeURIComponent(defaultText)}&url=${targetBase}`
+  const totalMEV = totalProfitFromSandwiches.toFixed() + ' WETH'
+  const numberMEV = totalSandwiches
+  const highestMEV = bestSandwichValue
+  const targetQuery = `?totalMEV=${totalMEV}&numberMEV=${numberMEV}&highestMEV=${highestMEV}`.replace(/\s/g, '-')
+  const text = `I've been Sandwiched, WTF! Have you?`
+  const url = `${twitterBase}?text=${encodeURIComponent(text)}&url=${targetBase}${encodeURIComponent(targetQuery)}`
+  return url
+}
+
 const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
   console.log('data', data)
   // Prep Data for Summary Tables
@@ -67,7 +82,11 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
   const detailedTableData = data.filter(filterSandwichesToDetailsTable).map(mapSandwichesToDetailsTable)
   // console.log('detailedTableData', detailedTableData)
 
-  const bestSandwichAmmoutValue = 'hmm'
+
+  const bestSandwichValue =
+    bestSandwich && bestSandwich.profit
+      ? `${Number(bestSandwich?.profit?.amount).toFixed()} ${bestSandwich?.profit?.currency}`
+      : 'None'
 
   return (
     <StyledResultsView>
@@ -94,6 +113,12 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
         />
       </StyledSummarySandwichTableWrapper>
+      <StyledCTAButton
+        href={twitterShareLink(totalSandwiches, totalProfitFromSandwiches, bestSandwichValue)}
+        target="_blank"
+      >
+        Spread the word on Twitter!
+      </StyledCTAButton>
       <StyledDetailedTableContainer>
         <MaterialTable
           style={{
