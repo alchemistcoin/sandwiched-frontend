@@ -127,7 +127,11 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
             borderTopRightRadius: '25px',
           }}
           columns={[
-            { title: 'Date & Time', field: 'date' },
+            {
+              title: 'Date & Time',
+              field: 'dateReadable',
+              customSort: (a: any, b: any) => a.date - b.date,
+            },
             {
               title: 'Sandwich open',
               field: 'open',
@@ -137,6 +141,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
                   <EtherscanLink txId={rowData?.openTx || ''} />
                 </div>
               ),
+              sorting: false,
             },
             {
               title: 'User transaction',
@@ -147,6 +152,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
                   <EtherscanLink txId={rowData?.targetTx || ''} />
                 </div>
               ),
+              sorting: false,
             },
             {
               title: 'Sandwich close',
@@ -157,6 +163,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
                   <EtherscanLink txId={rowData?.closeTx || ''} />
                 </div>
               ),
+              sorting: false,
             },
             {
               title: 'Profit earned',
@@ -168,6 +175,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
                   return <span style={{ color: '#22DA4A', fontWeight: 'bold' }}>{rowData.profit}</span>
                 }
               },
+              sorting: false,
             },
             {
               title: 'Attributes',
