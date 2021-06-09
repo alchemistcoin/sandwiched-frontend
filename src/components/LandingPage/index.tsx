@@ -24,7 +24,6 @@ function constructMetaDescription(search: string): string {
       ' '
     )
 
-  console.log('desc', desc)
   return desc
 }
 

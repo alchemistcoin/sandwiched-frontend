@@ -56,7 +56,6 @@ const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: nu
 }
 
 const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
-  console.log('data', data)
   // Prep Data for Summary Tables
   const bestSandwich = data.reduce((prev, curr) => {
     // TODO: find a better way to grab a records profit data (maybe combine, maybe take the max, or maybe one of them is always preferred?)
@@ -80,7 +79,6 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
   })
   // Prep Data for Detailed Table
   const detailedTableData = data.filter(filterSandwichesToDetailsTable).map(mapSandwichesToDetailsTable)
-  // console.log('detailedTableData', detailedTableData)
 
   const bestSandwichValue =
     bestSandwich && bestSandwich.profit
