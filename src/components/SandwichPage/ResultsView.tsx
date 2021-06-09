@@ -95,7 +95,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryBestSandwich}
           backgroundColor={'#fdf0ca'}
           title={'juiciest'}
-          value={bestSandwichAmmoutValue}
+          value={bestSandwichValue}
           valueColor={'#22da4a'}
         />
         <SummaryCard
