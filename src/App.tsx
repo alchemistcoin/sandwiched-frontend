@@ -190,7 +190,7 @@ class App extends React.Component<any, any> {
         style={{
           backgroundImage: `url(${backgroundSvg})`,
           backgroundSize: 'cover',
-          height: '100vh',
+          minHeight: '100vh',
         }}
       >
         <Helmet>
