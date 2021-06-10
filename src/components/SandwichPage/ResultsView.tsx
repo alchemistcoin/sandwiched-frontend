@@ -167,7 +167,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'Sandwich open',
               field: 'open',
               render: (rowData) => (
-                <div style={{ minWidth: 220 }}>
+                <div style={{ width: 260 }}>
                   <span style={{}}>{rowData.open}</span>
                   <EtherscanLink txId={rowData?.openTx || ''} />
                 </div>
@@ -177,7 +177,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'User transaction',
               field: 'target',
               render: (rowData) => (
-                <div style={{ minWidth: 220 }}>
+                <div style={{ width: 260 }}>
                   <span style={{}}>{rowData.target}</span>
                   <EtherscanLink txId={rowData?.targetTx || ''} />
                 </div>
@@ -187,7 +187,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'Sandwich close',
               field: 'close',
               render: (rowData) => (
-                <div style={{ minWidth: 220 }}>
+                <div style={{ width: 260 }}>
                   <span style={{}}>{rowData.close}</span>
                   <EtherscanLink txId={rowData?.closeTx || ''} />
                 </div>
