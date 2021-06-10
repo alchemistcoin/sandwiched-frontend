@@ -20,6 +20,7 @@ import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
 import { filterSandwichesToDetailsTable, mapSandwichesToDetailsTable } from '../../helpers/data'
 import { AnyShape } from '../../helpers/types'
 import ArrowLink from '../../assets/arrow-link.svg'
+import Decimal from 'decimal.js-light'
 
 type DetailedTableProps = {
   data: AnyShape[]
@@ -120,7 +121,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
 
   const bestSandwichValue =
     bestSandwich && bestSandwich.profit
-      ? `${Number(bestSandwich?.profit?.amount).toFixed()} ${bestSandwich?.profit?.currency}`
+      ? `${new Decimal(bestSandwich?.profit?.amount).toPrecision(5)} ${bestSandwich?.profit?.currency}`
       : 'None'
   return (
     <StyledResultsView>
@@ -143,7 +144,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryTotalProfitSandwiches}
           backgroundColor={'#F9EEE5'}
           title={'total profit made'}
-          value={totalProfitFromSandwiches.toFixed() + ' WETH' || '?'}
+          value={new Decimal(totalProfitFromSandwiches).toPrecision(5) + ' WETH' || '?'}
           valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
         />
       </StyledSummarySandwichTableWrapper>
