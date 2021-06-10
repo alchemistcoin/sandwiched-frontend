@@ -28,7 +28,17 @@ const ConnectWalletWithStatusButton = ({
   //     history.push(`/`)
   //   }
   // })
-
+  let buttonText = 'Connect Wallet'
+  if (connected) {
+    if (!ethereumAddress) {
+      buttonText = '...'
+    } else {
+      buttonText =
+        ethereumAddress?.substr(1, 4) +
+        '...' +
+        ethereumAddress?.substr(ethereumAddress.length - 3, ethereumAddress?.length)
+    }
+  }
   return (
     <>
       {
@@ -44,11 +54,7 @@ const ConnectWalletWithStatusButton = ({
           }}
           className={connected ? 'connected' : 'disconnected'}
         >
-          {connected
-            ? ethereumAddress.substr(1, 4) +
-              '...' +
-              ethereumAddress.substr(ethereumAddress.length - 3, ethereumAddress.length)
-            : 'Connect Wallet'}
+          {buttonText}
           {connected ? <img src={statusConnected} alt="connected" /> : <img src={connectIcon} alt="disconnected" />}
         </StyledConnectWalletWithStatusButton>
       }
