@@ -13,7 +13,7 @@ const StyledLoadingSandwichesDisplay = styled.div`
 
   img.loadingLogoStripped {
     opacity: 1;
-    animation: blinker 3s linear infinite;
+    animation: blinker 4s linear infinite;
     @keyframes blinker {
       50% {
         opacity: 0.3;
@@ -40,7 +40,7 @@ const StyledLoadingSandwichesDisplay = styled.div`
       //visibility: hidden;
       position: relative;
       left: 25%;
-      animation: slide-left-pause 3s infinite;
+      animation: slide-left-pause 4s infinite;
       @keyframes slide-left-pause {
         50% {
           left: -15%;
@@ -60,7 +60,7 @@ const StyledLoadingSandwichesDisplay = styled.div`
       //visibility: hidden;
       position: relative;
       right: 25%;
-      animation: slide-right-pause 3s infinite;
+      animation: slide-right-pause 4s infinite;
       @keyframes slide-right-pause {
         50% {
           right: -15%;
