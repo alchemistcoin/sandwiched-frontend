@@ -7,6 +7,7 @@ import { ISandwichDetailedTableData } from '../../helpers/types'
 import { sleep } from '../../helpers/utilities'
 import { AnyShape } from '../../helpers/types'
 import ndjsonStream from 'can-ndjson-stream'
+import { dataHasASandwich } from '../../helpers/data'
 
 const SandwichPage = ({}) => {
   const [data, setData] = useState<AnyShape[]>([])
@@ -53,10 +54,13 @@ const SandwichPage = ({}) => {
     // Execute the created function directly
     runFetchStream()
   }, [])
-
   return (
     <div>
-      {_isEmpty(data[2]) ? <LoadingSandwiches /> : <ResultsView data={data} fetchingComplete={fetchingComplete} />}
+      {!dataHasASandwich(data) ? (
+        <LoadingSandwiches />
+      ) : (
+        <ResultsView data={data} fetchingComplete={fetchingComplete} />
+      )}
     </div>
   )
 }

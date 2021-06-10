@@ -7,6 +7,19 @@ export const filterSandwichesToDetailsTable = (parsedMessage: any) => {
   return false
 }
 
+export function messageIsSandwich(o: any) {
+  return 'profit' in o
+}
+
+export function dataHasASandwich(data: any[]): boolean {
+  for (let i = 0; i < data.length; i++) {
+    if (messageIsSandwich(data[i])) {
+      return true
+    }
+  }
+  console.log(data, 'false')
+  return false
+}
 export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetailedTableData => {
   const date = new Date(parsedMessage.target.ts)
   const mappedMessage: ISandwichDetailedTableData = {
