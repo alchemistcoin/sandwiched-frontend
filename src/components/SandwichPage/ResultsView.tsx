@@ -111,7 +111,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
 
   const bestSandwichValue =
     bestSandwich && bestSandwich.profit
-      ? `${new Decimal(bestSandwich?.profit?.amount).toPrecision(5)} ${bestSandwich?.profit?.currency}`
+      ? `${new Decimal(bestSandwich?.profit?.amount).toFixed(2)} ${bestSandwich?.profit?.currency}`
       : 'None'
 
   return (
@@ -135,7 +135,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryTotalProfitSandwiches}
           backgroundColor={'#F9EEE5'}
           title={'total profit made'}
-          value={new Decimal(totalProfitFromSandwiches).toPrecision(5) + ' WETH' || '?'}
+          value={new Decimal(totalProfitFromSandwiches).toFixed(2) + ' WETH' || '?'}
           valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
         />
       </StyledSummarySandwichTableWrapper>
