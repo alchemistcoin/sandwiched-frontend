@@ -16,6 +16,7 @@
     "@typescript-eslint/parser": "~4.22.0",
     "@walletconnect/web3-provider": "^1.4.1",
     "decimal.js-light": "^2.5.1",
+    "can-ndjson-stream": "^1.0.2",
     "dotenv": "^10.0.0",
     "eslint": "~7.24.0",
     "eslint-config-prettier": "~8.1.0",

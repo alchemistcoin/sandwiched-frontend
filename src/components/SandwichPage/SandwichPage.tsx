@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom'
 import { ISandwichDetailedTableData } from '../../helpers/types'
 import { sleep } from '../../helpers/utilities'
 import { AnyShape } from '../../helpers/types'
+import ndjsonStream from 'can-ndjson-stream'
+import { dataHasASandwich } from '../../helpers/data'
 
 const SandwichPage = ({}) => {
   const [data, setData] = useState<AnyShape[]>([])
@@ -22,27 +24,23 @@ const SandwichPage = ({}) => {
       setFetching(true)
       let messageCount = 0
       for (;;) {
-        let { value: chunk, done: readerDone } = await reader.read()
+        let { value: msg, done: readerDone } = await reader.read()
         if (readerDone) {
           setFetchingComplete(true)
           setFetching(false)
           return
         }
         messageCount += 1
-        const message = utf8Decoder.decode(chunk)
-        let splitMessages = message.split('\n')
-        splitMessages.splice(splitMessages.length - 1, 1)
-        // console.log('split', splitMessages)
-        const parsedMessages = splitMessages.map((msg) => JSON.parse(msg))
         setData((oldArray) => {
-          const newArray = oldArray.concat(parsedMessages)
-          return [...newArray]
+          oldArray.push(msg)
+          return oldArray
         })
       }
     }
     async function runFetchStream() {
       // @ts-ignore
-      let reader = (await fetch(`https://api.sandwiched.wtf/sandwiches/${walletAddress}`)).body.getReader() // shouldn't hardcode this endpoint
+      const response = await fetch(`https://api.sandwiched.wtf/sandwiches/${walletAddress}`) // shouldn't hardcode this endpoint
+      const reader = ndjsonStream(response.body).getReader()
       let successfulFetch = false
       // while (!successfulFetch) {
       //   try {
@@ -56,10 +54,13 @@ const SandwichPage = ({}) => {
     // Execute the created function directly
     runFetchStream()
   }, [])
-
   return (
     <div>
-      {_isEmpty(data[0]) ? <LoadingSandwiches /> : <ResultsView data={data} fetchingComplete={fetchingComplete} />}
+      {!dataHasASandwich(data) ? (
+        <LoadingSandwiches />
+      ) : (
+        <ResultsView data={data} fetchingComplete={fetchingComplete} />
+      )}
     </div>
   )
 }

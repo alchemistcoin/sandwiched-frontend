@@ -33,7 +33,8 @@ export interface ISandwichDetailedTableData {
   closeTx?: string
   target?: string
   targetTx?: string
-  date?: string
+  date?: number
+  dateReadable?: string
   profit?: string
   count?: string
   attributes?: any

@@ -11,12 +11,27 @@ export const filterSandwichesToDetailsTable = (parsedMessage: any) => {
   return false
 }
 
+export function messageIsSandwich(o: any) {
+  return 'profit' in o
+}
+
+export function dataHasASandwich(data: any[]): boolean {
+  for (let i = 0; i < data.length; i++) {
+    if (messageIsSandwich(data[i])) {
+      return true
+    }
+  }
+  console.log(data, 'false')
+  return false
+}
 export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetailedTableData => {
   const date = new Date(parsedMessage.target.ts)
   // TODO: should just move this data reformatting to the table component instead
   const mappedMessage: ISandwichDetailedTableData = {
     message: parsedMessage.message,
-    date: date.toISOString().split('T')[0] + ' ' + `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+    date: date.getTime(),
+    dateReadable:
+      date.toISOString().split('T')[0] + ' ' + `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
     openTx: parsedMessage.open.tx,
     open:
       new Decimal(parsedMessage.open.amountIn).toPrecision(5) +

@@ -103,9 +103,10 @@ export const StyledPageHeader = styled.div`
 `
 
 export const StyledDetailedTableContainer = styled.div`
-  margin-top: 60px;
+  margin: 60px 0;
   width: 100%;
-  background-color: #ffbf00;
+  padding: 0 60px;
+  box-sizing: border-box;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -125,6 +126,14 @@ export const StyledDetailedTableContainer = styled.div`
   .MuiTableSortLabel-iconDirectionDesc,
   .MuiTableSortLabel-iconDirectionAsc {
     //color: rgb(var(--color-primary));
+  }
+  .MuiTableRow-root {
+    // display: none;
+  }
+  .MuiTableRow-root[index],
+  .MuiTableRow-head,
+  .MuiTableRow-footer {
+    display: table-row;
   }
 `
 
