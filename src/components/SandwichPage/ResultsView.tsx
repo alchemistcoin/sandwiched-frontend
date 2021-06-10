@@ -111,7 +111,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
 
   const bestSandwichValue =
     bestSandwich && bestSandwich.profit
-      ? `${new Decimal(bestSandwich?.profit?.amount).toFixed(2)} ${bestSandwich?.profit?.currency}`
+      ? `${new Decimal(bestSandwich?.profit?.amount).toSignificantDigits(5)} ${bestSandwich?.profit?.currency}`
       : 'None'
 
   return (
@@ -135,7 +135,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryTotalProfitSandwiches}
           backgroundColor={'#F9EEE5'}
           title={'total profit made'}
-          value={new Decimal(totalProfitFromSandwiches).toFixed(2) + ' WETH' || '?'}
+          value={new Decimal(totalProfitFromSandwiches).toSignificantDigits(5) + ' WETH' || '?'}
           valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
         />
       </StyledSummarySandwichTableWrapper>
@@ -163,7 +163,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'Sandwich open',
               field: 'open',
               render: (rowData) => (
-                <div style={{ width: 260 }}>
+                <div style={{ width: 240 }}>
                   <span style={{}}>{rowData.open}</span>
                   <EtherscanLink txId={rowData?.openTx || ''} />
                 </div>
@@ -174,7 +174,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'User transaction',
               field: 'target',
               render: (rowData) => (
-                <div style={{ width: 260 }}>
+                <div style={{ width: 240 }}>
                   <span style={{}}>{rowData.target}</span>
                   <EtherscanLink txId={rowData?.targetTx || ''} />
                 </div>
@@ -185,7 +185,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'Sandwich close',
               field: 'close',
               render: (rowData) => (
-                <div style={{ width: 260 }}>
+                <div style={{ width: 240 }}>
                   <span style={{}}>{rowData.close}</span>
                   <EtherscanLink txId={rowData?.closeTx || ''} />
                 </div>

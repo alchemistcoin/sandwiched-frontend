@@ -34,32 +34,32 @@ export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetail
       date.toISOString().split('T')[0] + ' ' + `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
     openTx: parsedMessage.open.tx,
     open:
-      new Decimal(parsedMessage.open.amountIn).toPrecision(5) +
+      new Decimal(parsedMessage.open.amountIn).toSignificantDigits(5) +
       ' ' +
       parsedMessage.open.currencyIn +
       ' for ' +
-      new Decimal(parsedMessage.open.amountOut).toPrecision(5) +
+      new Decimal(parsedMessage.open.amountOut).toSignificantDigits(5) +
       ' ' +
       parsedMessage.open.currencyOut,
     targetTx: parsedMessage.target.tx,
     target:
-      new Decimal(parsedMessage.target.amountIn).toPrecision(5) +
+      new Decimal(parsedMessage.target.amountIn).toSignificantDigits(5) +
       ' ' +
       parsedMessage.target.currencyIn +
       ' for ' +
-      new Decimal(parsedMessage.target.amountOut).toPrecision(5) +
+      new Decimal(parsedMessage.target.amountOut).toSignificantDigits(5) +
       ' ' +
       parsedMessage.target.currencyOut,
     closeTx: parsedMessage.close.tx,
     close:
-      new Decimal(parsedMessage.close.amountIn).toPrecision(5) +
+      new Decimal(parsedMessage.close.amountIn).toSignificantDigits(5) +
       ' ' +
       parsedMessage.close.currencyIn +
       ' for ' +
-      new Decimal(parsedMessage.close.amountOut).toPrecision(5) +
+      new Decimal(parsedMessage.close.amountOut).toSignificantDigits(5) +
       ' ' +
       parsedMessage.close.currencyOut,
-    profit: new Decimal(parsedMessage.profit.amount).toPrecision(5) + ' ' + parsedMessage.profit.currency,
+    profit: new Decimal(parsedMessage.profit.amount).toSignificantDigits(5) + ' ' + parsedMessage.profit.currency,
     attributes: { mev: parsedMessage.mev },
   }
 
