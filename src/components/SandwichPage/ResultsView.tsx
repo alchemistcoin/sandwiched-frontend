@@ -234,6 +234,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           localization={{
             body: {
               emptyDataSourceMessage: <h2 style={{}}>No sandwiches to display</h2>,
+            },
           }}
         />
       </StyledDetailedTableContainer>
