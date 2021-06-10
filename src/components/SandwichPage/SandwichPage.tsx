@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { ISandwichDetailedTableData } from '../../helpers/types'
 import { sleep } from '../../helpers/utilities'
 import { AnyShape } from '../../helpers/types'
+import { dataHasASandwich } from '../../helpers/data'
 
 const SandwichPage = ({}) => {
   const [data, setData] = useState<AnyShape[]>([])
@@ -32,7 +33,6 @@ const SandwichPage = ({}) => {
         const message = utf8Decoder.decode(chunk)
         let splitMessages = message.split('\n')
         splitMessages.splice(splitMessages.length - 1, 1)
-        // console.log('split', splitMessages)
         const parsedMessages = splitMessages.map((msg) => JSON.parse(msg))
         setData((oldArray) => {
           const newArray = oldArray.concat(parsedMessages)
@@ -56,10 +56,14 @@ const SandwichPage = ({}) => {
     // Execute the created function directly
     runFetchStream()
   }, [])
-
+  console.log('dataHasASandwich(data)', dataHasASandwich(data))
   return (
     <div>
-      {_isEmpty(data[2]) ? <LoadingSandwiches /> : <ResultsView data={data} fetchingComplete={fetchingComplete} />}
+      {!dataHasASandwich(data) ? (
+        <LoadingSandwiches />
+      ) : (
+        <ResultsView data={data} fetchingComplete={fetchingComplete} />
+      )}
     </div>
   )
 }
