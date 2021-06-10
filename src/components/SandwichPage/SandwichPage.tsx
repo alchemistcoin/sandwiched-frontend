@@ -56,7 +56,7 @@ const SandwichPage = ({}) => {
 
   return (
     <div>
-      {_isEmpty(data[0]) ? <LoadingSandwiches /> : <ResultsView data={data} fetchingComplete={fetchingComplete} />}
+      {_isEmpty(data[2]) ? <LoadingSandwiches /> : <ResultsView data={data} fetchingComplete={fetchingComplete} />}
     </div>
   )
 }
