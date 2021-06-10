@@ -21,6 +21,7 @@ import { filterSandwichesToDetailsTable, mapSandwichesToDetailsTable } from '../
 import { AnyShape } from '../../helpers/types'
 import ArrowLink from '../../assets/arrow-link.svg'
 import Decimal from 'decimal.js-light'
+import { messageIsSandwich } from '../../helpers/data'
 
 type DetailedTableProps = {
   data: AnyShape[]
@@ -94,9 +95,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
     return Number(prevProfit) >= Number(currProfit) ? prev : curr
   })
   const totalSandwiches = data.filter((rec) => {
-    if (rec.message.toLowerCase() === 'sandwich found') {
-      return true
-    }
+    return messageIsSandwich(rec)
   }).length
   let totalProfitFromSandwiches = 0
   data.forEach((rec) => {
