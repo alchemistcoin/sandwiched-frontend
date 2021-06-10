@@ -20,6 +20,8 @@ import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
 import { filterSandwichesToDetailsTable, mapSandwichesToDetailsTable } from '../../helpers/data'
 import { AnyShape } from '../../helpers/types'
 import ArrowLink from '../../assets/arrow-link.svg'
+import Decimal from 'decimal.js-light'
+import { messageIsSandwich } from '../../helpers/data'
 
 type DetailedTableProps = {
   data: AnyShape[]
@@ -93,9 +95,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
     return Number(prevProfit) >= Number(currProfit) ? prev : curr
   })
   const totalSandwiches = data.filter((rec) => {
-    if (rec.message.toLowerCase() === 'sandwich found') {
-      return true
-    }
+    return messageIsSandwich(rec)
   }).length
   let totalProfitFromSandwiches = 0
   data.forEach((rec) => {
@@ -111,7 +111,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
 
   const bestSandwichValue =
     bestSandwich && bestSandwich.profit
-      ? `${Number(bestSandwich?.profit?.amount).toFixed()} ${bestSandwich?.profit?.currency}`
+      ? `${new Decimal(bestSandwich?.profit?.amount).toSignificantDigits(5)} ${bestSandwich?.profit?.currency}`
       : 'None'
 
   return (
@@ -135,7 +135,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryTotalProfitSandwiches}
           backgroundColor={'#F9EEE5'}
           title={'total profit made'}
-          value={totalProfitFromSandwiches.toFixed() + ' WETH' || '?'}
+          value={new Decimal(totalProfitFromSandwiches).toSignificantDigits(5) + ' WETH' || '?'}
           valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
         />
       </StyledSummarySandwichTableWrapper>
@@ -163,7 +163,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'Sandwich open',
               field: 'open',
               render: (rowData) => (
-                <div style={{ minWidth: 220 }}>
+                <div style={{ width: 240 }}>
                   <span style={{}}>{rowData.open}</span>
                   <EtherscanLink txId={rowData?.openTx || ''} />
                 </div>
@@ -174,7 +174,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'User transaction',
               field: 'target',
               render: (rowData) => (
-                <div style={{ minWidth: 220 }}>
+                <div style={{ width: 240 }}>
                   <span style={{}}>{rowData.target}</span>
                   <EtherscanLink txId={rowData?.targetTx || ''} />
                 </div>
@@ -185,7 +185,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'Sandwich close',
               field: 'close',
               render: (rowData) => (
-                <div style={{ minWidth: 220 }}>
+                <div style={{ width: 240 }}>
                   <span style={{}}>{rowData.close}</span>
                   <EtherscanLink txId={rowData?.closeTx || ''} />
                 </div>
@@ -229,7 +229,8 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
             searchFieldStyle: {
               // color: 'yellow',
             },
-            pageSizeOptions: [10, 20, 50, 100],
+            paging: false,
+            // pageSizeOptions: [10, 20, 50, 100],
           }}
         />
       </StyledDetailedTableContainer>
