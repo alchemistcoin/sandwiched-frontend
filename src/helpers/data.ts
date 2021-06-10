@@ -4,6 +4,7 @@ Decimal.set({
   rounding: Decimal.ROUND_HALF_UP,
 })
 
+/** Filters **/
 export const filterSandwichesToDetailsTable = (parsedMessage: any) => {
   if (parsedMessage.message.toLowerCase() == 'sandwich found') {
     return true
@@ -23,14 +24,21 @@ export function dataHasASandwich(data: any[]): boolean {
   }
   return false
 }
+const profit2IfExists = (message: any) => {
+  if ('profit2' in message) {
+    return `\n ${new Decimal(message.profit2.amount).toSignificantDigits(5)} ${message.profit2.currency}`
+  }
+  return undefined
+}
+
+/** Maps **/
 export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetailedTableData => {
   const date = new Date(parsedMessage.target.ts)
   // TODO: should just move this data reformatting to the table component instead
   const mappedMessage: ISandwichDetailedTableData = {
     message: parsedMessage.message,
     date: date.getTime(),
-    dateReadable:
-      date.toISOString().split('T')[0] + ' ' + `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+    dateReadable: date.toISOString().split('T')[0] + ' ' + date.toLocaleTimeString(),
     openTx: parsedMessage.open.tx,
     open:
       new Decimal(parsedMessage.open.amountIn).toSignificantDigits(5) +
