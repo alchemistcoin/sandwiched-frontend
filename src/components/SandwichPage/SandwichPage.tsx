@@ -54,7 +54,6 @@ const SandwichPage = ({}) => {
     // Execute the created function directly
     runFetchStream()
   }, [])
-  console.log('dataHasASandwich(data)', dataHasASandwich(data))
   return (
     <div>
       {!dataHasASandwich(data) ? (
