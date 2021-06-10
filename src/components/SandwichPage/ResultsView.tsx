@@ -229,7 +229,8 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
             searchFieldStyle: {
               // color: 'yellow',
             },
-            pageSizeOptions: [10, 20, 50, 100],
+            paging: false,
+            // pageSizeOptions: [10, 20, 50, 100],
           }}
         />
       </StyledDetailedTableContainer>
