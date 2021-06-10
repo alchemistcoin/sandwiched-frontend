@@ -56,7 +56,7 @@ const SandwichPage = ({}) => {
   }, [])
   return (
     <div>
-      {!dataHasASandwich(data) ? (
+      {!dataHasASandwich(data) && !fetchingComplete ? (
         <LoadingSandwiches />
       ) : (
         <ResultsView data={data} fetchingComplete={fetchingComplete} />

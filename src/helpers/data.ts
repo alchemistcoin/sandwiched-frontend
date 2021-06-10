@@ -17,7 +17,6 @@ export function dataHasASandwich(data: any[]): boolean {
       return true
     }
   }
-  console.log(data, 'false')
   return false
 }
 export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetailedTableData => {
