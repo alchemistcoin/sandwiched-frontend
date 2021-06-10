@@ -196,9 +196,14 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               field: 'profit',
               render: (rowData) => {
                 if (rowData.profit && rowData.profit.substr(0, 1) != '-') {
-                  return <span style={{ color: '#D96A19' }}>{rowData.profit}</span>
+                  return (
+                    <div>
+                      <div style={{ color: '#D96A19' }}>{rowData.profit}</div>
+                      <div style={{ color: '#D96A19' }}>{rowData.profit2}</div>
+                    </div>
+                  )
                 } else {
-                  return <span style={{ color: '#22DA4A', fontWeight: 'bold' }}>{rowData.profit}</span>
+                  return <div style={{ color: '#22DA4A', fontWeight: 'bold' }}>{rowData.profit}</div>
                 }
               },
               sorting: false,
