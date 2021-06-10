@@ -113,7 +113,6 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
     bestSandwich && bestSandwich.profit
       ? `${new Decimal(bestSandwich?.profit?.amount).toSignificantDigits(5)} ${bestSandwich?.profit?.currency}`
       : 'None'
-
   return (
     <StyledResultsView>
       {PageHeader(totalSandwiches)}
@@ -231,6 +230,10 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
             },
             paging: false,
             // pageSizeOptions: [10, 20, 50, 100],
+          }}
+          localization={{
+            body: {
+              emptyDataSourceMessage: <h2 style={{}}>No sandwiches to display</h2>,
           }}
         />
       </StyledDetailedTableContainer>
