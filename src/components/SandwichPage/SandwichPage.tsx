@@ -33,7 +33,7 @@ const SandwichPage = ({}) => {
         messageCount += 1
         setData((oldArray) => {
           oldArray.push(msg)
-          return oldArray
+          return [...oldArray]
         })
       }
     }
