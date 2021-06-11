@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import hamburgers from '../../assets/hamburgers.svg'
 import hamburgerLine from '../../assets/hamburger-line.svg'
 import logoStripped from '../../assets/logo-stripped.svg'
+import errorHamburger from '../../assets/error-hamburger.svg'
 
 const StyledLoadingSandwichesDisplay = styled.div`
   margin-top: 19vh;
@@ -101,18 +102,30 @@ export const StyledMainTextBox = styled.div`
   line-height: 38px;
 `
 
-const LoadingSandwichesDisplay = () => (
-  <StyledLoadingSandwichesDisplay>
-    <img className="loadingLogoStripped" src={logoStripped} alt="sandwich.wtf" />
-    <div className="hamburgers-container">
-      <img className="left" src={hamburgerLine} alt="" style={{}} />
-      <img className="right" src={hamburgerLine} alt="" style={{}} />
-    </div>
-    <StyledMainTextBox>
-      <h1>Hold up!</h1>
-      <p>We are scanning your wallet transactions for potential sandwiches</p>
-    </StyledMainTextBox>
-  </StyledLoadingSandwichesDisplay>
-)
+const LoadingSandwichesDisplay = ({ error }: { error?: string }) => {
+  const header = !error ? 'Hold up!' : 'Uh-oh 😞'
+  const paragraph1 = !error
+    ? 'We are scanning your wallet transactions for potential sandwiches'
+    : error + '. Please try again later'
+  return (
+    <StyledLoadingSandwichesDisplay>
+      <img className="loadingLogoStripped" src={logoStripped} alt="sandwich.wtf" />
+      <div className="hamburgers-container">
+        {error ? (
+          <img src={hamburgerLine} alt="" />
+        ) : (
+          <>
+            <img className="left" src={hamburgerLine} alt="" />
+            <img className="right" src={hamburgerLine} alt="" />
+          </>
+        )}
+      </div>
+      <StyledMainTextBox>
+        <h1>{header}</h1>
+        <p>{paragraph1}</p>
+      </StyledMainTextBox>
+    </StyledLoadingSandwichesDisplay>
+  )
+}
 
 export default LoadingSandwichesDisplay
