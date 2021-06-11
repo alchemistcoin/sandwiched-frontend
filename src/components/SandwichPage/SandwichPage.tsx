@@ -49,29 +49,28 @@ const SandwichPage = ({}) => {
             return oldArray
           })
         } catch (err) {
-          console.error('catch (err)', err)
+          console.error('fetchStream catch (err)', err)
           setFetchErrorMessage(errorMessage)
           setFetching(false)
+          return
         }
       }
     }
     async function runFetchStream() {
       // @ts-ignore
-      const response = await fetch(`https://api.sandwiched.wtf/sandwiches/${walletAddress}`) // shouldn't hardcode this endpoint
-      console.log('response', response)
-      const reader = ndjsonStream(response.body).getReader()
-      console.log('reader', reader)
-      let successfulFetch = false
-      // while (!successfulFetch) {
-      // try {
-      fetchStream(reader)
-      //   await fetchStream(reader)
-      // successfulFetch = true
-      // } catch (err) {
-      //   console.error('err', err)
-      //   sleep(3000)
-      // }
-      // }
+      try {
+        //const response = await fetch(`http://localhost:3000/sandwiches/${walletAddress}`) // shouldn't hardcode this endpoint
+        const response = await fetch(`https://api.sandwiched.wtf/sandwiches/${walletAddress}`) // shouldn't hardcode this endpoint
+        console.log('response', response)
+        const reader = ndjsonStream(response.body).getReader()
+        console.log('reader', reader)
+        await fetchStream(reader)
+      } catch (err) {
+        console.error('runFetchStream() catch(err)', err) // ERR_SSL_PROTOCOL_ERROR
+        setFetchErrorMessage(errorMessage)
+        setFetching(false)
+        return
+      }
     }
     // Execute the created function directly
     runFetchStream()
