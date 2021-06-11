@@ -36,6 +36,7 @@ export interface ISandwichDetailedTableData {
   date?: number
   dateReadable?: string
   profit?: string
+  profit2?: string
   count?: string
   attributes?: any
 }

@@ -67,6 +67,7 @@ export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetail
       ' ' +
       parsedMessage.close.currencyOut,
     profit: new Decimal(parsedMessage.profit.amount).toSignificantDigits(5) + ' ' + parsedMessage.profit.currency,
+    profit2: profit2IfExists(parsedMessage),
     attributes: { mev: parsedMessage.mev },
   }
 
