@@ -23,6 +23,13 @@ export function dataHasASandwich(data: any[]): boolean {
   }
   return false
 }
+const profit2IfExists = (message: any) => {
+  if ('profit2' in message) {
+    return `\n ${new Decimal(message.profit2.amount).toSignificantDigits(5)} ${message.profit2.currency}`
+  }
+  return undefined
+}
+
 export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetailedTableData => {
   const date = new Date(parsedMessage.target.ts)
   // TODO: should just move this data reformatting to the table component instead
@@ -59,6 +66,7 @@ export const mapSandwichesToDetailsTable = (parsedMessage: any): ISandwichDetail
       ' ' +
       parsedMessage.close.currencyOut,
     profit: new Decimal(parsedMessage.profit.amount).toSignificantDigits(5) + ' ' + parsedMessage.profit.currency,
+    profit2: profit2IfExists(parsedMessage),
     attributes: { mev: parsedMessage.mev },
   }
 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import StyledConnectWalletWithStatusButton from './ConectWalletWithStatusButton.styled'
 import connectIcon from '../../../assets/connect-icon.svg'
 import statusConnected from '../../../assets/status-connected.svg'
-import { useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 interface ConnectWalletWithStatusButtonProps {
   connected: boolean
@@ -18,16 +18,9 @@ const ConnectWalletWithStatusButton = ({
   resetApp,
 }: ConnectWalletWithStatusButtonProps) => {
   /** Router Methods **/
-  let history = useHistory()
+  // @ts-ignore
+  let { walletAddress } = useParams()
 
-  // Send user back to homepage if they disconnect
-  // ! This is acutally not desireable because then you cannot use any arbitrary wallet ID, but instead would have to be connected yourself,
-  // instead we should just redirect the user if they connect, but not worry about disconnections
-  // useEffect(() => {
-  //   if (!connected) {
-  //     history.push(`/`)
-  //   }
-  // })
   let buttonText = 'Connect Wallet'
   if (connected) {
     if (!ethereumAddress) {
@@ -44,12 +37,13 @@ const ConnectWalletWithStatusButton = ({
       {
         <StyledConnectWalletWithStatusButton
           onClick={async () => {
-            const { address } = await onConnect()
             if (connected) {
               resetApp()
-              history.push('/')
             } else {
-              history.push(`/${address}`)
+              const { address } = await onConnect()
+              if (walletAddress !== address) {
+                window.location.href = `/${address}` // Dont use history here beacuse we want it to wipe out the old data
+              }
             }
           }}
           className={connected ? 'connected' : 'disconnected'}
