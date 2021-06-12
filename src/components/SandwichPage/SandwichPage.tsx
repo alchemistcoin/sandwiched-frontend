@@ -46,7 +46,7 @@ const SandwichPage = ({}) => {
           messageCount += 1
           setData((oldArray) => {
             oldArray.push(msg)
-            return oldArray
+            return [...oldArray]
           })
         } catch (err) {
           console.error('fetchStream catch (err)', err)

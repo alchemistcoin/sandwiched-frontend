@@ -113,7 +113,6 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
     bestSandwich && bestSandwich.profit
       ? `${new Decimal(bestSandwich?.profit?.amount).toSignificantDigits(5)} ${bestSandwich?.profit?.currency}`
       : 'None'
-
   return (
     <StyledResultsView>
       {PageHeader(totalSandwiches)}
@@ -197,9 +196,14 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               field: 'profit',
               render: (rowData) => {
                 if (rowData.profit && rowData.profit.substr(0, 1) != '-') {
-                  return <span style={{ color: '#D96A19' }}>{rowData.profit}</span>
+                  return (
+                    <div>
+                      <div style={{ color: '#D96A19' }}>{rowData.profit}</div>
+                      <div style={{ color: '#D96A19' }}>{rowData.profit2}</div>
+                    </div>
+                  )
                 } else {
-                  return <span style={{ color: '#22DA4A', fontWeight: 'bold' }}>{rowData.profit}</span>
+                  return <div style={{ color: '#22DA4A', fontWeight: 'bold' }}>{rowData.profit}</div>
                 }
               },
               sorting: false,
@@ -231,6 +235,11 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
             },
             paging: false,
             // pageSizeOptions: [10, 20, 50, 100],
+          }}
+          localization={{
+            body: {
+              emptyDataSourceMessage: <h2 style={{}}>No sandwiches to display</h2>,
+            },
           }}
         />
       </StyledDetailedTableContainer>
