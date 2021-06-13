@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import StyledLandingPage, { StyledMainTextBox, StyledConnectWalletButton } from './LandingPage.styled'
+import StyledLandingPage, { StyledMainTextBox, StyledPrimaryButton } from './LandingPage.styled'
 import LogoSvg from '../../assets/logo.svg'
 import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
@@ -66,7 +66,7 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
         <p>Did you know, you might have some unsuspected transactions, which might be draining away your wallet?</p>
         <p>We help you scan and find those sandwiches in your transactions.</p>
       </StyledMainTextBox>
-      <StyledConnectWalletButton
+      <StyledPrimaryButton
         onClick={async () => {
           const { address, connected } = await onConnect()
           if (connected) {
@@ -75,7 +75,7 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
         }}
       >
         Connect Wallet
-      </StyledConnectWalletButton>
+      </StyledPrimaryButton>
     </StyledLandingPage>
     // </Container>
   )

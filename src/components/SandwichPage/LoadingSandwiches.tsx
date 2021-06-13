@@ -4,6 +4,8 @@ import hamburgers from '../../assets/hamburgers.svg'
 import hamburgerLine from '../../assets/hamburger-line.svg'
 import logoStripped from '../../assets/logo-stripped.svg'
 import errorHamburger from '../../assets/error-hamburger.svg'
+import { StyledPrimaryButton } from '../LandingPage/LandingPage.styled'
+import { useHistory } from 'react-router-dom'
 
 const StyledLoadingSandwichesDisplay = styled.div`
   margin-top: 19vh;
@@ -103,6 +105,7 @@ export const StyledMainTextBox = styled.div`
 `
 
 const LoadingSandwichesDisplay = ({ error }: { error?: string }) => {
+  const history = useHistory()
   const header = !error ? 'Hold up!' : 'Uh-oh 😞'
   const paragraph1 = !error
     ? 'We are scanning your wallet transactions for potential sandwiches'
@@ -115,14 +118,23 @@ const LoadingSandwichesDisplay = ({ error }: { error?: string }) => {
           <img src={hamburgerLine} alt="" />
         ) : (
           <>
-            <img className="left" src={hamburgerLine} alt="" />
-            <img className="right" src={hamburgerLine} alt="" />
+            <img className={!error ? 'left' : ''} src={hamburgerLine} alt="" />
+            <img className={!error ? 'right' : ''} src={hamburgerLine} alt="" />
           </>
         )}
       </div>
       <StyledMainTextBox>
         <h1>{header}</h1>
         <p>{paragraph1}</p>
+        {error && (
+          <StyledPrimaryButton
+            onClick={() => {
+              location.reload() // refresh the current route and try again
+            }}
+          >
+            Retry
+          </StyledPrimaryButton>
+        )}
       </StyledMainTextBox>
     </StyledLoadingSandwichesDisplay>
   )

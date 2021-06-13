@@ -9,13 +9,20 @@ import { AnyShape } from '../../helpers/types'
 import ndjsonStream from 'can-ndjson-stream'
 import { dataHasASandwich } from '../../helpers/data'
 
-const SandwichPage = ({}) => {
+interface SandwichPageProps {
+  onConnect: Function
+  walletAddress: string
+  connected: boolean
+  resetApp: Function
+}
+
+const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: SandwichPageProps) => {
   const [data, setData] = useState<AnyShape[]>([])
   const [fetching, setFetching] = useState(false)
   const [fetchingComplete, setFetchingComplete] = useState(false)
   const [fetchErrorMessage, setFetchErrorMessage] = useState('')
   // @ts-ignore
-  let { walletAddress } = useParams()
+  let { walletAddress: walletAddressFromUrl } = useParams()
 
   // Fetch Sandwiches for wallet
   useEffect(() => {
@@ -45,14 +52,13 @@ const SandwichPage = ({}) => {
           }
           messageCount += 1
           setData((oldArray) => {
-            oldArray.push(msg)
-            return [...oldArray]
+            return [...oldArray, msg]
           })
         } catch (err) {
           console.error('fetchStream catch (err)', err)
           setFetchErrorMessage(errorMessage)
           setFetching(false)
-          return
+          return // without this return infinite errors can occur
         }
       }
     }
@@ -60,7 +66,7 @@ const SandwichPage = ({}) => {
       // @ts-ignore
       try {
         //const response = await fetch(`http://localhost:3000/sandwiches/${walletAddress}`) // shouldn't hardcode this endpoint
-        const response = await fetch(`https://api.sandwiched.wtf/sandwiches/${walletAddress}`) // shouldn't hardcode this endpoint
+        const response = await fetch(`https://api.sandwiched.wtf/sandwiches/${walletAddressFromUrl}`) // shouldn't hardcode this endpoint
         console.log('response', response)
         const reader = ndjsonStream(response.body).getReader()
         console.log('reader', reader)
