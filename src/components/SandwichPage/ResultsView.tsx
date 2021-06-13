@@ -88,7 +88,7 @@ const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: nu
 }
 
 const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
-  const { fetchData, totalEthProfit, loadingTotalEthProfit } = useCoinData()
+  const { fetchData, totalEthProfit, loadingTotalEthProfit, totalEthProfitError } = useCoinData()
 
   useEffect(() => {
     if (fetchingComplete) {
@@ -149,6 +149,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           value={totalEthProfit + ' ETH' || '?'}
           valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
           loading={loadingTotalEthProfit}
+          error={totalEthProfitError}
         />
       </StyledSummarySandwichTableWrapper>
       <StyledCTAButton

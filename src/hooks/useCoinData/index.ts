@@ -4,28 +4,28 @@ import { useState } from 'react'
 
 // https://api.coingecko.com/api/v3/simple/price?ids=alchemist%2Cchainlink&vs_currencies=eth
 
-const BASE_URL = 'https://api.coingecko.com/api/v3/simple/price?vs_currencies=eth&ids='
-
 const useCoinData = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [marketData, setMarketData] = useState<any>(null)
   const [tradeData, setTradeData] = useState([])
   const [totalEthProfit, setTotalEthProfit] = useState<number | null>(null)
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
     if (marketData && tradeData) {
-      console.log('marketData', marketData?.data)
       let totalEthProfit = 0
       tradeData.forEach((trade: any) => {
         let pairRate: any = 0
-        try {
-          pairRate = marketData?.data[trade.profit.cgId]
-        } catch (e) {
-          console.log('pairRate not found')
-        }
-        if (pairRate) {
-          const profitInEth = Number(trade.profit.amount) * pairRate.eth
-          totalEthProfit += profitInEth
+        if (trade.profit && trade.profit.cgId) {
+          try {
+            pairRate = marketData?.data[trade.profit.cgId]
+          } catch (e) {
+            console.log('error - pairRate not found', trade.profit, marketData?.data)
+          }
+          if (pairRate) {
+            const profitInEth = Number(trade.profit.amount) * pairRate.eth
+            totalEthProfit += profitInEth
+          }
         }
       })
       setTotalEthProfit(+totalEthProfit.toFixed(2))
@@ -42,17 +42,16 @@ const useCoinData = () => {
       }
     })
 
-    const requestUrl = `${BASE_URL}${uniquieIds.join(',')}`
-    console.log('requestUrl', requestUrl)
+    const requestUrl = `https://api.coingecko.com/api/v3/simple/price?vs_currencies=eth&ids=${uniquieIds.join(',')}`
+
     axios
       .get(requestUrl)
       .then((response: any) => {
-        console.log('response ', response)
         setMarketData(response)
       })
-      .catch(function (error) {
-        // handle error
-        console.log(error)
+      .catch(() => {
+        setError(true)
+        setLoading(false)
       })
   }
 
@@ -60,6 +59,7 @@ const useCoinData = () => {
     fetchData,
     totalEthProfit,
     loadingTotalEthProfit: loading,
+    totalEthProfitError: error,
   }
 }
 
