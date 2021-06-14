@@ -35,14 +35,14 @@ const useCoinData = () => {
 
   const fetchData = (data: any) => {
     setTradeData(data)
-    let uniquieIds: string[] = []
+    let uniqueIds: string[] = []
     data.filter((item: any) => {
-      if (item.profit && uniquieIds.indexOf(item.profit.cgId) < 0) {
+      if (item.profit && uniqueIds.indexOf(item.profit.cgId) < 0) {
         uniquieIds.push(item.profit.cgId)
       }
     })
 
-    const requestUrl = `https://api.coingecko.com/api/v3/simple/price?vs_currencies=eth&ids=${uniquieIds.join(',')}`
+    const requestUrl = `https://api.coingecko.com/api/v3/simple/price?vs_currencies=eth&ids=${uniqueIds.join(',')}`
 
     axios
       .get(requestUrl)
