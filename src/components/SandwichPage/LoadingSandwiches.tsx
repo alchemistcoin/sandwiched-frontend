@@ -25,9 +25,14 @@ const LoadingSandwichesDisplay = ({
 }: LoadingSandwichesDisplayProps) => {
   const history = useHistory()
   const header = !error ? 'Hold up!' : 'Uh-oh 😞'
-  const paragraph1 = !error
-    ? 'We are scanning your wallet transactions for potential sandwiches'
-    : error + '. Please try again later'
+  let paragraph1 = 'We are scanning your wallet transactions for potential sandwiches'
+  if (error) {
+    if (error.toLowerCase().search('bad wallet address') !== -1) {
+      paragraph1 = error + '. Please try again with a valid wallet address'
+    } else {
+      paragraph1 = error + '. Please try again later'
+    }
+  }
   return (
     <StyledLoadingSandwichesDisplay>
       <img className="loadingLogoStripped" src={logoStripped} alt="sandwich.wtf" />
