@@ -9,47 +9,71 @@ import { AnyShape } from '../../helpers/types'
 import ndjsonStream from 'can-ndjson-stream'
 import { dataHasASandwich } from '../../helpers/data'
 
-const SandwichPage = ({}) => {
+interface SandwichPageProps {
+  onConnect: Function
+  walletAddress: string
+  connected: boolean
+  resetApp: Function
+}
+
+const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: SandwichPageProps) => {
   const [data, setData] = useState<AnyShape[]>([])
   const [fetching, setFetching] = useState(false)
   const [fetchingComplete, setFetchingComplete] = useState(false)
+  const [fetchErrorMessage, setFetchErrorMessage] = useState('')
   // @ts-ignore
-  let { walletAddress } = useParams()
+  let { walletAddress: walletAddressFromUrl } = useParams()
 
   // Fetch Sandwiches for wallet
   useEffect(() => {
+    let errorMessage = 'Something went wrong'
     // Create an scoped async function in the hook
     const utf8Decoder = new TextDecoder('utf-8')
     async function fetchStream(reader: any) {
       setFetching(true)
       let messageCount = 0
       for (;;) {
-        let { value: msg, done: readerDone } = await reader.read()
-        if (readerDone) {
-          setFetchingComplete(true)
+        try {
+          let { value: msg, done: readerDone } = await reader.read()
+          const firstLineOfMsg = String(msg).split('/n')[0] // error comes as a string, messages come as json
+          /** Catch any errors in message **/
+          if (firstLineOfMsg.toLowerCase().substring(0, 5) === 'error') {
+            if (firstLineOfMsg.search('bad wallet') !== -1) {
+              errorMessage = 'Bad wallet address'
+            }
+            setFetchErrorMessage(errorMessage)
+            setFetching(false)
+            return
+          }
+          if (readerDone) {
+            setFetchingComplete(true)
+            setFetching(false)
+            return
+          }
+          messageCount += 1
+          setData((oldArray) => {
+            return [...oldArray, msg]
+          })
+        } catch (err) {
+          console.error('fetchStream catch (err)', err)
+          setFetchErrorMessage(errorMessage)
           setFetching(false)
-          return
+          return // without this return infinite errors can occur
         }
-        messageCount += 1
-        setData((oldArray) => {
-          oldArray.push(msg)
-          return [...oldArray]
-        })
       }
     }
     async function runFetchStream() {
       // @ts-ignore
-      const response = await fetch(`https://api.sandwiched.wtf/sandwiches/${walletAddress}`) // shouldn't hardcode this endpoint
-      const reader = ndjsonStream(response.body).getReader()
-      let successfulFetch = false
-      // while (!successfulFetch) {
-      //   try {
-      fetchStream(reader)
-      //     successfulFetch = true
-      //   } catch (err) {
-      //     sleep(3000)
-      //   }
-      // }
+      try {
+        const response = await fetch(`https://api.sandwiched.wtf/sandwiches/${walletAddressFromUrl}`) // shouldn't hardcode this endpoint
+        const reader = ndjsonStream(response.body).getReader()
+        await fetchStream(reader)
+      } catch (err) {
+        console.error('runFetchStream() catch(err)', err) // ERR_SSL_PROTOCOL_ERROR
+        setFetchErrorMessage(errorMessage)
+        setFetching(false)
+        return
+      }
     }
     // Execute the created function directly
     runFetchStream()
@@ -57,7 +81,13 @@ const SandwichPage = ({}) => {
   return (
     <div>
       {!dataHasASandwich(data) && !fetchingComplete ? (
-        <LoadingSandwiches />
+        <LoadingSandwiches
+          error={fetchErrorMessage}
+          resetApp={resetApp}
+          connected={connected}
+          onConnect={onConnect}
+          walletAddress={walletAddress}
+        />
       ) : (
         <ResultsView data={data} fetchingComplete={fetchingComplete} />
       )}

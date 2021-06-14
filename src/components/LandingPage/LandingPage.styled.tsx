@@ -27,7 +27,7 @@ export const StyledMainTextBox = styled.div`
   }
 `
 
-export const StyledConnectWalletButton = styled.button`
+export const StyledPrimaryButton = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 69px;

@@ -25,9 +25,6 @@ const Header = ({ onConnect, walletAddress, connected, resetApp, showLogo }: Hea
           onClick={() => {
             // console.log('clicked logo')
             resetApp()
-            setTimeout(() => {
-              history.push(`/`)
-            }, 200)
           }}
         ></img>
       </div>
