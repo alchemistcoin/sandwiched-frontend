@@ -11,22 +11,30 @@ const useCoinData = () => {
   const [totalEthProfit, setTotalEthProfit] = useState<number | null>(null)
   const [error, setError] = useState<boolean>(false)
 
+  const calcProfit = (trade: any, marketData: any): number => {
+    let pairRate: any = null
+    let totalEthProfit: number = 0
+    try {
+      pairRate = marketData?.data[trade.profit.cgId] || marketData?.data[trade.profit2.cgId]
+    } catch (e) {
+      console.log('error - pairRate not found', trade, marketData?.data)
+    }
+    if (trade.profit && trade.profit.cgId !== 'unknown' && pairRate) {
+      const profitInEth = Number(trade.profit.amount) * pairRate.eth
+      totalEthProfit += profitInEth
+    }
+    if (trade.profit2 && trade.profit2.cgId !== 'unknown' && pairRate) {
+      const profitInEth = Number(trade.profit2.amount) * pairRate.eth
+      totalEthProfit += profitInEth
+    }
+    return totalEthProfit
+  }
+
   useEffect(() => {
     if (marketData && tradeData) {
       let totalEthProfit = 0
       tradeData.forEach((trade: any) => {
-        let pairRate: any = 0
-        if (trade.profit && trade.profit.cgId !== 'unknown') {
-          try {
-            pairRate = marketData?.data[trade.profit.cgId]
-          } catch (e) {
-            console.log('error - pairRate not found', trade.profit, marketData?.data)
-          }
-          if (pairRate) {
-            const profitInEth = Number(trade.profit.amount) * pairRate.eth
-            totalEthProfit += profitInEth
-          }
-        }
+        totalEthProfit += calcProfit(trade, marketData)
       })
       setTotalEthProfit(+totalEthProfit.toFixed(2))
       setLoading(false)
@@ -36,9 +44,9 @@ const useCoinData = () => {
   const fetchData = (data: any) => {
     setTradeData(data)
     let uniqueIds: string[] = []
-    data.filter((item: any) => {
+    data.forEach((item: any) => {
       if (item.profit && uniqueIds.indexOf(item.profit.cgId) < 0) {
-        uniquieIds.push(item.profit.cgId)
+        uniqueIds.push(item.profit.cgId)
       }
     })
 
