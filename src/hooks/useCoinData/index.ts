@@ -16,7 +16,7 @@ const useCoinData = () => {
       let totalEthProfit = 0
       tradeData.forEach((trade: any) => {
         let pairRate: any = 0
-        if (trade.profit && trade.profit.cgId) {
+        if (trade.profit && trade.profit.cgId !== 'unknown') {
           try {
             pairRate = marketData?.data[trade.profit.cgId]
           } catch (e) {
