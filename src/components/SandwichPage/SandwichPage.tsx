@@ -81,7 +81,13 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
   return (
     <div>
       {!dataHasASandwich(data) && !fetchingComplete ? (
-        <LoadingSandwiches error={fetchErrorMessage} />
+        <LoadingSandwiches
+          error={fetchErrorMessage}
+          resetApp={resetApp}
+          connected={connected}
+          onConnect={onConnect}
+          walletAddress={walletAddress}
+        />
       ) : (
         <ResultsView data={data} fetchingComplete={fetchingComplete} />
       )}

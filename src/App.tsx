@@ -235,7 +235,10 @@ class App extends React.Component<any, any> {
                 onConnect={this.onConnect}
                 connected={connected}
                 walletAddress={this.state.address}
-                resetApp={this.resetApp}
+                resetApp={() => {
+                  window.location.href = '/'
+                  this.resetApp()
+                }}
               />
             </Route>
           </Switch>
