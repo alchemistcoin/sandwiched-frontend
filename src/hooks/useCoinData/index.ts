@@ -2,8 +2,6 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 
-// https://api.coingecko.com/api/v3/simple/price?ids=alchemist%2Cchainlink&vs_currencies=eth
-
 const useCoinData = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [marketData, setMarketData] = useState<any>(null)
@@ -12,26 +10,37 @@ const useCoinData = () => {
   const [error, setError] = useState<boolean>(false)
 
   const calcProfit = (trade: any, marketData: any): number => {
-    let pairRate: any = null
     let totalEthProfit: number = 0
-    try {
-      pairRate = marketData?.data[trade.profit.cgId] || marketData?.data[trade.profit2.cgId]
-    } catch (e) {
-      console.log('error - pairRate not found', trade, marketData?.data)
+    if (trade.profit && trade.profit.cgId !== 'unknown') {
+      let pairRate: any = null
+      try {
+        pairRate = marketData?.data[trade.profit.cgId]
+      } catch (e) {
+        console.log('error - pairRate for profit1 not found', trade, marketData?.data)
+      }
+      if (pairRate) {
+        const profitInEth = Number(trade.profit.amount) * pairRate.eth
+        totalEthProfit += profitInEth
+      }
     }
-    if (trade.profit && trade.profit.cgId !== 'unknown' && pairRate) {
-      const profitInEth = Number(trade.profit.amount) * pairRate.eth
-      totalEthProfit += profitInEth
-    }
-    if (trade.profit2 && trade.profit2.cgId !== 'unknown' && pairRate) {
-      const profitInEth = Number(trade.profit2.amount) * pairRate.eth
-      totalEthProfit += profitInEth
+    if (trade.profit2 && trade.profit2.cgId !== 'unknown') {
+      let pairRate2: any = null
+      try {
+        pairRate2 = marketData?.data[trade.profit2.cgId]
+      } catch (e) {
+        console.log('error - pairRate for profit2 not found', trade, marketData?.data)
+      }
+      if (pairRate2) {
+        const profitInEth = Number(trade.profit2.amount) * pairRate2.eth
+        totalEthProfit += profitInEth
+      }
     }
     return totalEthProfit
   }
 
   useEffect(() => {
     if (marketData && tradeData) {
+      console.log('tradeData', tradeData)
       let totalEthProfit = 0
       tradeData.forEach((trade: any) => {
         totalEthProfit += calcProfit(trade, marketData)
@@ -50,10 +59,8 @@ const useCoinData = () => {
       }
     })
 
-    const requestUrl = `https://api.coingecko.com/api/v3/simple/price?vs_currencies=eth&ids=${uniqueIds.join(',')}`
-
     axios
-      .get(requestUrl)
+      .get(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=eth&ids=${uniqueIds.join(',')}`)
       .then((response: any) => {
         setMarketData(response)
       })
