@@ -8,9 +8,11 @@ type SummaryCardProps = {
   value?: string
   valueColor?: string
   backgroundColor?: string
+  loading?: boolean
+  error?: boolean
 }
 
-const SummaryCard = ({ image, title, value, backgroundColor, valueColor }: SummaryCardProps) => {
+const SummaryCard = ({ image, title, value, backgroundColor, valueColor, loading, error }: SummaryCardProps) => {
   return (
     <StyledSummaryCard>
       <div className="statusIcon">
@@ -25,7 +27,7 @@ const SummaryCard = ({ image, title, value, backgroundColor, valueColor }: Summa
         </div>
         <div className="summaryCardTitle">{title}</div>
         <div className="summaryCardValue" style={{ color: valueColor }}>
-          {value}
+          {error ? 'Unavailable' : loading ? 'Loading ...' : value}
         </div>
       </div>
     </StyledSummaryCard>

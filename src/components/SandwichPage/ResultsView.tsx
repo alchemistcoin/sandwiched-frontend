@@ -1,7 +1,7 @@
 {
   /* eslint-disable react/display-name */
 }
-import React from 'react'
+import React, { useEffect } from 'react'
 import sandwichPotion from '../../assets/sandwich-potion.svg'
 import {
   StyledResultsView,
@@ -22,6 +22,7 @@ import { AnyShape } from '../../helpers/types'
 import ArrowLink from '../../assets/arrow-link.svg'
 import Decimal from 'decimal.js-light'
 import { messageIsSandwich } from '../../helpers/data'
+import useCoinData from '../../hooks/useCoinData'
 
 type DetailedTableProps = {
   data: AnyShape[]
@@ -87,6 +88,16 @@ const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: nu
 }
 
 const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
+  const { fetchData, totalEthProfit, loadingTotalEthProfit, totalEthProfitError } = useCoinData()
+
+  useEffect(() => {
+    if (fetchingComplete) {
+      fetchData(data)
+    }
+  }, [fetchingComplete])
+
+  // console.log('totalEthProfit', totalEthProfit)
+
   // Prep Data for Summary Tables
   const bestSandwich = data.reduce((prev, curr) => {
     // TODO: find a better way to grab a records profit data (maybe combine, maybe take the max, or maybe one of them is always preferred?)
@@ -113,6 +124,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
     bestSandwich && bestSandwich.profit
       ? `${new Decimal(bestSandwich?.profit?.amount).toSignificantDigits(5)} ${bestSandwich?.profit?.currency}`
       : 'None'
+
   return (
     <StyledResultsView>
       {PageHeader(totalSandwiches)}
@@ -134,8 +146,10 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryTotalProfitSandwiches}
           backgroundColor={'#F9EEE5'}
           title={'total profit made'}
-          value={new Decimal(totalProfitFromSandwiches).toSignificantDigits(5) + ' WETH' || '?'}
+          value={totalEthProfit + ' ETH' || '?'}
           valueColor={totalProfitFromSandwiches <= 0 ? '#22da4a' : '#d96a19'}
+          loading={loadingTotalEthProfit}
+          error={totalEthProfitError}
         />
       </StyledSummarySandwichTableWrapper>
       <StyledCTAButton
