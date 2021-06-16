@@ -9,6 +9,8 @@ export const StyledModalHeader = styled.div`
   align-items: flex-start;
   box-sizing: border-box;
   font-weight: 700;
+  color: rgb(var(--color-text));
+  font-size: 22px;
 
   > * {
     display: flex;
@@ -21,6 +23,7 @@ export const StyledModalHeader = styled.div`
 `
 export const StyledModalMain = styled.div`
   width: 100%;
-  padding: 25px;
+  padding: 0 25px 25px;
   box-sizing: border-box;
+  color: rgb(var(--color-text));
 `

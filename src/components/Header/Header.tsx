@@ -4,7 +4,7 @@ import ConnectWalletWithStatusButton from './ConectWalletWithStatusButton'
 import logoText from '../../assets/logo-text.svg'
 import { useHistory } from 'react-router-dom'
 import Modal from '../../components/Modal'
-
+import FAQ from '../../components/FAQ'
 interface HeaderProps {
   onConnect: Function
   walletAddress: string
@@ -65,7 +65,7 @@ const Header = ({ onConnect, walletAddress, connected, resetApp, showLogo }: Hea
         />
       </StyledHeader>
       <Modal open={isModalOpen} setModalOpen={setModalOpen} title="FAQ">
-        <div>testing</div>
+        <FAQ />
       </Modal>
     </>
   )

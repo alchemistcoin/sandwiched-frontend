@@ -40,6 +40,7 @@ const StyledHeader = styled.header`
       padding: 0;
       display: flex;
       flex-direction: row;
+
       li {
         list-style: none;
         margin: 0 10px;
