@@ -8,6 +8,7 @@ export const StyledModalHeader = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   box-sizing: border-box;
+  font-weight: 700;
 
   > * {
     display: flex;
