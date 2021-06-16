@@ -5,13 +5,13 @@ import StyledHeader from './components/Header/Header'
 import backgroundSvg from './assets/background.svg'
 import Web3 from 'web3'
 import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom'
+import styled from 'styled-components'
+import { ModalProvider, BaseModalBackground } from 'styled-react-modal'
 import SandwichPage from './components/SandwichPage'
-
 import Web3Modal from 'web3modal'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { getChainData } from './helpers/utilities'
 import { IAssetData } from './helpers/types'
-
 import { Helmet } from 'react-helmet'
 const META_DESCRIPTION =
   'Find out how much $$$ has been drained from your wallet by unsuspected sandwich transactions. Sandwiched is bringing transparency to the rampant MEV occuring on the most popular DEXs.'
@@ -20,6 +20,24 @@ const META_URL = 'https://sandwiched.wtf'
 
 // FROM EXAMPLE: https://github.com/Web3Modal/web3modal/blob/master/example/src/App.tsx
 
+const FadingBackground = styled(BaseModalBackground)`
+  opacity: ${(props) => props.opacity};
+  transition: all 0.3s ease-in-out;
+`
+
+const SpecialModalBackground = styled.div`
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 30;
+  opacity: ${(props: any) => props.opacity};
+  background-color: rgb(0 0 0 / 70%);
+`
 interface IAppState {
   fetching: boolean
   address: string
@@ -206,43 +224,45 @@ class App extends React.Component<any, any> {
           <meta property="twitter:description" content={META_DESCRIPTION} />
         </Helmet>
         {/* Router */}
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              {/* Header */}
-              <StyledHeader
-                showLogo={false}
-                onConnect={this.onConnect}
-                connected={connected}
-                walletAddress={this.state.address}
-                resetApp={this.resetApp}
-              />
-              <LandingPage onConnect={this.onConnect} connected={connected} walletAddress={this.state.address} />
-            </Route>
-            <Route path="/:walletAddress">
-              {/* Header */}
-              <StyledHeader
-                showLogo={true}
-                onConnect={this.onConnect}
-                connected={connected}
-                walletAddress={this.state.address}
-                resetApp={() => {
-                  window.location.href = '/'
-                  this.resetApp()
-                }}
-              />
-              <SandwichPage
-                onConnect={this.onConnect}
-                connected={connected}
-                walletAddress={this.state.address}
-                resetApp={() => {
-                  window.location.href = '/'
-                  this.resetApp()
-                }}
-              />
-            </Route>
-          </Switch>
-        </Router>
+        <ModalProvider backgroundComponent={SpecialModalBackground}>
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                {/* Header */}
+                <StyledHeader
+                  showLogo={false}
+                  onConnect={this.onConnect}
+                  connected={connected}
+                  walletAddress={this.state.address}
+                  resetApp={this.resetApp}
+                />
+                <LandingPage onConnect={this.onConnect} connected={connected} walletAddress={this.state.address} />
+              </Route>
+              <Route path="/:walletAddress">
+                {/* Header */}
+                <StyledHeader
+                  showLogo={true}
+                  onConnect={this.onConnect}
+                  connected={connected}
+                  walletAddress={this.state.address}
+                  resetApp={() => {
+                    window.location.href = '/'
+                    this.resetApp()
+                  }}
+                />
+                <SandwichPage
+                  onConnect={this.onConnect}
+                  connected={connected}
+                  walletAddress={this.state.address}
+                  resetApp={() => {
+                    window.location.href = '/'
+                    this.resetApp()
+                  }}
+                />
+              </Route>
+            </Switch>
+          </Router>
+        </ModalProvider>
       </div>
     )
   }
