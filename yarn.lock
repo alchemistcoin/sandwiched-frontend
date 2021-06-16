@@ -2352,6 +2352,15 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.0.tgz#7036640b4e21cc2f259ae826ce843d277dad8cff"
   integrity sha512-RJJrrySY7A8havqpGObOB4W92QXKJo63/jFLLgpvOtsGUqbQZ9Sbgl35KMm1DjC6j7AvmmU2bIno+3IyEaemaw==
 
+"@types/styled-components@*":
+  version "5.1.10"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.10.tgz#b509da9d62be8a02cefd88ec6b820f417429a503"
+  integrity sha512-g3ZfWlTiyXktASIhcfCicZtqB/fFFnq0a7kPYYxKXNggdrohp8m/9bMmmt3zDvHj2gplWDGCkZByfFnEXfbSWg==
+  dependencies:
+    "@types/hoist-non-react-statics" "*"
+    "@types/react" "*"
+    csstype "^3.0.2"
+
 "@types/styled-components@^5.1.9":
   version "5.1.9"
   resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.9.tgz#00d3d84b501420521c4db727e3c195459f87a6cf"
@@ -2367,6 +2376,14 @@
   integrity sha512-Yjye9VwMdYeXfS71ihueWRSxrruuXTwKCbzue4+5b2rjnQ//AtyM7myZ1BEhNhBQ/nL/RE7bdToUoLln2miKvg==
   dependencies:
     "@types/react" "*"
+
+"@types/styled-react-modal@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@types/styled-react-modal/-/styled-react-modal-1.2.0.tgz#82be290f1ee9a2cfcf0b7d4eb830ce7cb3a8c027"
+  integrity sha512-g+mtpYcekjAgnyKRN+xQ4bo5GQmiNdoXZ+XGb374uIgxSXx3+Wnb643o49MprYYcTTupzHf8scK3SDTzcf42Gw==
+  dependencies:
+    "@types/react" "*"
+    "@types/styled-components" "*"
 
 "@types/tapable@^1", "@types/tapable@^1.0.5":
   version "1.0.7"
@@ -12910,6 +12927,13 @@ styled-components@^5.1.1, styled-components@^5.2.1:
     hoist-non-react-statics "^3.0.0"
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
+
+styled-react-modal@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/styled-react-modal/-/styled-react-modal-2.1.0.tgz#524451deb2faba329f3a004d28733b3e6de27744"
+  integrity sha512-GgUzhU4oCCA31OFKv/rCIj0DN4FDVRirGWKH+pGsFyvlr7qxeyAsiM09J0Tss107dJ6EUhK+D7U8JzQuq06hZw==
+  dependencies:
+    prop-types "^15.7.2"
 
 stylehacks@^4.0.0:
   version "4.0.3"

@@ -40,7 +40,6 @@ const useCoinData = () => {
 
   useEffect(() => {
     if (marketData && tradeData) {
-      console.log('tradeData', tradeData)
       let totalEthProfit = 0
       tradeData.forEach((trade: any) => {
         totalEthProfit += calcProfit(trade, marketData)
