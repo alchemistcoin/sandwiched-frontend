@@ -37,14 +37,21 @@ const PageHeader = (x: number) => {
     // body = 'Well played - use mistX.io to stay unsandwiched!'
     body = (
       <>
-        Well played - use <a href="https://mistx.io">mistX.io</a> to stay unsandwiched!
+        Well played - use
+        <a href="https://mistx.io" onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}>
+          mistX.io
+        </a>
+        to stay unsandwiched!
       </>
     )
   } else {
     title = 'Uh-oh!'
     body = (
       <>
-        You&apos;ve been sandwiched, wtf were you thinking! Next time use <a href="https://mistx.io">mistX.io</a>
+        You&apos;ve been sandwiched, wtf were you thinking! Next time use{' '}
+        <a href="https://mistx.io" onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}>
+          mistX.io
+        </a>
       </>
     )
   }
