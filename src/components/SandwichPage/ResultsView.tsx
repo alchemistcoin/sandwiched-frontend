@@ -44,7 +44,7 @@ const PageHeader = (x: number) => {
     title = 'Uh-oh!'
     body = (
       <>
-        You&apos;ve been sandwiched, wtf were you thinking! Next time use <a href="http://mistx.io">mistX.io</a>
+        You&apos;ve been sandwiched, wtf were you thinking! Next time use <a href="https://mistx.io">mistX.io</a>
       </>
     )
   }
