@@ -10,11 +10,28 @@ type SummaryCardProps = {
   backgroundColor?: string
   loading?: boolean
   error?: boolean
+  selectBestSandwich?: Function
 }
 
-const SummaryCard = ({ image, title, value, backgroundColor, valueColor, loading, error }: SummaryCardProps) => {
+const SummaryCard = ({
+  image,
+  title,
+  value,
+  backgroundColor,
+  valueColor,
+  loading,
+  error,
+  selectBestSandwich,
+}: SummaryCardProps) => {
   return (
-    <StyledSummaryCard>
+    <StyledSummaryCard
+      className={selectBestSandwich ? 'clickable' : ''}
+      onClick={() => {
+        if (selectBestSandwich) {
+          selectBestSandwich()
+        }
+      }}
+    >
       <div className="statusIcon">
         <img
           style={{ visibility: 'hidden' }} // Remain Hidden until this icon has a function

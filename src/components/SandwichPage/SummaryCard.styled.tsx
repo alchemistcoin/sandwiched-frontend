@@ -8,6 +8,24 @@ const StyledSummaryCard = styled.div`
   background: #fcfcfc;
   box-shadow: 0px 0px 2px rgba(40, 41, 61, 0.04), 0px 4px 8px rgba(96, 97, 112, 0.16);
   border-radius: 30px;
+  &.clickable {
+    cursor: pointer;
+    &:hover {
+      filter: brightness(0.9);
+      box-shadow: 0px 0px 2px rgba(217, 106, 25, 0.6), 0px 4px 8px rgba(217, 106, 25, 0.7);
+    }
+
+    &:focus {
+      transition: box-shadow 50ms;
+    }
+
+    &:active {
+      filter: brightness(0.8);
+      box-shadow: 0px 0px 4px rgba(217, 106, 25, 0.8), 0px 6px 10px rgba(217, 106, 25, 0.9);
+    }
+
+    transition-duration: 150ms;
+  }
 
   .statusIcon {
     text-align: right;
