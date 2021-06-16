@@ -26,4 +26,14 @@ export const StyledModalMain = styled.div`
   padding: 0 25px 25px;
   box-sizing: border-box;
   color: rgb(var(--color-text));
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0 0 10px;
+  }
+  p {
+    font-size: 16px;
+  }
 `

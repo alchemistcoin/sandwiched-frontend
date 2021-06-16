@@ -8,7 +8,12 @@ const FAQ = (): React.ReactElement => (
       sandwiching your trades.
     </p>
     <h4>Who made this?</h4>
-    <p>sandwiched.wtf is a community project by Alchemist.</p>
+    <p>
+      sandwiched.wtf is a community project by{' '}
+      <a href="https://docs.alchemist.wtf" target="_blank" rel="noreferrer">
+        Alchemist.
+      </a>
+    </p>
     <h4>What is a sandwich?</h4>
     <p>
       A sandwich is a pair of bot-inserted trades that wrap your regular trade on a DEX like Uniswap. By doing this, the
@@ -19,7 +24,7 @@ const FAQ = (): React.ReactElement => (
       Currently we only search trades on uniswap v2. We will soon add more; please follow{' '}
       <a href="https://twitter.com/@sandwichedwtf" target="_blank" rel="noreferrer">
         @sandwichedwtf
-      </a>
+      </a>{' '}
       on twitter to track updates.
     </p>
     <h4>How do I avoid being sandwiched?</h4>
