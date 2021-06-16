@@ -9,7 +9,7 @@ const FAQ = (): React.ReactElement => (
     </p>
     <h4>Who made this?</h4>
     <p>
-      sandwiched.wtf is a community project by{' '}
+      Sandwiched.wtf is a community project by{' '}
       <a href="https://docs.alchemist.wtf" target="_blank" rel="noreferrer">
         Alchemist.
       </a>
@@ -18,7 +18,7 @@ const FAQ = (): React.ReactElement => (
     <p>
       A sandwich is a pair of bot-inserted trades that wrap your regular trade on a DEX like Uniswap. By doing this, the
       bot/attacker can make a profit at your expense. For more information, see{' '}
-      <a href="https://alchemistcoin.medium.com/f3123a7d409b" target="_blank" rel="noreferrer">
+      <a href="https://medium.com/@alchemistcoin/sandwiched.wtf-f3123a7d409b" target="_blank" rel="noreferrer">
         this article
       </a>
       .
