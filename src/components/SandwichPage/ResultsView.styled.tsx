@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import backgroundSvg from '../../assets/background.svg'
 
 export const StyledResultsView = styled.div`
-  margin-top: 10vh;
   //height: 100vh;
   display: flex;
   flex-direction: column;
@@ -153,14 +152,15 @@ export const StyledAttributesItem = styled.span`
 
 export const StyledCTAButton = styled.a`
   cursor: pointer;
-  border: none;
-  border-radius: 69px;
+  box-shadow: 0px 10px 16px rgba(199, 150, 3, 0.24);
+  border-radius: 16px;
   background-color: rgb(var(--color-primary));
-  width: 317px;
+  width: 342px;
   height: 54px;
   //styleName: Heading 6;
+  color: #836303;
   font-family: Poppins;
-  font-size: 16px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: 54px;
@@ -168,7 +168,6 @@ export const StyledCTAButton = styled.a`
   text-align: center;
   text-decoration: none;
   margin-top: 1.5rem;
-  color: #fff;
   &:hover {
     filter: brightness(0.9);
   }

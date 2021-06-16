@@ -14,6 +14,7 @@ import {
 import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
 import statusIcon from '../../assets/status-icon.svg'
+import { TwitterFill } from 'akar-icons'
 import SummaryTotalProfitSandwiches from '../../assets/summary-total-profit-sandwiches.svg'
 import SummaryTotalSandwiches from '../../assets/summary-total-sandwiches.svg'
 import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
@@ -58,7 +59,7 @@ const PageHeader = (x: number) => {
 
   return (
     <StyledPageHeader>
-      <img src={sandwichPotion} />
+      {/*<img src={sandwichPotion} />*/}
       <h1>{title}</h1>
       <p>{body}</p>
     </StyledPageHeader>
@@ -119,7 +120,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
         <SummaryCard
           image={SummaryBestSandwich}
           backgroundColor={'#fdf0ca'}
-          title={'juiciest'}
+          title={'worst sandwich'}
           value={juiciestEthSandwich?.profit?.toFixed(2) + ' ETH'}
           valueColor={'#D96A19'}
           loading={juiciestEthSandwich.profit === null}
@@ -136,7 +137,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
         <SummaryCard
           image={SummaryTotalProfitSandwiches}
           backgroundColor={'#F9EEE5'}
-          title={'total profit made'}
+          title={'total loss'}
           value={totalEthProfit + ' ETH' || '?'}
           valueColor={totalEthProfit && totalEthProfit <= 0 ? '#22da4a' : '#d96a19'}
           loading={loadingTotalEthProfit}
@@ -147,12 +148,13 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
         href={twitterShareLink(totalSandwiches, totalEthProfit || 0, juiciestEthSandwich.profit)}
         target="_blank"
       >
-        Spread the word on Twitter!
+        <TwitterFill style={{ display: 'inline', verticalAlign: 'middle', marginRight: '1rem' }} size={24} />
+        Share your sandwiches
       </StyledCTAButton>
       <StyledDetailedTableContainer>
         <MaterialTable
           style={{
-            paddingTop: 50,
+            paddingTop: 30,
             width: '100%',
             borderTopLeftRadius: '25px',
             borderTopRightRadius: '25px',
