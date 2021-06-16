@@ -88,7 +88,7 @@ const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: nu
 }
 
 const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
-  const { fetchData, totalEthProfit, loadingTotalEthProfit, totalEthProfitError } = useCoinData()
+  const { fetchData, totalEthProfit, juiciestEthSandwich, loadingTotalEthProfit, totalEthProfitError } = useCoinData()
 
   useEffect(() => {
     if (fetchingComplete) {
@@ -106,21 +106,6 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
     }
   }
   // Prep Data for Summary Tables
-  let bestSandwich: AnyShape | null = null
-  let bestSandwichValue: string = ''
-  if (fetchingComplete) {
-    bestSandwich = data.reduce((prev, curr) => {
-      // TODO: find a better way to grab a records profit data (maybe combine, maybe take the max, or maybe one of them is always preferred?)
-      const prevProfit = prev.profit?.amount || prev.profit2?.amount || 0
-      const currProfit = curr.profit?.amount || curr.profit2?.amount || 0
-      return Number(prevProfit) >= Number(currProfit) ? prev : curr
-    })
-
-    bestSandwichValue =
-      bestSandwich && bestSandwich.profit
-        ? `${new Decimal(bestSandwich?.profit?.amount).toSignificantDigits(5)} ${bestSandwich?.profit?.currency}`
-        : ''
-  }
   const totalSandwiches = data.filter((rec) => {
     return messageIsSandwich(rec)
   }).length
@@ -135,9 +120,9 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryBestSandwich}
           backgroundColor={'#fdf0ca'}
           title={'juiciest'}
-          value={bestSandwichValue}
+          value={juiciestEthSandwich?.profit?.toFixed(2) + ' ETH'}
           valueColor={'#D96A19'}
-          loading={bestSandwichValue === ''}
+          loading={juiciestEthSandwich.profit === null}
           selectBestSandwich={() => {
             scrollToBestSandwich()
           }}
@@ -158,7 +143,10 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           error={totalEthProfitError}
         />
       </StyledSummarySandwichTableWrapper>
-      <StyledCTAButton href={twitterShareLink(totalSandwiches, totalEthProfit || 0, bestSandwichValue)} target="_blank">
+      <StyledCTAButton
+        href={twitterShareLink(totalSandwiches, totalEthProfit || 0, juiciestEthSandwich.profit)}
+        target="_blank"
+      >
         Spread the word on Twitter!
       </StyledCTAButton>
       <StyledDetailedTableContainer>
@@ -215,7 +203,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'Profit earned',
               field: 'profit',
               render: (rowData) => {
-                const isBestSandwichRow = bestSandwich && bestSandwich.target.tx === rowData.targetTx
+                const isBestSandwichRow = juiciestEthSandwich && juiciestEthSandwich.targetTx === rowData.targetTx
                 const BestSandwichScrollToMarker = () => (
                   <div
                     ref={isBestSandwichRow ? bestSandwichRef : undefined}
@@ -265,12 +253,9 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               paddingBottom: '20px',
             },
             rowStyle: (rowData) => {
-              // @ts-ignore
-              if (rowData.targetTx === bestSandwich && bestSandwich.target.tx) {
-                // create reference to row
-              }
               return {
-                backgroundColor: bestSandwich && bestSandwich.target.tx === rowData.targetTx ? '#F9EEE5' : '#FFF',
+                backgroundColor:
+                  juiciestEthSandwich && juiciestEthSandwich.targetTx === rowData.targetTx ? '#F9EEE5' : '#FFF',
                 fontSize: '14px',
                 lineHeight: '24px',
                 borderBottom: '0px',
