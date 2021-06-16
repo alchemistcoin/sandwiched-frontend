@@ -3,6 +3,7 @@
 }
 import React, { useEffect, useRef, useState } from 'react'
 import sandwichPotion from '../../assets/sandwich-potion.svg'
+import backgroundSvg from '../../assets/background.svg'
 import {
   StyledResultsView,
   StyledPageHeader,
