@@ -17,7 +17,11 @@ const FAQ = (): React.ReactElement => (
     <h4>What is a sandwich?</h4>
     <p>
       A sandwich is a pair of bot-inserted trades that wrap your regular trade on a DEX like Uniswap. By doing this, the
-      bot/attacker can make a profit at your expense. For more information, see medium article.
+      bot/attacker can make a profit at your expense. For more information, see{' '}
+      <a href="https://alchemistcoin.medium.com/f3123a7d409b" target="_blank" rel="noreferrer">
+        this article
+      </a>
+      .
     </p>
     <h4>Do you track sandwiches on all exchanges?</h4>
     <p>
