@@ -100,7 +100,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
   // references
   let bestSandwichRef = useRef(null)
   const scrollToBestSandwich = () => {
-    if (bestSandwichRef) {
+    if (bestSandwichRef && bestSandwichRef.current) {
       // @ts-ignore
       bestSandwichRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
       // @ts-ignore
