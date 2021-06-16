@@ -6,6 +6,7 @@ import { StyledModalHeader, StyledModalMain } from './Modal.styled'
 
 const StyledModal = Modal.styled`
   max-width: 600px;
+  max-height: calc(100vh - 40px);
   width: calc(100% - 30px);
   display: flex;
   background-color: #fff;
@@ -15,6 +16,7 @@ const StyledModal = Modal.styled`
   box-sizing: border-box; 
   display: flex;
   flex-direction: column;
+  overflow: auto;
 `
 
 interface ModalProps {
