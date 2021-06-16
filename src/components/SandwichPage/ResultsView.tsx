@@ -37,7 +37,7 @@ const PageHeader = (x: number) => {
     // body = 'Well played - use mistX.io to stay unsandwiched!'
     body = (
       <>
-        Well played - use <a href="http://mistx.io">mistX.io</a> to stay unsandwiched!
+        Well played - use <a href="https://mistx.io">mistX.io</a> to stay unsandwiched!
       </>
     )
   } else {
