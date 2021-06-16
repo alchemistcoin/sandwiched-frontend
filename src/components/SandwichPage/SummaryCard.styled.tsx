@@ -14,7 +14,6 @@ const StyledSummaryCard = styled.div`
       filter: brightness(0.9);
       box-shadow: 0px 0px 2px rgba(217, 106, 25, 0.6), 0px 4px 8px rgba(217, 106, 25, 0.7);
     }
-
     &:focus {
       transition: box-shadow 50ms;
     }
@@ -41,7 +40,6 @@ const StyledSummaryCard = styled.div`
     height: 110px;
     border-radius: 70px;
   }
-
   .centeredContent {
     margin-top: 0px;
     margin-bottom: 32px;
