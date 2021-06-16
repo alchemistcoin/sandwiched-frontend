@@ -15,6 +15,14 @@ const FAQ = (): React.ReactElement => (
       bot/attacker can make a profit at your expense. For more information, see medium article.
     </p>
     <h4>Do you track sandwiches on all exchanges?</h4>
+    <p>
+      Currently we only search trades on uniswap v2. We will soon add more; please follow{' '}
+      <a href="https://twitter.com/@sandwichedwtf" target="_blank" rel="noreferrer">
+        @sandwichedwtf
+      </a>
+      on twitter to track updates.
+    </p>
+    <h4>How do I avoid being sandwiched?</h4>
     <p>Use mistX.io for protection against front-running and sandwich trades.</p>
   </>
 )
