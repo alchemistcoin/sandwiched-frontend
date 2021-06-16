@@ -32,7 +32,13 @@ const FAQ = (): React.ReactElement => (
       on twitter to track updates.
     </p>
     <h4>How do I avoid being sandwiched?</h4>
-    <p>Use mistX.io for protection against front-running and sandwich trades.</p>
+    <p>
+      Use{' '}
+      <a href="https://mistx.io" target="_blank" rel="noreferrer">
+        mistX.io
+      </a>{' '}
+      for protection against front-running and sandwich trades.
+    </p>
   </>
 )
 
