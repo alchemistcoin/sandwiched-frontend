@@ -102,7 +102,7 @@ export const StyledPageHeader = styled.div`
 `
 
 export const StyledDetailedTableContainer = styled.div`
-  margin: 60px 0;
+  margin: 30px 0;
   width: 100%;
   padding: 0 60px;
   box-sizing: border-box;
