@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const StyledLandingPage = styled.div`
-  margin-top: 4rem;
+  margin: 4rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,6 +10,7 @@ const StyledLandingPage = styled.div`
 export const StyledMainTextBox = styled.div`
   color: rgb(var(--color-text));
   margin-top: 10px;
+  margin-bottom: 50px;
   padding: 0px 40px;
   //display: flex;
   //flex-direction: column;
@@ -42,6 +43,7 @@ export const StyledPrimaryButton = styled.button`
   line-height: 22px;
   letter-spacing: 0em;
   text-align: center;
+  margin-bottom: 20px;
 
   &:hover {
     filter: brightness(0.9);
