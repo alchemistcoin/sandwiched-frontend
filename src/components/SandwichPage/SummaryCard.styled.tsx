@@ -3,11 +3,16 @@ import styled from 'styled-components'
 const StyledSummaryCard = styled.div`
   padding: 18px;
   width: 195px;
-  height: 229px;
+  height: auto;
   background-color: #ffbf00;
   background: #fcfcfc;
   box-shadow: 0px 0px 2px rgba(40, 41, 61, 0.04), 0px 4px 8px rgba(96, 97, 112, 0.16);
   border-radius: 30px;
+
+  @media only screen and (max-width: 600px) {
+    margin-bottom: 30px;
+  }
+
   &.clickable {
     cursor: pointer;
     &:hover {
@@ -42,7 +47,7 @@ const StyledSummaryCard = styled.div`
   }
   .centeredContent {
     margin-top: 0px;
-    margin-bottom: 32px;
+    margin-bottom: 10px;
     height: 100%;
     display: flex;
     flex-direction: column;

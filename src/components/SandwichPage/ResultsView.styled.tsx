@@ -7,8 +7,10 @@ export const StyledResultsView = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 20px;
   // background-image: url(${backgroundSvg});
   // background-size: cover;
+
   h1 {
     font-family: Poppins;
     font-style: normal;
@@ -21,11 +23,16 @@ export const StyledResultsView = styled.div`
   }
 `
 export const StyledSummarySandwichTableWrapper = styled.div`
-  min-width: 1024px;
+  max-width: 1024px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 export const StyledSummarySandwichList = styled.div`
   padding: 2px;
@@ -89,6 +96,10 @@ export const StyledPageHeader = styled.div`
     line-height: 54px;
     letter-spacing: 0em;
     text-align: center;
+
+    @media only screen and (max-width: 600px) {
+      margin-top: 50px;
+    }
   }
   p {
     font-family: Poppins;
@@ -113,6 +124,11 @@ export const StyledDetailedTableContainer = styled.div`
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   //padding-bottom: 32px;
+
+  @media only screen and (max-width: 600px) {
+    padding: 0;
+  }
+
   .MuiTableCell-footer {
     background-color: rgb(var(--color-primary));
   }
