@@ -122,9 +122,9 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           image={SummaryBestSandwich}
           backgroundColor={'#fdf0ca'}
           title={'worst sandwich'}
-          value={juiciestEthSandwich?.profit?.toFixed(2) + ' ETH'}
+          value={juiciestEthSandwich?.profit ? juiciestEthSandwich?.profit?.toFixed(2) + ' ETH' : 'None'}
           valueColor={'#D96A19'}
-          loading={juiciestEthSandwich.profit === null}
+          loading={loadingTotalEthProfit}
           selectBestSandwich={() => {
             scrollToBestSandwich()
           }}
