@@ -13,6 +13,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import { getChainData } from './helpers/utilities'
 import { IAssetData } from './helpers/types'
 import { Helmet } from 'react-helmet'
+import GlobalStyle from './styles/global'
 const META_DESCRIPTION =
   'Find out how much $$$ has been drained from your wallet by unsuspected sandwich transactions. Sandwiched is bringing transparency to the rampant MEV occuring on the most popular DEXs.'
 const META_TITLE = 'Sandwiched.wtf'
@@ -224,6 +225,7 @@ class App extends React.Component<any, any> {
           <meta property="twitter:description" content={META_DESCRIPTION} />
         </Helmet>
         {/* Router */}
+        <GlobalStyle />
         <ModalProvider backgroundComponent={SpecialModalBackground}>
           <Router>
             <Switch>
