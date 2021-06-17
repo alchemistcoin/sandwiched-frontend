@@ -206,7 +206,7 @@ class App extends React.Component<any, any> {
         className="App"
         style={{
           backgroundImage: `url(${backgroundSvg})`,
-          backgroundSize: 'cover',
+          backgroundSize: '100% auto',
           minHeight: '100vh',
         }}
       >
