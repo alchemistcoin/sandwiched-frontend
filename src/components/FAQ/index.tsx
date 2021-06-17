@@ -39,6 +39,24 @@ const FAQ = (): React.ReactElement => (
       </a>{' '}
       for protection against front-running and sandwich trades.
     </p>
+    <h4>How do you compute the total loss?</h4>
+    <p>
+      The total loss number (right-hand card) is the sum of all sandwich bot profits. ETH profits are added as-is, and
+      other tokens are converted to ETH, at the current rates using the Coingecko APIs (thanks Coingecko!). This means
+      that total loss can vary over time for the same set of sandwiches.
+    </p>
+    <h4>Is this open source?</h4>
+    <p>
+      Of course! Checkout our{' '}
+      <a href="https://github.com/alchemistcoin/sandwiched-frontend" target="_blank" rel="noreferrer">
+        frontend
+      </a>{' '}
+      and{' '}
+      <a href="https://github.com/alchemistcoin/sandwiched-backend" target="_blank" rel="noreferrer">
+        backend
+      </a>{' '}
+      repos on GitHub. While you&apos;re there, a star would be welcome.
+    </p>
   </>
 )
 
