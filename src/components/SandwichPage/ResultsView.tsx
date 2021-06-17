@@ -203,7 +203,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               sorting: false,
             },
             {
-              title: 'Profit earned',
+              title: 'Sandwich loss',
               field: 'profit',
               render: (rowData) => {
                 const isBestSandwichRow = juiciestEthSandwich && juiciestEthSandwich.targetTx === rowData.targetTx
