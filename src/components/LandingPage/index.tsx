@@ -98,7 +98,7 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
             value={inputVal}
             onChange={(e: any) => setInputVal(e.target.value)}
             required
-            placeholder="Enter Wallet Address"
+            placeholder="Enter Wallet or ENS Address"
           />
           <StyledPrimaryButton type="submit">Submit</StyledPrimaryButton>
         </StyledAddressForm>
