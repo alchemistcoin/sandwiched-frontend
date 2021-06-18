@@ -120,10 +120,8 @@ export const StyledDetailedTableContainer = styled.div`
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
-  //margin-top: 60px;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-  //padding-bottom: 32px;
 
   @media only screen and (max-width: 600px) {
     padding: 0;

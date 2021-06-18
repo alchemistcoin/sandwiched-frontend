@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 const StyledHeader = styled.header`
   padding: 34px 40px;
-  height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
