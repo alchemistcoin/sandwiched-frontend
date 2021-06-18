@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import StyledLandingPage, { StyledMainTextBox, StyledPrimaryButton } from './LandingPage.styled'
+import StyledLandingPage, {
+  StyledMainTextBox,
+  StyledPrimaryButton,
+  StyledManualAddress,
+  StyledAddressForm,
+} from './LandingPage.styled'
+import Modal from '../../components/Modal'
 import LogoSvg from '../../assets/logo.svg'
 import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
@@ -32,6 +38,9 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
   let history = useHistory()
   let location = useLocation()
 
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [inputVal, setInputVal] = useState('')
+
   const [metaDesc, setMetaDesc] = useState(constructMetaDescription(location.search))
   // Send user to sandwich look up if wallet is connected
   useEffect(() => {
@@ -44,8 +53,13 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
     setMetaDesc(constructMetaDescription(location.search))
   }, [location.search])
 
+  const manualAddressSubmit = () => {
+    if (inputVal) {
+      history.push(`/${inputVal}`)
+    }
+  }
+
   return (
-    // <Container>
     <StyledLandingPage>
       {metaDesc ? (
         <Helmet>
@@ -76,8 +90,20 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
       >
         Connect Wallet
       </StyledPrimaryButton>
+      <StyledManualAddress onClick={() => setModalOpen(true)}>Or enter manually</StyledManualAddress>
+      <Modal open={isModalOpen} setModalOpen={setModalOpen} title="Enter Manual Address">
+        <StyledAddressForm onSubmit={() => manualAddressSubmit()}>
+          <input
+            type="text"
+            value={inputVal}
+            onChange={(e: any) => setInputVal(e.target.value)}
+            required
+            placeholder="Wallet Address"
+          />
+          <StyledPrimaryButton type="submit">Submit</StyledPrimaryButton>
+        </StyledAddressForm>
+      </Modal>
     </StyledLandingPage>
-    // </Container>
   )
 }
 export default LandingPage

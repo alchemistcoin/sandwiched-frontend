@@ -10,8 +10,8 @@ const StyledLandingPage = styled.div`
 export const StyledMainTextBox = styled.div`
   color: rgb(var(--color-text));
   margin-top: 10px;
-  margin-bottom: 50px;
-  padding: 0px 40px;
+  margin-bottom: 20px;
+  padding: 0px 20px;
   //display: flex;
   //flex-direction: column;
   //justify-content: space-around;
@@ -44,6 +44,8 @@ export const StyledPrimaryButton = styled.button`
   letter-spacing: 0em;
   text-align: center;
   margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     filter: brightness(0.9);
@@ -59,6 +61,31 @@ export const StyledPrimaryButton = styled.button`
   }
 
   transition-duration: 150ms;
+`
+
+export const StyledManualAddress = styled.div`
+  margin: 10px 0 60px 0;
+  cursor: pointer;
+  font-size: 16px;
+`
+
+export const StyledAddressForm = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    display: flex;
+    width: 100%;
+    background: #e9e9e9;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 0;
+    margin: 20px 0;
+  }
 `
 
 export default StyledLandingPage
