@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { ModalProvider, BaseModalBackground } from 'styled-react-modal'
 import SandwichPage from './components/SandwichPage'
 import Web3Modal from 'web3modal'
+import Torus from '@toruslabs/torus-embed'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { getChainData } from './helpers/utilities'
 import { IAssetData } from './helpers/types'
@@ -167,9 +168,9 @@ class App extends React.Component<any, any> {
           infuraId: process.env.REACT_APP_INFURA_ID,
         },
       },
-      // torus: {
-      //   package: Torus
-      // },
+      torus: {
+        package: Torus,
+      },
       // fortmatic: {
       //   package: Fortmatic,
       //   options: {
