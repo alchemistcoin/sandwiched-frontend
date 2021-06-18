@@ -90,15 +90,15 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
       >
         Connect Wallet
       </StyledPrimaryButton>
-      <StyledManualAddress onClick={() => setModalOpen(true)}>Or enter manually</StyledManualAddress>
-      <Modal open={isModalOpen} setModalOpen={setModalOpen} title="Enter Manual Address">
+      <StyledManualAddress onClick={() => setModalOpen(true)}>Manually enter a wallet address</StyledManualAddress>
+      <Modal open={isModalOpen} setModalOpen={setModalOpen} title="Enter a wallet address to continue">
         <StyledAddressForm onSubmit={() => manualAddressSubmit()}>
           <input
             type="text"
             value={inputVal}
             onChange={(e: any) => setInputVal(e.target.value)}
             required
-            placeholder="Wallet Address"
+            placeholder="Enter Wallet Address"
           />
           <StyledPrimaryButton type="submit">Submit</StyledPrimaryButton>
         </StyledAddressForm>

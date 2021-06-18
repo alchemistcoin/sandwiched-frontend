@@ -66,7 +66,9 @@ export const StyledPrimaryButton = styled.button`
 export const StyledManualAddress = styled.div`
   margin: 10px 0 60px 0;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
+  color: #836303;
+  font-weight: bold;
 `
 
 export const StyledAddressForm = styled.form`
