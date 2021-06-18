@@ -13,7 +13,7 @@ const StyledConnectWalletWithStatusButton = styled.button`
   }
   color: rgb(var(--color-text));
   border-radius: 8px;
-  width: 120px;
+  width: 160px;
   height: 32px;
   font-size: 10px;
   font-weight: 500;
