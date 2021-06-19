@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import StyledLandingPage, {
-  StyledMainTextBox,
-  StyledPrimaryButton,
-  StyledManualAddress,
-  StyledAddressForm,
-} from './LandingPage.styled'
+import StyledLandingPage, { StyledMainTextBox, StyledPrimaryButton } from './LandingPage.styled'
+import EthAddressForm from '../common/EthAddressForm'
 import Modal from '../../components/Modal'
 import LogoSvg from '../../assets/logo.svg'
 import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import { CircleChevronRightFill } from 'akar-icons'
 
 interface LandingPageProps {
   onConnect: Function
@@ -53,12 +50,6 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
     setMetaDesc(constructMetaDescription(location.search))
   }, [location.search])
 
-  const manualAddressSubmit = () => {
-    if (inputVal) {
-      history.push(`/${inputVal}`)
-    }
-  }
-
   return (
     <StyledLandingPage>
       {metaDesc ? (
@@ -90,19 +81,8 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
       >
         Connect Wallet
       </StyledPrimaryButton>
-      <StyledManualAddress onClick={() => setModalOpen(true)}>Manually enter a wallet address</StyledManualAddress>
-      <Modal open={isModalOpen} setModalOpen={setModalOpen} title="Enter a wallet address to continue">
-        <StyledAddressForm onSubmit={() => manualAddressSubmit()}>
-          <input
-            type="text"
-            value={inputVal}
-            onChange={(e: any) => setInputVal(e.target.value)}
-            required
-            placeholder="Enter Wallet or ENS Address"
-          />
-          <StyledPrimaryButton type="submit">Submit</StyledPrimaryButton>
-        </StyledAddressForm>
-      </Modal>
+      {/*EthAddressForm*/}
+      <EthAddressForm />
     </StyledLandingPage>
   )
 }

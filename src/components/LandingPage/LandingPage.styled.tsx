@@ -63,31 +63,4 @@ export const StyledPrimaryButton = styled.button`
   transition-duration: 150ms;
 `
 
-export const StyledManualAddress = styled.div`
-  margin: 10px 0 60px 0;
-  cursor: pointer;
-  font-size: 14px;
-  color: #836303;
-  font-weight: bold;
-`
-
-export const StyledAddressForm = styled.form`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  input {
-    display: flex;
-    width: 100%;
-    background: #e9e9e9;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 15px;
-    border: 0;
-    margin: 20px 0;
-  }
-`
-
 export default StyledLandingPage
