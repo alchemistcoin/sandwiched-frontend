@@ -159,7 +159,7 @@ export const ButtonsGroup = styled.div`
   max-width: 1024px;
   @media only screen and (max-width: 864px) {
     flex-direction: column;
-    height: 160px;
+    height: 150px;
   }
 `
 export const StyledAttributesItem = styled.span`

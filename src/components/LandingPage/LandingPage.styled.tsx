@@ -34,6 +34,7 @@ export const StyledButtonsContainer = styled.div`
   width: 872px;
   @media only screen and (max-width: 864px) {
     flex-direction: column;
+    height: 200px;
   }
 `
 

@@ -16,7 +16,6 @@ export default styled.button`
   line-height: 28px;
   letter-spacing: 0em;
   text-align: center;
-  margin-bottom: 20px;
   align-items: center;
   justify-content: center;
 
