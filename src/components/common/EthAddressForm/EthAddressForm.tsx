@@ -4,7 +4,12 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import PrimaryButton from '../PrimaryButton'
 
-const EthAddressForm = ({ ...props }) => {
+type EthAddressFormProps = {
+  inputPlaceholder?: string
+  className?: string
+}
+
+const EthAddressForm = ({ inputPlaceholder = 'Enter Wallet Address or ENS', ...props }: EthAddressFormProps) => {
   const [inputVal, setInputVal] = useState()
   let history = useHistory()
 
@@ -23,7 +28,7 @@ const EthAddressForm = ({ ...props }) => {
           value={inputVal}
           onChange={(e: any) => setInputVal(e.target.value)}
           required
-          placeholder="Enter Wallet Address"
+          placeholder={inputPlaceholder}
         />
       </div>
       <PrimaryButton

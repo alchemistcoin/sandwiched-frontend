@@ -178,18 +178,18 @@ export const StyledAttributesItem = styled.span`
 
 export const StyledCTAButton = styled.a`
   cursor: pointer;
-  box-shadow: 0px 10px 16px rgba(199, 150, 3, 0.24);
+  box-shadow: 0px 10px 16px #cae6fa;
   border-radius: 16px;
-  background-color: rgb(var(--color-primary));
+  background-color: #41afff;
   width: 362px;
   height: 60px;
   //styleName: Heading 6;
-  color: #836303;
+  color: #fff;
   font-family: Poppins;
   font-size: 20px;
   font-style: normal;
-  font-weight: 700;
-  line-height: 54px;
+  font-weight: 600;
+  line-height: 58px;
   letter-spacing: 0em;
   text-align: center;
   text-decoration: none;

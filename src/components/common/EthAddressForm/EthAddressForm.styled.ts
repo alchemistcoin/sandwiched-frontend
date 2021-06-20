@@ -5,6 +5,11 @@ export const StyledAddressForm = styled.form`
   border-radius: 16px;
   background: #e9e9e9;
   display: flex;
+
+  &.small {
+    height: 60px;
+    width: 394px;
+  }
   .input-wrapper {
     flex: 1;
     margin-left: 20px;
