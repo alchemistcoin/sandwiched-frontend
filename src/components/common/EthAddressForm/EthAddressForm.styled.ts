@@ -19,7 +19,7 @@ export const StyledAddressForm = styled.form`
     background-color: #c4c4c4;
   }
   input {
-    height: 72px;
+    height: 100%;
     width: 100%;
     border: 0;
     display: inline;
@@ -45,5 +45,13 @@ export const StyledAddressForm = styled.form`
     float: right;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
+  }
+  &.small {
+    .input-wrapper {
+      height: 60px;
+    }
+    button {
+      height: 60px;
+    }
   }
 `

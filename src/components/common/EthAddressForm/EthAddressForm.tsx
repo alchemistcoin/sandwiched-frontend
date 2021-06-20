@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import PrimaryButton from '../PrimaryButton'
 
-const EthAddressForm = () => {
+const EthAddressForm = ({ ...props }) => {
   const [inputVal, setInputVal] = useState()
   let history = useHistory()
 
@@ -15,7 +15,7 @@ const EthAddressForm = () => {
   }
 
   return (
-    <StyledAddressForm onSubmit={() => manualAddressSubmit()}>
+    <StyledAddressForm onSubmit={() => manualAddressSubmit()} {...props}>
       <div className={'input-wrapper'}>
         <div className="rectangle" />
         <input

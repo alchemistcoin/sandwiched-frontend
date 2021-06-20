@@ -11,7 +11,9 @@ import {
   StyledDetailedTableContainer,
   StyledAttributesItem,
   StyledCTAButton,
+  ButtonsGroup,
 } from './ResultsView.styled'
+import EthAddressForm from '../common/EthAddressForm'
 import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
 import statusIcon from '../../assets/status-icon.svg'
@@ -145,13 +147,16 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           error={totalEthProfitError}
         />
       </StyledSummarySandwichTableWrapper>
-      <StyledCTAButton
-        href={twitterShareLink(totalSandwiches, totalEthProfit || 0, juiciestEthSandwich.profit)}
-        target="_blank"
-      >
-        <TwitterFill style={{ display: 'inline', verticalAlign: 'middle', marginRight: '1rem' }} size={24} />
-        Share your sandwiches
-      </StyledCTAButton>
+      <ButtonsGroup>
+        <StyledCTAButton
+          href={twitterShareLink(totalSandwiches, totalEthProfit || 0, juiciestEthSandwich.profit)}
+          target="_blank"
+        >
+          <TwitterFill style={{ display: 'inline', verticalAlign: 'middle', marginRight: '1rem' }} size={24} />
+          Share your sandwiches
+        </StyledCTAButton>
+        <EthAddressForm className="small" />
+      </ButtonsGroup>
       <StyledDetailedTableContainer>
         <MaterialTable
           style={{
