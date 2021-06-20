@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import StyledLandingPage, { StyledMainTextBox, StyledPrimaryButton } from './LandingPage.styled'
+import StyledLandingPage, { StyledMainTextBox, StyledButtonsContainer } from './LandingPage.styled'
 import EthAddressForm from '../common/EthAddressForm'
-import Modal from '../../components/Modal'
+import PrimaryButton from '../common/PrimaryButton'
 import LogoSvg from '../../assets/logo.svg'
 import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import { CircleChevronRightFill } from 'akar-icons'
 
 interface LandingPageProps {
   onConnect: Function
@@ -71,18 +70,22 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
         <p>Did you know, you might have some unsuspected transactions, which might be draining away your wallet?</p>
         <p>We help you scan and find those sandwiches in your transactions.</p>
       </StyledMainTextBox>
-      <StyledPrimaryButton
-        onClick={async () => {
-          const { address, connected } = await onConnect()
-          if (connected) {
-            history.push(`/${address}`)
-          }
-        }}
-      >
-        Connect Wallet
-      </StyledPrimaryButton>
-      {/*EthAddressForm*/}
-      <EthAddressForm />
+
+      <StyledButtonsContainer>
+        <PrimaryButton
+          onClick={async () => {
+            const { address, connected } = await onConnect()
+            if (connected) {
+              history.push(`/${address}`)
+            }
+          }}
+        >
+          Connect Wallet
+        </PrimaryButton>
+        <div>OR</div>
+        {/*EthAddressForm*/}
+        <EthAddressForm />
+      </StyledButtonsContainer>
     </StyledLandingPage>
   )
 }

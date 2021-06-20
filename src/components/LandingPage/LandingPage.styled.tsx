@@ -27,40 +27,14 @@ export const StyledMainTextBox = styled.div`
     margin-top: 30px;
   }
 `
-
-export const StyledPrimaryButton = styled.button`
-  cursor: pointer;
-  border: none;
-  border-radius: 69px;
-  background-color: rgb(var(--color-primary));
-  width: 317px;
-  height: 54px;
-  //styleName: Heading 6;
-  font-family: Poppins;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
-  letter-spacing: 0em;
-  text-align: center;
-  margin-bottom: 20px;
+export const StyledButtonsContainer = styled.div`
+  display: flex;
   align-items: center;
-  justify-content: center;
-
-  &:hover {
-    filter: brightness(0.9);
+  justify-content: space-around;
+  width: 872px;
+  @media only screen and (max-width: 864px) {
+    flex-direction: column;
   }
-
-  &:focus {
-    box-shadow: 0 0 6px 0 rgba(var(--color-primary));
-    transition: box-shadow 50ms;
-  }
-
-  &:active {
-    filter: brightness(0.8);
-  }
-
-  transition-duration: 150ms;
 `
 
 export default StyledLandingPage
