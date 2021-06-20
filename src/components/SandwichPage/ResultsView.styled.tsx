@@ -193,6 +193,9 @@ export const StyledCTAButton = styled.a`
   letter-spacing: 0em;
   text-align: center;
   text-decoration: none;
+  @media only screen and (max-width: 864px) {
+    width: 395px;
+  }
   &:hover {
     filter: brightness(0.9);
   }

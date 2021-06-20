@@ -42,20 +42,19 @@ export const StyledAddressForm = styled.form`
   }
   button {
     display: flex;
-    //justify-content: center;
-    //align-items: center;
     width: 89px; // Sensitive Styling here for Firefox and Safari
     height: 72px;
     background-color: rgba(var(--color-primary));
     border: none;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
-    svg {
-    }
   }
   &.small {
     .input-wrapper {
       height: 60px;
+    }
+    input {
+      width: 290px;
     }
     button {
       height: 60px;
