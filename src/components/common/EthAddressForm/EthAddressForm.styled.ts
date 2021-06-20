@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { StyledPrimaryButton } from '../../LandingPage/LandingPage.styled'
 
 export const StyledAddressForm = styled.form`
   width: 368px;

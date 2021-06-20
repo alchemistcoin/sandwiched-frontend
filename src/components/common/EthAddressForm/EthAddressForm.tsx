@@ -2,7 +2,7 @@ import { CircleChevronRightFill } from 'akar-icons'
 import { StyledAddressForm } from './EthAddressForm.styled'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { StyledPrimaryButton } from '../../LandingPage/LandingPage.styled'
+import PrimaryButton from '../PrimaryButton'
 
 const EthAddressForm = () => {
   const [inputVal, setInputVal] = useState()
@@ -26,12 +26,12 @@ const EthAddressForm = () => {
           placeholder="Enter Wallet Address"
         />
       </div>
-      <StyledPrimaryButton
+      <PrimaryButton
         //Style Overrides
         style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0, padding: 0, margin: 0 }}
       >
         <CircleChevronRightFill size={26} style={{ color: '#836303' }} />
-      </StyledPrimaryButton>
+      </PrimaryButton>
     </StyledAddressForm>
   )
 }
