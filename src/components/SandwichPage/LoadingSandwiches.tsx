@@ -1,10 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
-import hamburgers from '../../assets/hamburgers.svg'
 import hamburgerLine from '../../assets/hamburger-line.svg'
 import logoStripped from '../../assets/logo-stripped.svg'
-import errorHamburger from '../../assets/error-hamburger.svg'
-import { StyledPrimaryButton } from '../LandingPage/LandingPage.styled'
+import PrimaryButton from '../common/PrimaryButton'
 import { StyledLoadingSandwichesDisplay, StyledMainTextBox } from './LoadingSandwiches.styled'
 import { useHistory } from 'react-router-dom'
 
@@ -50,7 +47,7 @@ const LoadingSandwichesDisplay = ({
         <h1>{header}</h1>
         <p>{paragraph1}</p>
         {error && (
-          <StyledPrimaryButton
+          <PrimaryButton
             onClick={() => {
               /** If wallet address is bad reset app and send to home page **/
               if (error.toLowerCase().search('bad wallet address') !== -1) {
@@ -62,7 +59,7 @@ const LoadingSandwichesDisplay = ({
             }}
           >
             Retry
-          </StyledPrimaryButton>
+          </PrimaryButton>
         )}
       </StyledMainTextBox>
     </StyledLoadingSandwichesDisplay>

@@ -150,6 +150,18 @@ export const StyledDetailedTableContainer = styled.div`
   }
 `
 
+export const ButtonsGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  width: 812px;
+  max-width: 1024px;
+  @media only screen and (max-width: 864px) {
+    flex-direction: column;
+    height: 150px;
+  }
+`
 export const StyledAttributesItem = styled.span`
   width: 50px;
   height: 30px;
@@ -166,22 +178,21 @@ export const StyledAttributesItem = styled.span`
 
 export const StyledCTAButton = styled.a`
   cursor: pointer;
-  box-shadow: 0px 10px 16px rgba(199, 150, 3, 0.24);
+  box-shadow: 0px 10px 16px #cae6fa;
   border-radius: 16px;
-  background-color: rgb(var(--color-primary));
-  width: 342px;
-  height: 54px;
+  background-color: #41afff;
+  width: 362px;
+  height: 60px;
   //styleName: Heading 6;
-  color: #836303;
+  color: #fff;
   font-family: Poppins;
   font-size: 20px;
   font-style: normal;
-  font-weight: 700;
-  line-height: 54px;
+  font-weight: 600;
+  line-height: 58px;
   letter-spacing: 0em;
   text-align: center;
   text-decoration: none;
-  margin-top: 1.5rem;
   &:hover {
     filter: brightness(0.9);
   }

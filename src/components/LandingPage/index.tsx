@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import StyledLandingPage, {
-  StyledMainTextBox,
-  StyledPrimaryButton,
-  StyledManualAddress,
-  StyledAddressForm,
-} from './LandingPage.styled'
-import Modal from '../../components/Modal'
+import StyledLandingPage, { StyledMainTextBox, StyledButtonsContainer } from './LandingPage.styled'
+import EthAddressForm from '../common/EthAddressForm'
+import PrimaryButton from '../common/PrimaryButton'
 import LogoSvg from '../../assets/logo.svg'
 import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
@@ -53,12 +49,6 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
     setMetaDesc(constructMetaDescription(location.search))
   }, [location.search])
 
-  const manualAddressSubmit = () => {
-    if (inputVal) {
-      history.push(`/${inputVal}`)
-    }
-  }
-
   return (
     <StyledLandingPage>
       {metaDesc ? (
@@ -80,29 +70,22 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
         <p>Did you know, you might have some unsuspected transactions, which might be draining away your wallet?</p>
         <p>We help you scan and find those sandwiches in your transactions.</p>
       </StyledMainTextBox>
-      <StyledPrimaryButton
-        onClick={async () => {
-          const { address, connected } = await onConnect()
-          if (connected) {
-            history.push(`/${address}`)
-          }
-        }}
-      >
-        Connect Wallet
-      </StyledPrimaryButton>
-      <StyledManualAddress onClick={() => setModalOpen(true)}>Manually enter a wallet address</StyledManualAddress>
-      <Modal open={isModalOpen} setModalOpen={setModalOpen} title="Enter a wallet address to continue">
-        <StyledAddressForm onSubmit={() => manualAddressSubmit()}>
-          <input
-            type="text"
-            value={inputVal}
-            onChange={(e: any) => setInputVal(e.target.value)}
-            required
-            placeholder="Enter Wallet or ENS Address"
-          />
-          <StyledPrimaryButton type="submit">Submit</StyledPrimaryButton>
-        </StyledAddressForm>
-      </Modal>
+
+      <StyledButtonsContainer>
+        <PrimaryButton
+          onClick={async () => {
+            const { address, connected } = await onConnect()
+            if (connected) {
+              history.push(`/${address}`)
+            }
+          }}
+        >
+          Connect Wallet
+        </PrimaryButton>
+        <div>OR</div>
+        {/*EthAddressForm*/}
+        <EthAddressForm />
+      </StyledButtonsContainer>
     </StyledLandingPage>
   )
 }
