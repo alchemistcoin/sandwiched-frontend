@@ -155,7 +155,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           <TwitterFill style={{ display: 'inline', verticalAlign: 'middle', marginRight: '1rem' }} size={24} />
           Share your sandwiches
         </StyledCTAButton>
-        <EthAddressForm className="small" inputPlaceholder={'Enter New Wallet Address or ENS to Scan'} />
+        <EthAddressForm className="small" inputPlaceholder={'Enter new wallet address or ENS'} />
       </ButtonsGroup>
       <StyledDetailedTableContainer>
         <MaterialTable

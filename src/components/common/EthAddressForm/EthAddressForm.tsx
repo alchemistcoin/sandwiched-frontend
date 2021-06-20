@@ -9,7 +9,7 @@ type EthAddressFormProps = {
   className?: string
 }
 
-const EthAddressForm = ({ inputPlaceholder = 'Enter Wallet Address or ENS', ...props }: EthAddressFormProps) => {
+const EthAddressForm = ({ inputPlaceholder = 'Enter wallet address or ENS', ...props }: EthAddressFormProps) => {
   const [inputVal, setInputVal] = useState()
   let history = useHistory()
 
