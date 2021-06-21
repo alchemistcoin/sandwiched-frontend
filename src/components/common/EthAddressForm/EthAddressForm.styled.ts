@@ -11,25 +11,26 @@ export const StyledAddressForm = styled.form`
     width: 394px;
   }
   .input-wrapper {
-    flex: 1;
-    margin-left: 20px;
+    // Sensitive Styling here for Firefox and Safari
+    width: 368px;
     height: 72px;
     display: inline;
     background: #e9e9e9;
+    border-radius: 16px;
   }
   .rectangle {
-    display: inline;
+    height: 100%;
     padding: 1.5px;
-    min-height: 24px;
+    margin-left: 20px;
+    margin-right: 5px;
     background-color: #c4c4c4;
   }
   input {
     height: 100%;
-    width: 100%;
+    width: 236px;
     border: 0;
     display: inline;
     background: #e9e9e9;
-    padding: 15px;
     font-size: 18px;
     color: #434343;
 
@@ -41,13 +42,10 @@ export const StyledAddressForm = styled.form`
   }
   button {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 72px;
+    width: 89px; // Sensitive Styling here for Firefox and Safari
     height: 72px;
     background-color: rgba(var(--color-primary));
     border: none;
-    float: right;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
   }
@@ -55,8 +53,12 @@ export const StyledAddressForm = styled.form`
     .input-wrapper {
       height: 60px;
     }
+    input {
+      width: 290px;
+    }
     button {
       height: 60px;
+      width: 69px;
     }
   }
 `

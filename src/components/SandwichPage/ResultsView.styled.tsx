@@ -106,9 +106,18 @@ export const StyledPageHeader = styled.div`
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: 39px;
+    line-height: 38px;
     letter-spacing: 0em;
     text-align: center;
+  }
+  .mistx-link {
+    border: 3px solid rgb(var(--color-primary));
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 2px 16px;
+    color: #836303;
+    font-weight: bold;
+    text-decoration: none;
   }
 `
 
@@ -193,6 +202,9 @@ export const StyledCTAButton = styled.a`
   letter-spacing: 0em;
   text-align: center;
   text-decoration: none;
+  @media only screen and (max-width: 864px) {
+    width: 395px;
+  }
   &:hover {
     filter: brightness(0.9);
   }
