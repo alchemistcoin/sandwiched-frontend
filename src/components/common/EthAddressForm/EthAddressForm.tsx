@@ -21,9 +21,9 @@ const EthAddressForm = ({ inputPlaceholder = 'Enter wallet address or ENS', ...p
 
   return (
     <StyledAddressForm onSubmit={() => manualAddressSubmit()} {...props}>
-      {/*<span style={{ width: 100, backgroundColor: 'red' }} />*/}
       <div className={'input-wrapper'}>
         <span />
+        {/*<div className="rectangle" />*/}
         <input
           type="text"
           value={inputVal}
