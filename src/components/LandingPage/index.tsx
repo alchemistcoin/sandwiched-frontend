@@ -67,8 +67,8 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
 
       <img src={LogoSvg} alt="sandwich.wtf" />
       <StyledMainTextBox>
-        <p>Did you know, you might have some unsuspected transactions, which might be draining away your wallet?</p>
-        <p>We help you scan and find those sandwiches in your transactions.</p>
+        <p>Every day more than 10,000 DEX trades are attacked by front-running bots, costing over $25,000,000.</p>
+        <p>Are you a sandwich victim? Connect your wallet now and find out</p>
       </StyledMainTextBox>
 
       <StyledButtonsContainer>
