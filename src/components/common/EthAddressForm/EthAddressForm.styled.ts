@@ -18,7 +18,7 @@ export const StyledAddressForm = styled.form`
     background: #e9e9e9;
     border-radius: 16px;
   }
-  span {
+  .rectangle {
     height: 100%;
     padding: 1.5px;
     margin-left: 20px;
