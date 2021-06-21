@@ -42,7 +42,7 @@ const PageHeader = (x: number) => {
     body = (
       <>
         Well played - use{' '}
-        <a href="https://mistx.io" onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}>
+        <a className={'mistx-link'} href="https://mistx.io" onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}>
           mistX.io
         </a>{' '}
         to stay unsandwiched!
@@ -53,7 +53,7 @@ const PageHeader = (x: number) => {
     body = (
       <>
         You&apos;ve been sandwiched, wtf were you thinking! Next time use{' '}
-        <a href="https://mistx.io" onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}>
+        <a className={'mistx-link'} href="https://mistx.io" onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}>
           mistX.io
         </a>
       </>
