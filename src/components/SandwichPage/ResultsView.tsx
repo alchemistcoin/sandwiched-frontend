@@ -1,5 +1,6 @@
 {
   /* eslint-disable react/display-name */
+  /* eslint-disable react/jsx-no-target-blank */
 }
 import React, { useEffect, useRef, useState } from 'react'
 import sandwichPotion from '../../assets/sandwich-potion.svg'
@@ -42,7 +43,12 @@ const PageHeader = (x: number) => {
     body = (
       <>
         Well played - use{' '}
-        <a className={'mistx-link'} href="https://mistx.io" onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}>
+        <a
+          className={'mistx-link'}
+          href="https://mistx.io"
+          target="_blank"
+          onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}
+        >
           mistX.io
         </a>{' '}
         to stay unsandwiched!
@@ -53,7 +59,12 @@ const PageHeader = (x: number) => {
     body = (
       <>
         You&apos;ve been sandwiched, wtf were you thinking! Next time use{' '}
-        <a className={'mistx-link'} href="https://mistx.io" onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}>
+        <a
+          className={'mistx-link'}
+          href="https://mistx.io"
+          target="_blank"
+          onClick={() => window.fathom.trackGoal('WDNN8XUH', 0)}
+        >
           mistX.io
         </a>
       </>
