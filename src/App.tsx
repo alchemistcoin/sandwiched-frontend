@@ -14,6 +14,8 @@ import { getChainData } from './helpers/utilities'
 import { IAssetData } from './helpers/types'
 import { Helmet } from 'react-helmet'
 import GlobalStyle from './styles/global'
+import { reverseEnsLookup } from './helpers/ens'
+
 const META_DESCRIPTION =
   'Find out how much $$$ has been drained from your wallet by unsuspected sandwich transactions. Sandwiched is bringing transparency to the rampant MEV occuring on the most popular DEXs.'
 const META_TITLE = 'Sandwiched.wtf'

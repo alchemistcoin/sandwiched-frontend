@@ -14,6 +14,7 @@ import {
   StyledCTAButton,
   ButtonsGroup,
 } from './ResultsView.styled'
+import { reverseEnsLookup } from '../../helpers/ens'
 import EthAddressForm from '../common/EthAddressForm'
 import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
@@ -28,10 +29,12 @@ import ArrowLink from '../../assets/arrow-link.svg'
 import Decimal from 'decimal.js-light'
 import { messageIsSandwich } from '../../helpers/data'
 import useCoinData from '../../hooks/useCoinData'
+import ENSAddress from './ENSAddress'
 
 type DetailedTableProps = {
   data: AnyShape[]
   fetchingComplete: boolean
+  walletAddressFromUrl: string
 }
 
 const PageHeader = (x: number) => {
@@ -102,14 +105,24 @@ const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: nu
   return url
 }
 
-const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
+const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: DetailedTableProps) => {
   const { fetchData, totalEthProfit, juiciestEthSandwich, loadingTotalEthProfit, totalEthProfitError } = useCoinData()
+  const [ensName, setEnsName] = useState(null)
 
   useEffect(() => {
     if (fetchingComplete) {
       fetchData(data)
     }
   }, [fetchingComplete])
+
+  // useEffect(() => {
+  //   // fetch the project name, once it retrieves resolve the promsie and update the state.
+  //   reverseEnsLookup(window.web3.currentProvider || window.ethereum, walletAddressFromUrl).then((result) => {
+  //     if (result?.name) {
+  //       setEnsName(result.name)
+  //     }
+  //   })
+  // })
   // references
   let bestSandwichRef = useRef(null)
   const scrollToBestSandwich = () => {
@@ -120,6 +133,8 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
       bestSandwichRef.current.focus()
     }
   }
+
+  console.log('ensName', ensName)
   // Prep Data for Summary Tables
   const totalSandwiches = data.filter((rec) => {
     return messageIsSandwich(rec)
@@ -163,7 +178,14 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           href={twitterShareLink(totalSandwiches, totalEthProfit || 0, juiciestEthSandwich.profit)}
           target="_blank"
         >
-          <TwitterFill style={{ display: 'inline', verticalAlign: 'middle', marginRight: '1rem' }} size={24} />
+          <TwitterFill
+            style={{
+              display: 'inline',
+              verticalAlign: 'middle',
+              marginRight: '1rem',
+            }}
+            size={24}
+          />
           Share your sandwiches
         </StyledCTAButton>
         <EthAddressForm className="small" inputPlaceholder={'Enter new wallet address or ENS'} />
@@ -176,12 +198,25 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
             borderTopLeftRadius: '25px',
             borderTopRightRadius: '25px',
           }}
-          title={<span style={{ fontSize: 14, letterSpacing: 2 }}>ALL SANDWICHES</span>}
+          title={
+            <div>
+              <span style={{ fontSize: 14, letterSpacing: 2, marginRight: '3rem' }}>ALL SANDWICHES</span>
+              <ENSAddress address={walletAddressFromUrl} ensName={ensName} />
+            </div>
+          }
           columns={[
             {
               title: (
                 <>
-                  <Alarm style={{ position: 'relative', top: 4, display: 'inline', marginRight: '.75rem' }} size={18} />
+                  <Alarm
+                    style={{
+                      position: 'relative',
+                      top: 4,
+                      display: 'inline',
+                      marginRight: '.75rem',
+                    }}
+                    size={18}
+                  />
                   <span>Date & Time</span>
                 </>
               ),

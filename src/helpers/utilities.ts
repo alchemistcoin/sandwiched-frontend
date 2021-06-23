@@ -25,3 +25,7 @@ export function getChainData(chainId: number): IChainData {
 export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
+export const conciseEthAddress = (addr: string, significantCharacters: number = 3) => {
+  if (!addr) return ''
+  return addr.substring(0, significantCharacters + 2) + '...' + addr.substring(addr.length - 3, addr.length)
+}
