@@ -1,5 +1,6 @@
 // @ts-ignore
 import ENS, { getEnsAddress } from '@ensdomains/ensjs'
+import { IEnsData } from './types'
 
 // ENS Singleton
 let ensApi: any = null
@@ -13,7 +14,6 @@ export const getEns = (provider: any) => {
 export async function reverseEnsLookup(provider: any, address: string) {
   let name
   try {
-    // let ens = new ENS({ provider, ensAddress: getEnsAddress('1') })
     const ens = getEns(provider)
     name = await ens.getName(address)
     console.log(address, '--->', name)
@@ -43,4 +43,20 @@ export async function ensLookup(provider: any, name: string) {
     address = { error: e }
     return address
   }
+}
+
+export const getEnsData = async (provider: any, address: string = '', name: string = ''): Promise<IEnsData> => {
+  let data = { address, name }
+  if (!name && address && address !== '') {
+    // Reverse lookup
+    const reverseEnsLookupResult = await reverseEnsLookup(provider, address)
+    if (reverseEnsLookupResult?.name) {
+      data.name = reverseEnsLookupResult.name
+    }
+  } else if (!address && name && name !== '') {
+    // Forward lookup
+    const ensLookupResult = await ensLookup(provider, name)
+    data.address = ensLookupResult
+  }
+  return data
 }
