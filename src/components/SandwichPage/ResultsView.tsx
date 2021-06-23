@@ -18,7 +18,7 @@ import EthAddressForm from '../common/EthAddressForm'
 import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
 import statusIcon from '../../assets/status-icon.svg'
-import { TwitterFill } from 'akar-icons'
+import { TwitterFill, Alarm } from 'akar-icons'
 import SummaryTotalProfitSandwiches from '../../assets/summary-total-profit-sandwiches.svg'
 import SummaryTotalSandwiches from '../../assets/summary-total-sandwiches.svg'
 import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
@@ -179,12 +179,21 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           title={<span style={{ fontSize: 14, letterSpacing: 2 }}>ALL SANDWICHES</span>}
           columns={[
             {
-              title: 'Date & Time',
+              title: (
+                <>
+                  <Alarm style={{ position: 'relative', top: 4, display: 'inline', marginRight: '.75rem' }} size={18} />
+                  <span>Date & Time</span>
+                </>
+              ),
               field: 'dateReadable',
               customSort: (a: any, b: any) => a.date - b.date,
             },
             {
-              title: 'Sandwich open',
+              title: (
+                <>
+                  <span>Sandwich open</span>
+                </>
+              ),
               field: 'open',
               render: (rowData) => (
                 <div style={{ width: 240 }}>
@@ -263,6 +272,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           ]}
           data={detailedTableData}
           options={{
+            search: false,
             headerStyle: {
               fontWeight: 'bold',
               fontSize: '14px',
