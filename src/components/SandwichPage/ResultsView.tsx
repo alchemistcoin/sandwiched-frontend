@@ -115,15 +115,6 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
     }
   }, [fetchingComplete])
 
-  // useEffect(() => {
-  //   // fetch the project name, once it retrieves resolve the promsie and update the state.
-  //   reverseEnsLookup(window.web3.currentProvider || window.ethereum, walletAddressFromUrl).then((result) => {
-  //     if (result?.name) {
-  //       setEnsName(result.name)
-  //     }
-  //   })
-  // })
-  // references
   let bestSandwichRef = useRef(null)
   const scrollToBestSandwich = () => {
     if (bestSandwichRef && bestSandwichRef.current) {

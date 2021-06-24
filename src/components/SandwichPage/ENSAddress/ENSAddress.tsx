@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ensLookup, reverseEnsLookup } from '../../../helpers/ens'
 import { conciseEthAddress } from '../../../helpers/utilities'
+import Web3 from 'web3'
 
 type props = {
   address: string | null
@@ -12,7 +13,8 @@ type props = {
 const ENSAddress = ({ address = '', ensName = '', ...props }: props) => {
   const [fetchedEnsName, setFetchedEnsName] = useState<string | null>(null)
   const [fetchedEnsAddress, setFetchedEnsAddress] = useState<string | null>(null)
-  const provider = window.ethereum || window?.web3?.currentProvider
+  var web3 = new Web3(`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_ID}` || Web3.givenProvider)
+  const provider = web3.currentProvider
   // const provider = new
   if (address && address.split('.').length > 1) {
     // indicates an ENS name in address prop, so adjust variables
