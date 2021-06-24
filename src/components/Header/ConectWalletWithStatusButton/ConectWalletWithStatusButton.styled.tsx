@@ -8,7 +8,7 @@ const StyledConnectWalletWithStatusButton = styled.button`
   transition-duration: 150ms;
   color: rgb(var(--color-text));
   border-radius: 8px;
-  width: 120px;
+  min-width: 120px;
   height: 32px;
   font-size: 10px;
   font-weight: 500;

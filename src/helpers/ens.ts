@@ -16,14 +16,12 @@ export async function reverseEnsLookup(provider: any, address: string) {
   try {
     const ens = getEns(provider)
     name = await ens.getName(address)
-    console.log(address, '--->', name)
     // Check to be sure the reverse record is correct.
     if (address != (await ens.name(name.name).getAddress())) {
       name = null
     }
     return name
   } catch (e) {
-    console.log(e)
     console.error('reverseEnsLookup error' + e)
     name = { error: e }
     return name
@@ -35,10 +33,8 @@ export async function ensLookup(provider: any, name: string) {
   try {
     const ens = getEns(provider)
     address = await ens.name(name).getAddress()
-    console.log(name, '-->', address)
     return address
   } catch (e) {
-    console.log(e)
     console.error('ensLookup error' + e)
     address = { error: e }
     return address

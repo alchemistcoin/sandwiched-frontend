@@ -22,15 +22,6 @@ const ConnectWalletWithStatusButton = ({
   resetApp,
 }: ConnectWalletWithStatusButtonProps) => {
   /** Router Methods **/
-  const [ensData, setEnsData] = useState<IEnsData>()
-  const provider = window.web3.currentProvider || window.ethereum
-  useEffect(() => {
-    getEnsData(provider, ethereumAddress).then((result) => {
-      // @ts-ignore
-      setEnsData(result)
-      return
-    })
-  }, [ethereumAddress])
   // @ts-ignore
   let { walletAddress } = useParams()
 
@@ -39,7 +30,6 @@ const ConnectWalletWithStatusButton = ({
     if (!ethereumAddress) {
       buttonText = '...'
     } else {
-      // buttonText = conciseEthAddress(ethereumAddress)
       buttonText = <ENSAddress address={ethereumAddress} ensName={'happyPathMan'} />
     }
   }
@@ -59,7 +49,7 @@ const ConnectWalletWithStatusButton = ({
           }}
           className={connected ? 'connected' : 'disconnected'}
         >
-          <span style={{ marginLeft: 6 }}>{buttonText}</span>
+          <span style={{ margin: 6 }}>{buttonText}</span>
           {connected ? <img src={statusConnected} alt="connected" /> : <img src={connectIcon} alt="disconnected" />}
         </StyledConnectWalletWithStatusButton>
       }

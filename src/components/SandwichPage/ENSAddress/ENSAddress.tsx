@@ -4,7 +4,7 @@ import { conciseEthAddress } from '../../../helpers/utilities'
 
 type props = {
   address: string | null
-  ensName: string | null
+  ensName?: string | null
 }
 /**
  * will display both address and ens name if available
@@ -12,7 +12,8 @@ type props = {
 const ENSAddress = ({ address = '', ensName = '', ...props }: props) => {
   const [fetchedEnsName, setFetchedEnsName] = useState<string | null>(null)
   const [fetchedEnsAddress, setFetchedEnsAddress] = useState<string | null>(null)
-  const provider = window.web3.currentProvider || window.ethereum
+  const provider = window.ethereum || window?.web3?.currentProvider
+  // const provider = new
   if (address && address.split('.').length > 1) {
     // indicates an ENS name in address prop, so adjust variables
     ensName = address
@@ -32,11 +33,8 @@ const ENSAddress = ({ address = '', ensName = '', ...props }: props) => {
       ensLookup(provider, ensName).then((result) => {
         setFetchedEnsAddress(result)
       })
-    } else {
-      // setFetchedEnsName('error')
-      // setFetchedEnsAddress('error')
     }
-  })
+  }, [])
 
   return (
     <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'flex-start' }}>
