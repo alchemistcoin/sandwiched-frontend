@@ -30,7 +30,7 @@ const ConnectWalletWithStatusButton = ({
     if (!ethereumAddress) {
       buttonText = '...'
     } else {
-      buttonText = <ENSAddress address={ethereumAddress} ensName={'happyPathMan'} />
+      buttonText = <ENSAddress address={ethereumAddress} />
     }
   }
   return (
