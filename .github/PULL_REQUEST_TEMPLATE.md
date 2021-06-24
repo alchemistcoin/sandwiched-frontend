@@ -10,5 +10,6 @@
 - [ ] No Sandwiches: http://localhost:3001/0xd3230876c670971797a1f55a7bc100bec25759f1
 - [ ] Connect/Disconnect from header wallet button
 - [ ] Click Logo in header bar to go back to home page
+- [ ] Smoke test in Firefox/Chrome
 
 Fixes #
