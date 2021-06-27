@@ -124,8 +124,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
       bestSandwichRef.current.focus()
     }
   }
-
-  console.log('ensName', ensName)
+  
   // Prep Data for Summary Tables
   const totalSandwiches = data.filter((rec) => {
     return messageIsSandwich(rec)
