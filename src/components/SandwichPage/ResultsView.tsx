@@ -191,8 +191,10 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
           }}
           title={
             <div>
-              <span style={{ fontSize: 14, letterSpacing: 2, marginRight: '3rem' }}>ALL SANDWICHES</span>
-              <ENSAddress address={walletAddressFromUrl} ensName={ensName} />
+              <span style={{ fontSize: 14, letterSpacing: 2, marginRight: '3rem' }}>
+                <span>ALL SANDWICHES</span>
+                <ENSAddress style={{ marginBottom: 7 }} address={walletAddressFromUrl} ensName={ensName} />
+              </span>
             </div>
           }
           columns={[
@@ -213,6 +215,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
               ),
               field: 'dateReadable',
               customSort: (a: any, b: any) => a.date - b.date,
+              render: (rowData) => <div style={{ minWidth: '160px' }}>{rowData.dateReadable}</div>,
             },
             {
               title: (
@@ -222,7 +225,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
               ),
               field: 'open',
               render: (rowData) => (
-                <div style={{ width: 240 }}>
+                <div style={{ width: 230 }}>
                   <span style={{}}>{rowData.open}</span>
                   <EtherscanLink txId={rowData?.openTx || ''} />
                 </div>
@@ -234,7 +237,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
               field: 'target',
               render: (rowData, rowGroups) => {
                 return (
-                  <div style={{ width: 240 }}>
+                  <div style={{ width: 230 }}>
                     <span style={{}}>{rowData.target}</span>
                     <EtherscanLink txId={rowData?.targetTx || ''} />
                   </div>
@@ -246,7 +249,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
               title: 'Sandwich close',
               field: 'close',
               render: (rowData) => (
-                <div style={{ width: 240 }}>
+                <div style={{ width: 230 }}>
                   <span style={{}}>{rowData.close}</span>
                   <EtherscanLink txId={rowData?.closeTx || ''} />
                 </div>
@@ -261,7 +264,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
                 const BestSandwichScrollToMarker = () => (
                   <div
                     ref={isBestSandwichRow ? bestSandwichRef : undefined}
-                    style={{ position: 'relative', top: '-1rem' }}
+                    style={{ position: 'relative', top: '-1rem', width: 120 }}
                   />
                 )
                 if (rowData.profit && rowData.profit.substr(0, 1) != '-') {
