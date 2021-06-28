@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import StyledConnectWalletWithStatusButton from './ConectWalletWithStatusButton.styled'
 import connectIcon from '../../../assets/connect-icon.svg'
 import statusConnected from '../../../assets/status-connected.svg'
 import { useParams } from 'react-router-dom'
+import { reverseEnsLookup, getEnsData } from '../../../helpers/ens'
+import { conciseEthAddress } from '../../../helpers/utilities'
+import { IEnsData } from '../../../helpers/types'
+import ENSAddress from '../../SandwichPage/ENSAddress'
 
 interface ConnectWalletWithStatusButtonProps {
   connected: boolean
@@ -21,15 +25,12 @@ const ConnectWalletWithStatusButton = ({
   // @ts-ignore
   let { walletAddress } = useParams()
 
-  let buttonText = 'Connect Wallet'
+  let buttonText: JSX.Element | string = 'Connect Wallet'
   if (connected) {
     if (!ethereumAddress) {
       buttonText = '...'
     } else {
-      buttonText =
-        ethereumAddress?.substr(1, 4) +
-        '...' +
-        ethereumAddress?.substr(ethereumAddress.length - 3, ethereumAddress?.length)
+      buttonText = <ENSAddress address={ethereumAddress} />
     }
   }
   return (
@@ -48,7 +49,7 @@ const ConnectWalletWithStatusButton = ({
           }}
           className={connected ? 'connected' : 'disconnected'}
         >
-          {buttonText}
+          <span style={{ margin: 6 }}>{buttonText}</span>
           {connected ? <img src={statusConnected} alt="connected" /> : <img src={connectIcon} alt="disconnected" />}
         </StyledConnectWalletWithStatusButton>
       }

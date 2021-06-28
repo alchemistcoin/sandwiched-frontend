@@ -14,11 +14,12 @@ import {
   StyledCTAButton,
   ButtonsGroup,
 } from './ResultsView.styled'
+import { reverseEnsLookup } from '../../helpers/ens'
 import EthAddressForm from '../common/EthAddressForm'
 import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
 import statusIcon from '../../assets/status-icon.svg'
-import { TwitterFill } from 'akar-icons'
+import { TwitterFill, Alarm } from 'akar-icons'
 import SummaryTotalProfitSandwiches from '../../assets/summary-total-profit-sandwiches.svg'
 import SummaryTotalSandwiches from '../../assets/summary-total-sandwiches.svg'
 import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
@@ -28,10 +29,12 @@ import ArrowLink from '../../assets/arrow-link.svg'
 import Decimal from 'decimal.js-light'
 import { messageIsSandwich } from '../../helpers/data'
 import useCoinData from '../../hooks/useCoinData'
+import ENSAddress from './ENSAddress'
 
 type DetailedTableProps = {
   data: AnyShape[]
   fetchingComplete: boolean
+  walletAddressFromUrl: string
 }
 
 const PageHeader = (x: number) => {
@@ -102,15 +105,16 @@ const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: nu
   return url
 }
 
-const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
+const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: DetailedTableProps) => {
   const { fetchData, totalEthProfit, juiciestEthSandwich, loadingTotalEthProfit, totalEthProfitError } = useCoinData()
+  const [ensName, setEnsName] = useState(null)
 
   useEffect(() => {
     if (fetchingComplete) {
       fetchData(data)
     }
   }, [fetchingComplete])
-  // references
+
   let bestSandwichRef = useRef(null)
   const scrollToBestSandwich = () => {
     if (bestSandwichRef && bestSandwichRef.current) {
@@ -120,6 +124,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
       bestSandwichRef.current.focus()
     }
   }
+
   // Prep Data for Summary Tables
   const totalSandwiches = data.filter((rec) => {
     return messageIsSandwich(rec)
@@ -163,7 +168,14 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           href={twitterShareLink(totalSandwiches, totalEthProfit || 0, juiciestEthSandwich.profit)}
           target="_blank"
         >
-          <TwitterFill style={{ display: 'inline', verticalAlign: 'middle', marginRight: '1rem' }} size={24} />
+          <TwitterFill
+            style={{
+              display: 'inline',
+              verticalAlign: 'middle',
+              marginRight: '1rem',
+            }}
+            size={24}
+          />
           Share your sandwiches
         </StyledCTAButton>
         <EthAddressForm className="small" inputPlaceholder={'Enter new wallet address or ENS'} />
@@ -176,18 +188,43 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
             borderTopLeftRadius: '25px',
             borderTopRightRadius: '25px',
           }}
-          title={<span style={{ fontSize: 14, letterSpacing: 2 }}>ALL SANDWICHES</span>}
+          title={
+            <div>
+              <span style={{ fontSize: 14, letterSpacing: 2, marginRight: '3rem' }}>
+                <span>ALL SANDWICHES</span>
+                <ENSAddress style={{ marginBottom: 7 }} address={walletAddressFromUrl} ensName={ensName} />
+              </span>
+            </div>
+          }
           columns={[
             {
-              title: 'Date & Time',
+              title: (
+                <>
+                  <Alarm
+                    style={{
+                      position: 'relative',
+                      top: 4,
+                      display: 'inline',
+                      marginRight: '.75rem',
+                    }}
+                    size={18}
+                  />
+                  <span>Date & Time</span>
+                </>
+              ),
               field: 'dateReadable',
               customSort: (a: any, b: any) => a.date - b.date,
+              render: (rowData) => <div style={{ minWidth: '160px' }}>{rowData.dateReadable}</div>,
             },
             {
-              title: 'Sandwich open',
+              title: (
+                <>
+                  <span>Sandwich open</span>
+                </>
+              ),
               field: 'open',
               render: (rowData) => (
-                <div style={{ width: 240 }}>
+                <div style={{ width: 230 }}>
                   <span style={{}}>{rowData.open}</span>
                   <EtherscanLink txId={rowData?.openTx || ''} />
                 </div>
@@ -199,7 +236,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               field: 'target',
               render: (rowData, rowGroups) => {
                 return (
-                  <div style={{ width: 240 }}>
+                  <div style={{ width: 230 }}>
                     <span style={{}}>{rowData.target}</span>
                     <EtherscanLink txId={rowData?.targetTx || ''} />
                   </div>
@@ -211,7 +248,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
               title: 'Sandwich close',
               field: 'close',
               render: (rowData) => (
-                <div style={{ width: 240 }}>
+                <div style={{ width: 230 }}>
                   <span style={{}}>{rowData.close}</span>
                   <EtherscanLink txId={rowData?.closeTx || ''} />
                 </div>
@@ -226,7 +263,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
                 const BestSandwichScrollToMarker = () => (
                   <div
                     ref={isBestSandwichRow ? bestSandwichRef : undefined}
-                    style={{ position: 'relative', top: '-1rem' }}
+                    style={{ position: 'relative', top: '-1rem', width: 120 }}
                   />
                 )
                 if (rowData.profit && rowData.profit.substr(0, 1) != '-') {
@@ -263,6 +300,7 @@ const ResultsView = ({ data = [], fetchingComplete }: DetailedTableProps) => {
           ]}
           data={detailedTableData}
           options={{
+            search: false,
             headerStyle: {
               fontWeight: 'bold',
               fontSize: '14px',

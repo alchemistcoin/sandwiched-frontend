@@ -44,3 +44,8 @@ export interface ISandwichDetailedTableData {
 export interface AnyShape {
   [fieldName: string]: any
 }
+
+export interface IEnsData {
+  address: string
+  name: string
+}

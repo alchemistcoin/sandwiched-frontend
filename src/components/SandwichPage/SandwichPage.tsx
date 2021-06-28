@@ -89,7 +89,7 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
           walletAddress={walletAddress}
         />
       ) : (
-        <ResultsView data={data} fetchingComplete={fetchingComplete} />
+        <ResultsView data={data} fetchingComplete={fetchingComplete} walletAddressFromUrl={walletAddressFromUrl} />
       )}
     </div>
   )
