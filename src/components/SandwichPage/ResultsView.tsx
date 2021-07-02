@@ -347,8 +347,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
         {/*
         Loading Table Display
         */}
-        {/*{!fetchingComplete && (*/}
-        {true && (
+        {!fetchingComplete && (
           <MaterialTable
             style={{
               marginTop: '0px',
