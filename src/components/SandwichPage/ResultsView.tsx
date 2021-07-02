@@ -111,7 +111,7 @@ const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: nu
 
 const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: DetailedTableProps) => {
   // Constants
-  const dateColumnWidth = 160
+  const dateColumnWidth = 164
   const sandwichColumnWidth = 230
   const profitColumnWidth = 120
   const attributesColumnWidth = 100
@@ -167,6 +167,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
           backgroundColor={'#dff8fd'}
           title={'total # sandwiches'}
           value={String(totalSandwiches) + (!fetchingComplete ? ' ...' : '')}
+          loading={loadingTotalEthProfit}
         />
         <SummaryCard
           image={SummaryTotalProfitSandwiches}
@@ -215,7 +216,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
           columns={[
             {
               title: (
-                <>
+                <div>
                   <Alarm
                     style={{
                       position: 'relative',
@@ -226,15 +227,11 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
                     size={18}
                   />
                   <span>Date & Time</span>
-                </>
+                </div>
               ),
               field: 'dateReadable',
               customSort: (a: any, b: any) => a.date - b.date,
-              render: (rowData) => (
-                <div style={{ minWidth: dateColumnWidth }}>
-                  {rowData.dateReadable ? rowData.dateReadable : LoadingBarForDetailsTable(160)}
-                </div>
-              ),
+              render: (rowData) => <div style={{ width: dateColumnWidth }}>{rowData.dateReadable}</div>,
             },
             {
               title: (
@@ -364,12 +361,9 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
             }}
             columns={[
               {
-                cellStyle: {
-                  width: dateColumnWidth,
-                },
                 field: 'dateReadable',
                 render: (rowData) => (
-                  <div style={{ minWidth: dateColumnWidth }}>{LoadingBarForDetailsTable(dateColumnWidth)}</div>
+                  <div style={{ maxWidth: dateColumnWidth }}>{LoadingBarForDetailsTable(dateColumnWidth)}</div>
                 ),
               },
               {
@@ -383,7 +377,9 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
                 field: 'target',
                 render: (rowData, rowGroups) => {
                   return (
-                    <div style={{ width: sandwichColumnWidth }}>{LoadingBarForDetailsTable(sandwichColumnWidth)}</div>
+                    <div style={{ maxWidth: sandwichColumnWidth }}>
+                      {LoadingBarForDetailsTable(sandwichColumnWidth)}
+                    </div>
                   )
                 },
                 sorting: false,
@@ -391,14 +387,14 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
               {
                 field: 'close',
                 render: (rowData) => (
-                  <div style={{ width: sandwichColumnWidth }}>{LoadingBarForDetailsTable(sandwichColumnWidth)}</div>
+                  <div style={{ maxWidth: sandwichColumnWidth }}>{LoadingBarForDetailsTable(sandwichColumnWidth)}</div>
                 ),
                 sorting: false,
               },
               {
                 field: 'profit',
                 render: (rowData) => (
-                  <div style={{ width: profitColumnWidth }}>{LoadingBarForDetailsTable(profitColumnWidth)}</div>
+                  <div style={{ maxWidth: profitColumnWidth }}>{LoadingBarForDetailsTable(profitColumnWidth)}</div>
                 ),
                 sorting: false,
               },
@@ -433,4 +429,4 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
   )
 }
 
-export default ResultsView
+export default React.memo(ResultsView)
