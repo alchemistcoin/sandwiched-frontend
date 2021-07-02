@@ -11,6 +11,7 @@ interface LoadingSandwichesDisplayProps {
   connected: boolean
   resetApp: Function
   error: string
+  endAnimation: Boolean
 }
 
 const LoadingSandwichesDisplay = ({
@@ -19,6 +20,7 @@ const LoadingSandwichesDisplay = ({
   onConnect,
   resetApp,
   walletAddress,
+  endAnimation,
 }: LoadingSandwichesDisplayProps) => {
   const history = useHistory()
   const header = !error ? 'Hold up!' : 'Uh-oh 😞'
@@ -38,8 +40,18 @@ const LoadingSandwichesDisplay = ({
           <img src={hamburgerLine} alt="" />
         ) : (
           <>
-            <img className={!error ? 'left' : ''} src={hamburgerLine} alt="" />
-            <img className={!error ? 'right' : ''} src={hamburgerLine} alt="" />
+            <img
+              className={!error ? 'left' : ''}
+              style={{ animation: endAnimation ? 'animationEnd' : undefined }}
+              src={hamburgerLine}
+              alt=""
+            />
+            <img
+              className={!error ? 'right' : ''}
+              style={{ animation: endAnimation ? 'animationEnd' : undefined }}
+              src={hamburgerLine}
+              alt=""
+            />
           </>
         )}
       </div>

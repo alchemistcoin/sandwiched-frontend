@@ -21,8 +21,16 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
   const [fetching, setFetching] = useState(false)
   const [fetchingComplete, setFetchingComplete] = useState(false)
   const [fetchErrorMessage, setFetchErrorMessage] = useState('')
+  const [hasASandwichDelayed, setHasASandwichDelayed] = useState(false)
   // @ts-ignore
   let { walletAddress: walletAddressFromUrl } = useParams()
+
+  const hasASandwich = dataHasASandwich(data)
+  if ((hasASandwich || fetchingComplete) && hasASandwichDelayed === false) {
+    setTimeout(() => {
+      setHasASandwichDelayed(true)
+    }, 400)
+  }
 
   // Fetch Sandwiches for wallet
   useEffect(() => {
@@ -32,7 +40,7 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
     async function fetchStream(reader: any) {
       let tempData: AnyShape[] = []
       let lastUpdate = 0
-      let cooldown = 200 // update data at most every 200 milliseconds or 10 times a second
+      let cooldown = 100 // update data at most every (cooldown in milliseconds)
       setFetching(true)
       let messageCount = 0
       try {
@@ -62,8 +70,7 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
           messageCount += 1
           tempData.push(msg)
           if (new Date().getTime() >= lastUpdate + cooldown) {
-            // Only update every second
-            console.log('settingState...')
+            // Only update if not on cooldown
             setData((oldArray) => {
               return [...oldArray, ...tempData]
             })
@@ -96,13 +103,14 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
   }, [])
   return (
     <div>
-      {!dataHasASandwich(data) && !fetchingComplete ? (
+      {hasASandwichDelayed === false ? (
         <LoadingSandwiches
           error={fetchErrorMessage}
           resetApp={resetApp}
           connected={connected}
           onConnect={onConnect}
           walletAddress={walletAddress}
+          endAnimation={hasASandwich}
         />
       ) : (
         <ResultsView data={data} fetchingComplete={fetchingComplete} walletAddressFromUrl={walletAddressFromUrl} />

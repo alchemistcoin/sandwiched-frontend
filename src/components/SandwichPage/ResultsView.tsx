@@ -360,20 +360,20 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
             }}
             columns={[
               {
-                field: 'dateReadableLoading',
+                field: 'dateReadable',
                 render: (rowData) => (
                   <div style={{ maxWidth: dateColumnWidth }}>{LoadingBarForDetailsTable(dateColumnWidth)}</div>
                 ),
               },
               {
-                field: 'openLoading',
+                field: 'open',
                 render: (rowData) => (
                   <div style={{ width: sandwichColumnWidth }}>{LoadingBarForDetailsTable(sandwichColumnWidth)}</div>
                 ),
                 sorting: false,
               },
               {
-                field: 'targetLoading',
+                field: 'target',
                 render: (rowData, rowGroups) => {
                   return (
                     <div style={{ maxWidth: sandwichColumnWidth }}>
@@ -384,25 +384,25 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
                 sorting: false,
               },
               {
-                field: 'closeLoading',
+                field: 'close',
                 render: (rowData) => (
                   <div style={{ maxWidth: sandwichColumnWidth }}>{LoadingBarForDetailsTable(sandwichColumnWidth)}</div>
                 ),
                 sorting: false,
               },
               {
-                field: 'profitLoading',
+                field: 'profit',
                 render: (rowData) => (
                   <div style={{ maxWidth: profitColumnWidth }}>{LoadingBarForDetailsTable(profitColumnWidth)}</div>
                 ),
                 sorting: false,
               },
               {
-                field: 'attributesLoading',
+                field: 'attributes',
                 render: (rowData) => <AttributeItem {...rowData.attributes}/>, // prettier-ignore
               },
             ]}
-            data={Array(5).fill({} as ISandwichDetailedTableData)}
+            data={randomISandwichDetailedTableDataArray(5)}
             options={{
               toolbar: false,
               search: false,
@@ -429,3 +429,13 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
 }
 
 export default React.memo(ResultsView)
+
+function randomISandwichDetailedTableDataArray(count = 5): ISandwichDetailedTableData[] {
+  let array = []
+  for (let i = 0; i < count; i++) {
+    array.push({
+      message: i.toString(),
+    })
+  }
+  return array as ISandwichDetailedTableData[]
+}
