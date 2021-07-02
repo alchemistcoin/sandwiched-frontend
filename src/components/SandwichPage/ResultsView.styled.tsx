@@ -137,6 +137,7 @@ export const StyledDetailedTableContainer = styled.div`
   font-size: 14px;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
+  margin-left: calc((100% - ${detailsTableWidth}));
   .Component-horizontalScrollContainer-12 {
     overflow: unset;
     width: 1320px;
@@ -153,6 +154,7 @@ export const StyledDetailedTableContainer = styled.div`
   }
   @media only screen and (max-width: ${detailsTableWidth}) {
     padding: 0;
+    margin-left: 0;
     overflow-x: auto;
     overflow-y: hidden;
   }
