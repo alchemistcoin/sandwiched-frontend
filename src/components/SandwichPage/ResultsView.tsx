@@ -109,7 +109,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
   // Constants
   const dateColumnWidth = 164
   const sandwichColumnWidth = 230
-  const profitColumnWidth = 120
+  const profitColumnWidth = 110
   const attributesColumnWidth = 100
 
   // Hooks
@@ -197,7 +197,6 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
           tableRef={tableRef}
           style={{
             paddingTop: 30,
-            width: '100%',
             borderTopLeftRadius: '25px',
             borderTopRightRadius: '25px',
           }}
@@ -313,6 +312,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
           ]}
           data={detailedTableData}
           options={{
+            emptyRowsWhenPaging: true,
             // loadingType: 'overlay',
             search: false,
             headerStyle: {
@@ -347,10 +347,10 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
         {/*
         Loading Table Display
         */}
-        {!fetchingComplete && (
+        {/*{!fetchingComplete && (*/}
+        {true && (
           <MaterialTable
             style={{
-              width: '100%',
               marginTop: '0px',
               paddingTop: '0px',
             }}
