@@ -424,7 +424,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
   )
 }
 
-export default React.memo(ResultsView)
+export default ResultsView
 
 function randomISandwichDetailedTableDataArray(count = 5): ISandwichDetailedTableData[] {
   let array = []

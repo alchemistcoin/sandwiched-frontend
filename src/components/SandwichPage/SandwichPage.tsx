@@ -29,7 +29,7 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
   if ((hasASandwich || fetchingComplete) && hasASandwichDelayed === false) {
     setTimeout(() => {
       setHasASandwichDelayed(true)
-    }, 300)
+    }, 250)
   }
 
   // Fetch Sandwiches for wallet
