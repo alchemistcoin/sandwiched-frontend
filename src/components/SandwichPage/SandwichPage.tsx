@@ -30,10 +30,13 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
     // Create an scoped async function in the hook
     const utf8Decoder = new TextDecoder('utf-8')
     async function fetchStream(reader: any) {
+      let tempData: AnyShape[] = []
+      let lastUpdate = 0
+      let cooldown = 200 // update data at most every 200 milliseconds or 10 times a second
       setFetching(true)
       let messageCount = 0
-      for (;;) {
-        try {
+      try {
+        for (;;) {
           let { value: msg, done: readerDone } = await reader.read()
           const firstLineOfMsg = String(msg).split('/n')[0] // error comes as a string, messages come as json
           /** Catch any errors in message **/
@@ -46,20 +49,33 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
             return
           }
           if (readerDone) {
+            // Add anything still in the temp Queue and return
+            if (tempData.length > 0) {
+              setData((oldArray) => {
+                return [...oldArray, ...tempData]
+              })
+            }
             setFetchingComplete(true)
             setFetching(false)
             return
           }
           messageCount += 1
-          setData((oldArray) => {
-            return [...oldArray, msg]
-          })
-        } catch (err) {
-          console.error('fetchStream catch (err)', err)
-          setFetchErrorMessage(errorMessage)
-          setFetching(false)
-          return // without this return infinite errors can occur
+          tempData.push(msg)
+          if (new Date().getTime() >= lastUpdate + cooldown) {
+            // Only update every second
+            console.log('settingState...')
+            setData((oldArray) => {
+              return [...oldArray, ...tempData]
+            })
+            tempData = []
+            lastUpdate = new Date().getTime()
+          }
         }
+      } catch (err) {
+        console.error('fetchStream catch (err)', err)
+        setFetchErrorMessage(errorMessage)
+        setFetching(false)
+        return // without this return infinite errors can occur
       }
     }
     async function runFetchStream() {

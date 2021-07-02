@@ -353,7 +353,6 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
         */}
         {!fetchingComplete && (
           <MaterialTable
-            tableRef={tableRef}
             style={{
               width: '100%',
               marginTop: '0px',
@@ -361,20 +360,20 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
             }}
             columns={[
               {
-                field: 'dateReadable',
+                field: 'dateReadableLoading',
                 render: (rowData) => (
                   <div style={{ maxWidth: dateColumnWidth }}>{LoadingBarForDetailsTable(dateColumnWidth)}</div>
                 ),
               },
               {
-                field: 'open',
+                field: 'openLoading',
                 render: (rowData) => (
                   <div style={{ width: sandwichColumnWidth }}>{LoadingBarForDetailsTable(sandwichColumnWidth)}</div>
                 ),
                 sorting: false,
               },
               {
-                field: 'target',
+                field: 'targetLoading',
                 render: (rowData, rowGroups) => {
                   return (
                     <div style={{ maxWidth: sandwichColumnWidth }}>
@@ -385,21 +384,21 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
                 sorting: false,
               },
               {
-                field: 'close',
+                field: 'closeLoading',
                 render: (rowData) => (
                   <div style={{ maxWidth: sandwichColumnWidth }}>{LoadingBarForDetailsTable(sandwichColumnWidth)}</div>
                 ),
                 sorting: false,
               },
               {
-                field: 'profit',
+                field: 'profitLoading',
                 render: (rowData) => (
                   <div style={{ maxWidth: profitColumnWidth }}>{LoadingBarForDetailsTable(profitColumnWidth)}</div>
                 ),
                 sorting: false,
               },
               {
-                field: 'attributes',
+                field: 'attributesLoading',
                 render: (rowData) => <AttributeItem {...rowData.attributes}/>, // prettier-ignore
               },
             ]}
