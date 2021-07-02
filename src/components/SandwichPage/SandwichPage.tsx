@@ -29,7 +29,7 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
   if ((hasASandwich || fetchingComplete) && hasASandwichDelayed === false) {
     setTimeout(() => {
       setHasASandwichDelayed(true)
-    }, 400)
+    }, 300)
   }
 
   // Fetch Sandwiches for wallet
@@ -40,7 +40,7 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
     async function fetchStream(reader: any) {
       let tempData: AnyShape[] = []
       let lastUpdate = 0
-      let cooldown = 100 // update data at most every (cooldown in milliseconds)
+      let cooldown = 150 // update data at most every (cooldown in milliseconds)
       setFetching(true)
       let messageCount = 0
       try {
