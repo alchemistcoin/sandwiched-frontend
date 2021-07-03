@@ -1,8 +1,10 @@
+import styled from 'styled-components'
+
 {
   /* eslint-disable react/display-name */
   /* eslint-disable react/jsx-no-target-blank */
 }
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import sandwichPotion from '../../assets/sandwich-potion.svg'
 import backgroundSvg from '../../assets/background.svg'
 import {
@@ -14,19 +16,17 @@ import {
   StyledCTAButton,
   ButtonsGroup,
 } from './ResultsView.styled'
-import { reverseEnsLookup } from '../../helpers/ens'
+import LoadingBar from '../common/LoadingBar'
 import EthAddressForm from '../common/EthAddressForm'
 import SummaryCard from './SummaryCard'
 import MaterialTable from 'material-table'
-import statusIcon from '../../assets/status-icon.svg'
 import { TwitterFill, Alarm } from 'akar-icons'
 import SummaryTotalProfitSandwiches from '../../assets/summary-total-profit-sandwiches.svg'
 import SummaryTotalSandwiches from '../../assets/summary-total-sandwiches.svg'
 import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
 import { filterSandwichesToDetailsTable, mapSandwichesToDetailsTable } from '../../helpers/data'
-import { AnyShape } from '../../helpers/types'
+import { AnyShape, ISandwichDetailedTableData } from '../../helpers/types'
 import ArrowLink from '../../assets/arrow-link.svg'
-import Decimal from 'decimal.js-light'
 import { messageIsSandwich } from '../../helpers/data'
 import useCoinData from '../../hooks/useCoinData'
 import ENSAddress from './ENSAddress'
@@ -106,9 +106,15 @@ const twitterShareLink = (totalSandwiches: number, totalProfitFromSandwiches: nu
 }
 
 const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: DetailedTableProps) => {
+  // Constants
+  const dateColumnWidth = 164
+  const sandwichColumnWidth = 230
+  const profitColumnWidth = 110
+  const attributesColumnWidth = 100
+
+  // Hooks
   const { fetchData, totalEthProfit, juiciestEthSandwich, loadingTotalEthProfit, totalEthProfitError } = useCoinData()
   const [ensName, setEnsName] = useState(null)
-
   useEffect(() => {
     if (fetchingComplete) {
       fetchData(data)
@@ -129,8 +135,13 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
   const totalSandwiches = data.filter((rec) => {
     return messageIsSandwich(rec)
   }).length
+
   // Prep Data for Detailed Table
   const detailedTableData = data.filter(filterSandwichesToDetailsTable).map(mapSandwichesToDetailsTable)
+
+  const tableRef = useRef()
+
+  const LoadingBarForDetailsTable = (width: number): JSX.Element => <LoadingBar width={width} height={16} />
 
   return (
     <StyledResultsView>
@@ -152,6 +163,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
           backgroundColor={'#dff8fd'}
           title={'total # sandwiches'}
           value={String(totalSandwiches) + (!fetchingComplete ? ' ...' : '')}
+          loading={loadingTotalEthProfit}
         />
         <SummaryCard
           image={SummaryTotalProfitSandwiches}
@@ -182,9 +194,9 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
       </ButtonsGroup>
       <StyledDetailedTableContainer>
         <MaterialTable
+          tableRef={tableRef}
           style={{
             paddingTop: 30,
-            width: '100%',
             borderTopLeftRadius: '25px',
             borderTopRightRadius: '25px',
           }}
@@ -199,7 +211,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
           columns={[
             {
               title: (
-                <>
+                <div>
                   <Alarm
                     style={{
                       position: 'relative',
@@ -210,11 +222,11 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
                     size={18}
                   />
                   <span>Date & Time</span>
-                </>
+                </div>
               ),
               field: 'dateReadable',
               customSort: (a: any, b: any) => a.date - b.date,
-              render: (rowData) => <div style={{ minWidth: '160px' }}>{rowData.dateReadable}</div>,
+              render: (rowData) => <div style={{ width: dateColumnWidth }}>{rowData.dateReadable}</div>,
             },
             {
               title: (
@@ -224,7 +236,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
               ),
               field: 'open',
               render: (rowData) => (
-                <div style={{ width: 230 }}>
+                <div style={{ width: sandwichColumnWidth }}>
                   <span style={{}}>{rowData.open}</span>
                   <EtherscanLink txId={rowData?.openTx || ''} />
                 </div>
@@ -236,7 +248,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
               field: 'target',
               render: (rowData, rowGroups) => {
                 return (
-                  <div style={{ width: 230 }}>
+                  <div style={{ width: sandwichColumnWidth }}>
                     <span style={{}}>{rowData.target}</span>
                     <EtherscanLink txId={rowData?.targetTx || ''} />
                   </div>
@@ -248,7 +260,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
               title: 'Sandwich close',
               field: 'close',
               render: (rowData) => (
-                <div style={{ width: 230 }}>
+                <div style={{ width: sandwichColumnWidth }}>
                   <span style={{}}>{rowData.close}</span>
                   <EtherscanLink txId={rowData?.closeTx || ''} />
                 </div>
@@ -263,7 +275,7 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
                 const BestSandwichScrollToMarker = () => (
                   <div
                     ref={isBestSandwichRow ? bestSandwichRef : undefined}
-                    style={{ position: 'relative', top: '-1rem', width: 120 }}
+                    style={{ position: 'relative', top: '-1rem', width: profitColumnWidth }}
                   />
                 )
                 if (rowData.profit && rowData.profit.substr(0, 1) != '-') {
@@ -295,11 +307,13 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
             {
               title: 'Attributes',
               field: 'attributes',
-              render: (rowData) => <AttributeItem {...rowData.attributes}/>, // prettier-ignore
+              render: (rowData) => <div style={{ width: attributesColumnWidth }}><AttributeItem {...rowData.attributes}/></div>, // prettier-ignore
             },
           ]}
           data={detailedTableData}
           options={{
+            emptyRowsWhenPaging: true,
+            // loadingType: 'overlay',
             search: false,
             headerStyle: {
               fontWeight: 'bold',
@@ -330,9 +344,93 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
             },
           }}
         />
+        {/*
+        Loading Table Display
+        */}
+        {!fetchingComplete && (
+          <MaterialTable
+            style={{
+              marginTop: '0px',
+              paddingTop: '0px',
+            }}
+            columns={[
+              {
+                field: 'dateReadable',
+                render: (rowData) => (
+                  <div style={{ maxWidth: dateColumnWidth }}>{LoadingBarForDetailsTable(dateColumnWidth)}</div>
+                ),
+              },
+              {
+                field: 'open',
+                render: (rowData) => (
+                  <div style={{ width: sandwichColumnWidth }}>{LoadingBarForDetailsTable(sandwichColumnWidth)}</div>
+                ),
+                sorting: false,
+              },
+              {
+                field: 'target',
+                render: (rowData, rowGroups) => {
+                  return (
+                    <div style={{ maxWidth: sandwichColumnWidth }}>
+                      {LoadingBarForDetailsTable(sandwichColumnWidth)}
+                    </div>
+                  )
+                },
+                sorting: false,
+              },
+              {
+                field: 'close',
+                render: (rowData) => (
+                  <div style={{ maxWidth: sandwichColumnWidth }}>{LoadingBarForDetailsTable(sandwichColumnWidth)}</div>
+                ),
+                sorting: false,
+              },
+              {
+                field: 'profit',
+                render: (rowData) => (
+                  <div style={{ maxWidth: profitColumnWidth }}>{LoadingBarForDetailsTable(profitColumnWidth)}</div>
+                ),
+                sorting: false,
+              },
+              {
+                field: 'attributes',
+                render: (rowData) => <AttributeItem {...rowData.attributes}/>, // prettier-ignore
+              },
+            ]}
+            data={randomISandwichDetailedTableDataArray(5)}
+            options={{
+              toolbar: false,
+              search: false,
+              showTitle: false,
+              headerStyle: {
+                display: 'none',
+              },
+              paging: false,
+              rowStyle: (rowData) => {
+                return {
+                  backgroundColor:
+                    juiciestEthSandwich && juiciestEthSandwich.targetTx === rowData.targetTx ? '#F9EEE5' : '#FFF',
+                  fontSize: '14px',
+                  lineHeight: '24px',
+                  borderBottom: '0px',
+                }
+              },
+            }}
+          />
+        )}
       </StyledDetailedTableContainer>
     </StyledResultsView>
   )
 }
 
 export default ResultsView
+
+function randomISandwichDetailedTableDataArray(count = 5): ISandwichDetailedTableData[] {
+  let array = []
+  for (let i = 0; i < count; i++) {
+    array.push({
+      message: i.toString(),
+    })
+  }
+  return array as ISandwichDetailedTableData[]
+}
