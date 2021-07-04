@@ -193,18 +193,33 @@ export const ButtonsGroup = styled.div`
     height: 150px;
   }
 `
+
+export const StyledAttributesContainer = styled.div`
+  img,
+  span :not(:first-child) {
+    margin-left: 5px;
+  }
+`
 export const StyledAttributesItem = styled.span`
   width: 50px;
-  height: 30px;
   border-radius: 8px;
   padding: 6px;
   border: 1px solid rgb(var(--color-primary));
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  line-height: 24px;
   text-align: left;
   color: rgb(var(--color-primary));
+`
+
+export const StyledAttributesImage = styled.img`
+  height: 35px;
+  display: inline;
+  vertical-align: middle;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  border-radius: 8px;
+  border: 1px solid rgb(var(--color-primary));
 `
 
 export const StyledCTAButton = styled.a`

@@ -15,6 +15,8 @@ import {
   StyledAttributesItem,
   StyledCTAButton,
   ButtonsGroup,
+  StyledAttributesImage,
+  StyledAttributesContainer,
 } from './ResultsView.styled'
 import LoadingBar from '../common/LoadingBar'
 import EthAddressForm from '../common/EthAddressForm'
@@ -24,6 +26,8 @@ import { TwitterFill, Alarm } from 'akar-icons'
 import SummaryTotalProfitSandwiches from '../../assets/summary-total-profit-sandwiches.svg'
 import SummaryTotalSandwiches from '../../assets/summary-total-sandwiches.svg'
 import SummaryBestSandwich from '../../assets/summary-best-sandwich.svg'
+import SushiswapLogo from '../../assets/sushiswap-logo.svg'
+import UniswapLogo from '../../assets/uniswap-logo.svg'
 import { filterSandwichesToDetailsTable, mapSandwichesToDetailsTable } from '../../helpers/data'
 import { AnyShape, ISandwichDetailedTableData } from '../../helpers/types'
 import ArrowLink from '../../assets/arrow-link.svg'
@@ -84,7 +88,14 @@ const PageHeader = (x: number) => {
 }
 
 /** Details Table Components */
-const AttributeItem = ({ mev }: { mev?: boolean }) => <>{mev && <StyledAttributesItem>MEV</StyledAttributesItem>}</>
+const AttributeItem = ({ mev, dex }: { mev?: boolean; dex?: string }) => (
+  <StyledAttributesContainer>
+    {mev && <StyledAttributesItem>MEV</StyledAttributesItem>}
+    {console.log(dex)}
+    {dex == 'SushiSwapV2' && <StyledAttributesImage src={SushiswapLogo} />}
+    {dex == 'UniswapV2' && <StyledAttributesImage style={{ paddingBottom: 2 }} src={UniswapLogo} />}
+  </StyledAttributesContainer>
+)
 const EtherscanLink = ({ txId }: { txId: string }) => (
   <a style={{ float: 'right' }} href={`https://etherscan.io/tx/${txId}`} rel="noreferrer" target="_blank">
     <img src={ArrowLink} />
@@ -111,6 +122,9 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
   const sandwichColumnWidth = 230
   const profitColumnWidth = 110
   const attributesColumnWidth = 100
+  if (fetchingComplete) {
+    console.log(data)
+  }
 
   // Hooks
   const { fetchData, totalEthProfit, juiciestEthSandwich, loadingTotalEthProfit, totalEthProfitError } = useCoinData()
