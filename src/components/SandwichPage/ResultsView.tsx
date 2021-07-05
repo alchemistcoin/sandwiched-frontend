@@ -122,9 +122,6 @@ const ResultsView = ({ data = [], fetchingComplete, walletAddressFromUrl }: Deta
   const sandwichColumnWidth = 230
   const profitColumnWidth = 110
   const attributesColumnWidth = 100
-  if (fetchingComplete) {
-    console.log(data)
-  }
 
   // Hooks
   const { fetchData, totalEthProfit, juiciestEthSandwich, loadingTotalEthProfit, totalEthProfitError } = useCoinData()
