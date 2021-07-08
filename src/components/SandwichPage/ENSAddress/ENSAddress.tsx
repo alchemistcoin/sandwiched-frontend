@@ -44,7 +44,6 @@ const ENSAddress = ({ address = '', ensName = '', style, ...props }: props) => {
     } else if (!address && ensName && ensName !== '') {
       // Forward lookup
       ensLookup(provider, ensName).then((result) => {
-        console.log(result)
         setFetchedEnsAddress(result)
       })
     }
