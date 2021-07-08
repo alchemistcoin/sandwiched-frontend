@@ -13,6 +13,28 @@ interface HeaderProps {
   showLogo: boolean
 }
 
+const ExternalLink = ({ name, link }: { name: string; link: string }) => (
+  <a href={link} target="_blank" rel="noreferrer">
+    {name}
+    <svg
+      stroke="currentColor"
+      fill="none"
+      strokeWidth="0"
+      viewBox="0 0 24 24"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+      ></path>
+    </svg>
+  </a>
+)
+
 const Header = ({ onConnect, walletAddress, connected, resetApp, showLogo }: HeaderProps) => {
   const history = useHistory()
   const [isModalOpen, setModalOpen] = useState(false)
@@ -34,25 +56,13 @@ const Header = ({ onConnect, walletAddress, connected, resetApp, showLogo }: Hea
             <ul>
               <li onClick={() => setModalOpen(true)}>FAQ</li>
               <li>
-                <a href="https://alchemistcoin.typeform.com/to/rmykUVWf" target="_blank" rel="noreferrer">
-                  Feedback
-                  <svg
-                    stroke="currentColor"
-                    fill="none"
-                    strokeWidth="0"
-                    viewBox="0 0 24 24"
-                    height="1em"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    ></path>
-                  </svg>
-                </a>
+                <ExternalLink name={'feedback'} link={'https://alchemistcoin.typeform.com/to/rmykUVWf'} />
+              </li>
+              <li>
+                <ExternalLink name={'mistx'} link={'https://mistx.io/'} />
+              </li>
+              <li>
+                <ExternalLink name={'crucible'} link={'https://crucible.alchemist.wtf'} />
               </li>
             </ul>
           </nav>
