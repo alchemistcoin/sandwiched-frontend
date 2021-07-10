@@ -44,7 +44,7 @@ const Header = ({ onConnect, walletAddress, connected, resetApp, showLogo }: Hea
     <span>
       <StyledHeader>
         <div>
-          <span>
+          <span style={{ display: showLogo ? 'visible' : 'none' }}>
             {showLogo && (
               <div style={{ float: 'left', verticalAlign: 'middle', marginTop: 5, marginRight: 12 }}>
                 <AlchemistLinks />
