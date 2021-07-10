@@ -5,6 +5,7 @@ import logoText from '../../assets/logo-text.svg'
 import { useHistory } from 'react-router-dom'
 import Modal from '../../components/Modal'
 import FAQ from '../../components/FAQ'
+import AlchemistLinks from './AlchemistLinks'
 interface HeaderProps {
   onConnect: Function
   walletAddress: string
@@ -40,29 +41,32 @@ const Header = ({ onConnect, walletAddress, connected, resetApp, showLogo }: Hea
   const [isModalOpen, setModalOpen] = useState(false)
 
   return (
-    <>
+    <span>
       <StyledHeader>
         <div>
-          {/* Only Show Small Logo in corner if we're not on the landing page */}
-          <img
-            src={logoText}
-            style={{ display: showLogo ? 'flex' : 'none', cursor: 'pointer', marginRight: '20px' }}
-            alt="sandwich.wtf"
-            onClick={() => {
-              resetApp()
-            }}
-          ></img>
+          <span>
+            {showLogo && (
+              <div style={{ float: 'left', verticalAlign: 'middle', marginTop: 5, marginRight: 12 }}>
+                <AlchemistLinks />
+              </div>
+            )}
+            {/* Only Show Small Logo in corner if we're not on the landing page */}
+            <img
+              src={logoText}
+              style={{ display: showLogo ? 'flex' : 'none', cursor: 'pointer', marginRight: '20px' }}
+              alt="sandwich.wtf"
+              onClick={() => {
+                resetApp()
+              }}
+            ></img>
+          </span>
           <nav>
-            <ul>
+            {/* Don't show AlchemistLinks here if logo is present in the top left */}
+            {!showLogo && <AlchemistLinks />}
+            <ul className={'helplinks'}>
               <li onClick={() => setModalOpen(true)}>FAQ</li>
               <li>
                 <ExternalLink name={'feedback'} link={'https://alchemistcoin.typeform.com/to/rmykUVWf'} />
-              </li>
-              <li>
-                <ExternalLink name={'mistx'} link={'https://mistx.io/'} />
-              </li>
-              <li>
-                <ExternalLink name={'crucible'} link={'https://crucible.alchemist.wtf'} />
               </li>
             </ul>
           </nav>
@@ -77,7 +81,7 @@ const Header = ({ onConnect, walletAddress, connected, resetApp, showLogo }: Hea
       <Modal open={isModalOpen} setModalOpen={setModalOpen} title="FAQ">
         <FAQ />
       </Modal>
-    </>
+    </span>
   )
 }
 

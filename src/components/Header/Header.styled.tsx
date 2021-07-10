@@ -33,7 +33,7 @@ const StyledHeader = styled.header`
     display: flex;
     padding: 5px 0 0 0;
 
-    ul {
+    ul.helplinks {
       list-style: none;
       margin: 0;
       padding: 0;
