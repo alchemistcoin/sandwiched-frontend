@@ -16,7 +16,7 @@ interface ListItemsProps {
 const ListItem = ({ imageSrc, title, description, link }: ListItemsProps) => {
   return (
     <StyledListItem>
-      <a href={link}>
+      <a href={link} target="_blank" rel="noreferrer">
         <img src={imageSrc} />
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 16 }}>
           <span className={'title'}>{title}</span>
