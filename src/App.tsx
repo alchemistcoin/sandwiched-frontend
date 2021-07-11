@@ -10,6 +10,8 @@ import { ModalProvider, BaseModalBackground } from 'styled-react-modal'
 import SandwichPage from './components/SandwichPage'
 import Web3Modal from 'web3modal'
 import Torus from '@toruslabs/torus-embed'
+import Authereum from 'authereum'
+// import { Bitski } from 'bitski'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { getChainData } from './helpers/utilities'
 import { IAssetData } from './helpers/types'
@@ -174,19 +176,19 @@ class App extends React.Component<any, any> {
       // fortmatic: {
       //   package: Fortmatic,
       //   options: {
-      //     key: process.env.REACT_APP_FORTMATIC_KEY
-      //   }
+      //     key: process.env.REACT_APP_FORTMATIC_KEY,
+      //   },
       // },
-      // authereum: {
-      //   package: Authereum
-      // },
+      authereum: {
+        package: Authereum,
+      },
       // bitski: {
       //   package: Bitski,
       //   options: {
       //     clientId: process.env.REACT_APP_BITSKI_CLIENT_ID,
-      //     callbackUrl: window.location.href + "bitski-callback.html"
-      //   }
-      // }
+      //     callbackUrl: window.location.href + 'bitski-callback.html',
+      //   },
+      // },
     }
     return providerOptions
   }
