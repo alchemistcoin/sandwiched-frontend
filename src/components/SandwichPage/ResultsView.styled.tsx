@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import backgroundSvg from '../../assets/background.svg'
 
+const detailsTableWidth = '1320px'
 export const StyledResultsView = styled.div`
   //height: 100vh;
   display: flex;
@@ -10,6 +11,9 @@ export const StyledResultsView = styled.div`
   padding: 0 20px;
   // background-image: url(${backgroundSvg});
   // background-size: cover;
+  @media only screen and (max-width: ${detailsTableWidth}) {
+    padding: 0;
+  }
 
   h1 {
     font-family: Poppins;
@@ -106,27 +110,54 @@ export const StyledPageHeader = styled.div`
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: 39px;
+    line-height: 38px;
     letter-spacing: 0em;
     text-align: center;
+  }
+  .mistx-link {
+    border: 3px solid rgb(var(--color-primary));
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 2px 16px;
+    color: #836303;
+    font-weight: bold;
+    text-decoration: none;
   }
 `
 
 export const StyledDetailedTableContainer = styled.div`
   margin: 30px 0;
+  //white-space: nowrap;
+  //max-width: 1440px;
   width: 100%;
-  padding: 0 60px;
+  padding: 0;
   box-sizing: border-box;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-
-  @media only screen and (max-width: 600px) {
-    padding: 0;
+  margin-left: calc((100% - ${detailsTableWidth}));
+  .Component-horizontalScrollContainer-12 {
+    overflow: unset;
+    width: 1320px;
+    div {
+      //width: 100%;
+      overflow: unset;
+      overflow-x: unset;
+      overflow-y: unset;
+    }
   }
-
+  .MuiToolbar-root,
+  .MuiPaper-root {
+    width: 1320px;
+  }
+  @media only screen and (max-width: ${detailsTableWidth}) {
+    padding: 0;
+    margin-left: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
   .MuiTableCell-footer {
     background-color: rgb(var(--color-primary));
   }
@@ -150,38 +181,67 @@ export const StyledDetailedTableContainer = styled.div`
   }
 `
 
+export const ButtonsGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  width: 812px;
+  max-width: 1024px;
+  @media only screen and (max-width: 864px) {
+    flex-direction: column;
+    height: 150px;
+  }
+`
+
+export const StyledAttributesContainer = styled.div`
+  img,
+  span :not(:first-child) {
+    margin-left: 5px;
+  }
+`
 export const StyledAttributesItem = styled.span`
   width: 50px;
-  height: 30px;
   border-radius: 8px;
   padding: 6px;
   border: 1px solid rgb(var(--color-primary));
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  line-height: 24px;
   text-align: left;
   color: rgb(var(--color-primary));
 `
 
+export const StyledAttributesImage = styled.img`
+  height: 35px;
+  display: inline;
+  vertical-align: middle;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  border-radius: 8px;
+  border: 1px solid rgb(var(--color-primary));
+`
+
 export const StyledCTAButton = styled.a`
   cursor: pointer;
-  box-shadow: 0px 10px 16px rgba(199, 150, 3, 0.24);
+  box-shadow: 0px 10px 16px #cae6fa;
   border-radius: 16px;
-  background-color: rgb(var(--color-primary));
-  width: 342px;
-  height: 54px;
+  background-color: #41afff;
+  width: 362px;
+  height: 60px;
   //styleName: Heading 6;
-  color: #836303;
+  color: #fff;
   font-family: Poppins;
   font-size: 20px;
   font-style: normal;
-  font-weight: 700;
-  line-height: 54px;
+  font-weight: 600;
+  line-height: 58px;
   letter-spacing: 0em;
   text-align: center;
   text-decoration: none;
-  margin-top: 1.5rem;
+  @media only screen and (max-width: 864px) {
+    width: 395px;
+  }
   &:hover {
     filter: brightness(0.9);
   }

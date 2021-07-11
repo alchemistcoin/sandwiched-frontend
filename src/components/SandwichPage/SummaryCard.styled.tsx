@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const StyledSummaryCard = styled.div`
   padding: 18px;
-  width: 195px;
+  width: 199px;
   height: auto;
   background-color: #ffbf00;
   background: #fcfcfc;

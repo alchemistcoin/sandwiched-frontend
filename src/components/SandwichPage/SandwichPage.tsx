@@ -21,8 +21,16 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
   const [fetching, setFetching] = useState(false)
   const [fetchingComplete, setFetchingComplete] = useState(false)
   const [fetchErrorMessage, setFetchErrorMessage] = useState('')
+  const [hasASandwichDelayed, setHasASandwichDelayed] = useState(false)
   // @ts-ignore
   let { walletAddress: walletAddressFromUrl } = useParams()
+
+  const hasASandwich = dataHasASandwich(data)
+  if ((hasASandwich || fetchingComplete) && hasASandwichDelayed === false) {
+    setTimeout(() => {
+      setHasASandwichDelayed(true)
+    }, 250)
+  }
 
   // Fetch Sandwiches for wallet
   useEffect(() => {
@@ -30,10 +38,13 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
     // Create an scoped async function in the hook
     const utf8Decoder = new TextDecoder('utf-8')
     async function fetchStream(reader: any) {
+      let tempData: AnyShape[] = []
+      let lastUpdate = 0
+      let cooldown = 150 // update data at most every (cooldown in milliseconds)
       setFetching(true)
       let messageCount = 0
-      for (;;) {
-        try {
+      try {
+        for (;;) {
           let { value: msg, done: readerDone } = await reader.read()
           const firstLineOfMsg = String(msg).split('/n')[0] // error comes as a string, messages come as json
           /** Catch any errors in message **/
@@ -46,20 +57,32 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
             return
           }
           if (readerDone) {
+            // Add anything still in the temp Queue and return
+            if (tempData.length > 0) {
+              setData((oldArray) => {
+                return [...oldArray, ...tempData]
+              })
+            }
             setFetchingComplete(true)
             setFetching(false)
             return
           }
           messageCount += 1
-          setData((oldArray) => {
-            return [...oldArray, msg]
-          })
-        } catch (err) {
-          console.error('fetchStream catch (err)', err)
-          setFetchErrorMessage(errorMessage)
-          setFetching(false)
-          return // without this return infinite errors can occur
+          tempData.push(msg)
+          if (new Date().getTime() >= lastUpdate + cooldown) {
+            // Only update if not on cooldown
+            setData((oldArray) => {
+              return [...oldArray, ...tempData]
+            })
+            tempData = []
+            lastUpdate = new Date().getTime()
+          }
         }
+      } catch (err) {
+        console.error('fetchStream catch (err)', err)
+        setFetchErrorMessage(errorMessage)
+        setFetching(false)
+        return // without this return infinite errors can occur
       }
     }
     async function runFetchStream() {
@@ -80,16 +103,17 @@ const SandwichPage = ({ onConnect, connected, walletAddress, resetApp }: Sandwic
   }, [])
   return (
     <div>
-      {!dataHasASandwich(data) && !fetchingComplete ? (
+      {hasASandwichDelayed === false ? (
         <LoadingSandwiches
           error={fetchErrorMessage}
           resetApp={resetApp}
           connected={connected}
           onConnect={onConnect}
           walletAddress={walletAddress}
+          endAnimation={hasASandwich}
         />
       ) : (
-        <ResultsView data={data} fetchingComplete={fetchingComplete} />
+        <ResultsView data={data} fetchingComplete={fetchingComplete} walletAddressFromUrl={walletAddressFromUrl} />
       )}
     </div>
   )

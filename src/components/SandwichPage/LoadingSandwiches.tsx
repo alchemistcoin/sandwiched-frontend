@@ -1,10 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
-import hamburgers from '../../assets/hamburgers.svg'
 import hamburgerLine from '../../assets/hamburger-line.svg'
 import logoStripped from '../../assets/logo-stripped.svg'
-import errorHamburger from '../../assets/error-hamburger.svg'
-import { StyledPrimaryButton } from '../LandingPage/LandingPage.styled'
+import PrimaryButton from '../common/PrimaryButton'
 import { StyledLoadingSandwichesDisplay, StyledMainTextBox } from './LoadingSandwiches.styled'
 import { useHistory } from 'react-router-dom'
 
@@ -14,6 +11,7 @@ interface LoadingSandwichesDisplayProps {
   connected: boolean
   resetApp: Function
   error: string
+  endAnimation: Boolean
 }
 
 const LoadingSandwichesDisplay = ({
@@ -22,6 +20,7 @@ const LoadingSandwichesDisplay = ({
   onConnect,
   resetApp,
   walletAddress,
+  endAnimation,
 }: LoadingSandwichesDisplayProps) => {
   const history = useHistory()
   const header = !error ? 'Hold up!' : 'Uh-oh 😞'
@@ -41,8 +40,18 @@ const LoadingSandwichesDisplay = ({
           <img src={hamburgerLine} alt="" />
         ) : (
           <>
-            <img className={!error ? 'left' : ''} src={hamburgerLine} alt="" />
-            <img className={!error ? 'right' : ''} src={hamburgerLine} alt="" />
+            <img
+              className={!error ? 'left' : ''}
+              style={{ animation: endAnimation ? 'animationEnd' : undefined }}
+              src={hamburgerLine}
+              alt=""
+            />
+            <img
+              className={!error ? 'right' : ''}
+              style={{ animation: endAnimation ? 'animationEnd' : undefined }}
+              src={hamburgerLine}
+              alt=""
+            />
           </>
         )}
       </div>
@@ -50,7 +59,7 @@ const LoadingSandwichesDisplay = ({
         <h1>{header}</h1>
         <p>{paragraph1}</p>
         {error && (
-          <StyledPrimaryButton
+          <PrimaryButton
             onClick={() => {
               /** If wallet address is bad reset app and send to home page **/
               if (error.toLowerCase().search('bad wallet address') !== -1) {
@@ -62,7 +71,7 @@ const LoadingSandwichesDisplay = ({
             }}
           >
             Retry
-          </StyledPrimaryButton>
+          </PrimaryButton>
         )}
       </StyledMainTextBox>
     </StyledLoadingSandwichesDisplay>
