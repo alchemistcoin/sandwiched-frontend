@@ -91,7 +91,6 @@ const PageHeader = (x: number) => {
 const AttributeItem = ({ mev, dex }: { mev?: boolean; dex?: string }) => (
   <StyledAttributesContainer>
     {mev && <StyledAttributesItem>MEV</StyledAttributesItem>}
-    {console.log(dex)}
     {dex == 'SushiSwapV2' && <StyledAttributesImage src={SushiswapLogo} />}
     {dex == 'UniswapV2' && <StyledAttributesImage style={{ paddingBottom: 2 }} src={UniswapLogo} />}
   </StyledAttributesContainer>
