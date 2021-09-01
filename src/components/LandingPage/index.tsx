@@ -71,7 +71,7 @@ const LandingPage = ({ onConnect, walletAddress }: LandingPageProps) => {
           Each and every one of your DEX trades is observed by countless bots, who are ready to pounce and front-run it
           if they can profit.
         </p>
-        <p>Are you a sandwich victim? Connect your wallet or enter and address to find out.</p>
+        <p>Are you a sandwich victim? Connect your wallet or enter an address to find out.</p>
       </StyledMainTextBox>
 
       <StyledButtonsContainer>
